@@ -1,0 +1,26 @@
+{
+  "name": "reformex-listare",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.13.6",
+    "bootstrap": "^4.6.0",
+    "bootstrap-vue": "^2.21.2",
+    "core-js": "^3.15.1",
+    "https": "^1.0.0",
+    "nuxt": "^2.15.7",
+    "vue-animate-onscroll": "^1.0.8",
+    "vue-cool-lightbox": "^2.7.4",
+    "vue-slick-carousel": "^1.0.6",
+    "vuejs-typist": "^0.1.1"
+  },
+  "devDependencies": {
+    "url-loader": "^4.1.1"
+  }
+}
