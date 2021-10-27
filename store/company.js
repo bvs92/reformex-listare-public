@@ -20,6 +20,8 @@ export const actions = {
             if(response.data.company){
                 await commit('set_company', response.data.company);
                 //   console.log(response.data.company);
+            } else {
+                this.$router.push('/pagina-negasita');
             }
       });
     },

@@ -10,6 +10,7 @@ export const state = () => ({
     page_404: false,
 
     loading_status: false,
+    loading_header: false,
     checkedVerified: false,
     filter_verified_status: false,
 
@@ -19,10 +20,78 @@ export const state = () => ({
 
 export const actions = {
 
+    async initCategory({commit}, category_slug){
+        await commit('set_category', null);
+        await commit('set_loading_header', true);
+
+        axios.defaults.httpsAgent = new https.Agent({
+            rejectUnauthorized: false,
+          });
+
+          let final_url = `${BASE_URL}/api/categories/get/single/${category_slug}`;
+            await axios.get(final_url,{
+                headers: {'Access-Control-Allow-Origin': "*"},
+                mode: 'cors',
+            }).then(async response => {
+            if(response.data){
+                console.log('nuxtServerInit',response.data);
+                // await commit('set_category', response.data.category.name);
+                // await commit('set_companies', response.data.companies);
+                // await commit('set_initial_companies', response.data.companies);
+
+                if(response.data.category){
+                    await commit('set_category', response.data.category.name);
+                } else {
+                    // commit('set_404_page', true)
+                    this.$router.push('/pagina-negasita');
+                }
+
+            }
+            }).finally(() => {
+                commit('set_loading_header', false);
+            });
+
+    },
+
+    async initLocation({commit}, location_slug){
+        await commit('set_location', null);
+        await commit('set_loading_header', true);
+
+        axios.defaults.httpsAgent = new https.Agent({
+            rejectUnauthorized: false,
+          });
+
+          let final_url = `${BASE_URL}/api/locations/get/single/${location_slug}`;
+            await axios.get(final_url,{
+                headers: {'Access-Control-Allow-Origin': "*"},
+                mode: 'cors',
+            }).then(async response => {
+            if(response.data){
+                console.log(response.data);
+                // await commit('set_category', response.data.category.name);
+                // await commit('set_companies', response.data.companies);
+                // await commit('set_initial_companies', response.data.companies);
+
+                if(response.data.location){
+                    await commit('set_location', response.data.location.name);
+                } else {
+                    // commit('set_404_page', true)
+                    this.$router.push('/pagina-negasita');
+                }
+
+            }
+            }).finally(() => {
+                commit('set_loading_header', false);
+            });
+
+    },
+
 
     async initCompanies({commit}, payload){
-        await commit('set_category', null);
-        await commit('set_location', null);
+        // await commit('set_category', null);
+        // await commit('set_location', null);
+        await commit('set_companies', []);
+        await commit('set_initial_companies', []);
         await commit('set_loading_search', true);
         axios.defaults.httpsAgent = new https.Agent({
             rejectUnauthorized: false,
@@ -35,8 +104,8 @@ export const actions = {
             }).then(async response => {
             if(response.data){
                 if(response.data.companies){
-                    await commit('set_category', response.data.category.name);
-                    await commit('set_location', response.data.location.name);
+                    // await commit('set_category', response.data.category.name);
+                    // await commit('set_location', response.data.location.name);
     
                     if(Array.isArray(response.data.companies)){
                         await commit('set_companies', response.data.companies);
@@ -98,6 +167,9 @@ export const mutations = {
     
     set_loading_search(state, status) {
         state.loading_status = status;
+    },
+    set_loading_header(state, status) {
+        state.loading_header = status;
     },
     toggle_verified: function(state, _status){
         state.checkedVerified = _status;

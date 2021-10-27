@@ -84,14 +84,18 @@ export default {
     },
     
     async fetch(){
-        this.loading_comp = true;
-        await this.$store.dispatch('categories/initCategories');
-        await this.$store.dispatch('judete/initJudete');
-
         let category_slug = decodeURI(this.$route.params.category);
-        await this.$store.dispatch('category_companies/initCategoryCompanies', category_slug).finally(() => {
+
+        // get category and check if exists. if false, redirect to 404. else continue the process
+        await this.$store.dispatch('category_companies/initCategory', category_slug); 
+
+        this.loading_comp = true;
+        await this.$store.dispatch('category_companies/initCategoryCompanies', category_slug);
+        await this.$store.dispatch('categories/initCategories');
+        await this.$store.dispatch('judete/initJudete').finally(() => {
                 this.loading_comp = false;
         });
+        
     },
 
     methods: {
@@ -107,8 +111,8 @@ export default {
     },
 
     mounted(){
-        console.log(this.$route.params.category);
-        this.scrollToElement();
+        // console.log(this.$route.params.category);
+        // this.scrollToElement();
     }
 
 

@@ -78,6 +78,9 @@ export default {
         search_loading_status() {
             return this.$store.state.category_city_companies.loading_status;
         },
+        header_loading_status() {
+            return this.$store.state.category_city_companies.loading_header;
+        },
         current_category() {
             return this.$store.state.category_city_companies.category;
         },
@@ -90,18 +93,29 @@ export default {
     },
     
     async fetch(){
-        this.loading_comp = true;
-        await this.$store.dispatch('categories/initCategories');
-        await this.$store.dispatch('judete/initJudete');
+        //reset companies
+        // this.$store.commit('category_city_companies/set_companies', []);
 
-        
+
         let payload = {
             category_slug: decodeURI(this.$route.params.category),
             location_slug: decodeURI(this.$route.params.oras)
         }
-        await this.$store.dispatch('category_city_companies/initCompanies', payload).finally(() => {
-                this.loading_comp = false;
+
+        // get category and check if exists. if false, redirect to 404. else continue the process
+        await this.$store.dispatch('category_city_companies/initCategory', payload.category_slug); 
+        await this.$store.dispatch('category_city_companies/initLocation', payload.location_slug); 
+
+
+        // load companies and categories + judets
+        this.loading_comp = true; 
+        await this.$store.dispatch('category_city_companies/initCompanies', payload);
+
+        await this.$store.dispatch('categories/initCategories');
+        await this.$store.dispatch('judete/initJudete').finally(() => {
+            this.loading_comp = false;
         });
+
     },
 
     methods: {
@@ -118,7 +132,7 @@ export default {
 
     mounted(){
         console.log(this.$route.params.category);
-        this.scrollToElement();
+        // this.scrollToElement();
     }
 
 

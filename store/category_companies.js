@@ -18,9 +18,41 @@ export const state = () => ({
 
 export const actions = {
 
+    async initCategory({commit}, category_slug){
+        await commit('set_category', null);
+        // await commit('set_loading_search', true);
+
+        axios.defaults.httpsAgent = new https.Agent({
+            rejectUnauthorized: false,
+          });
+
+          let final_url = `${BASE_URL}/api/categories/get/single/${category_slug}`;
+            await axios.get(final_url,{
+                headers: {'Access-Control-Allow-Origin': "*"},
+                mode: 'cors',
+            }).then(async response => {
+            if(response.data){
+                console.log(response.data);
+                // await commit('set_category', response.data.category.name);
+                // await commit('set_companies', response.data.companies);
+                // await commit('set_initial_companies', response.data.companies);
+
+                if(response.data.category){
+                    await commit('set_category', response.data.category.name);
+                } else {
+                    // commit('set_404_page', true)
+                    this.$router.push('/pagina-negasita');
+                }
+
+            }
+            }).finally(() => {
+                // commit('set_loading_search', false);
+            });
+
+    },
 
     async initCategoryCompanies({commit}, category){
-        await commit('set_category', null);
+        // await commit('set_category', null);
         await commit('set_loading_search', true);
         axios.defaults.httpsAgent = new https.Agent({
             rejectUnauthorized: false,
@@ -32,9 +64,25 @@ export const actions = {
                 mode: 'cors',
             }).then(async response => {
             if(response.data){
-                await commit('set_category', response.data.category.name);
-                await commit('set_companies', response.data.companies);
-                await commit('set_initial_companies', response.data.companies);
+                // await commit('set_category', response.data.category.name);
+                // await commit('set_companies', response.data.companies);
+                // await commit('set_initial_companies', response.data.companies);
+
+                if(response.data.companies){
+                    // await commit('set_category', response.data.category.name);
+    
+                    if(Array.isArray(response.data.companies)){
+                        await commit('set_companies', response.data.companies);
+                        await commit('set_initial_companies', response.data.companies);
+                    } else {
+                        await commit('set_companies', [response.data.companies[Object.keys(response.data.companies)[0]]]);
+                        await commit('set_initial_companies', [response.data.companies[Object.keys(response.data.companies)[0]]]);
+                    }
+                } else {
+                    // commit('set_404_page', true)
+                    this.$router.push('/pagina-negasita');
+                }
+
             }
             }).finally(() => {
                 commit('set_loading_search', false);
