@@ -63,6 +63,7 @@ export default {
     'bootstrap-vue/nuxt',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/toast',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -70,5 +71,5 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+  },
 }

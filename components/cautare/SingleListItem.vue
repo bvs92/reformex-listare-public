@@ -100,8 +100,6 @@ export default {
     created(){
         this.BASE = BASE_URL;
         this.slug = this.company.user_name_profile ? this.company.user_name_profile.username : this.company.username;
-
-        // console.log(this.company);
     }
 }
 </script>

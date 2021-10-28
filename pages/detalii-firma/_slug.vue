@@ -52,6 +52,9 @@
         </div>
         </div>
     </div>
+    
+    <RegisterSmall />
+
     </section>
 </template>
 
@@ -66,6 +69,8 @@ import ContactDetails from "@/components/pagina-detalii/ContactDetails.vue";
 import SendMessage from "@/components/pagina-detalii/SendMessage.vue";
 import UserDetails from "@/components/pagina-detalii/UserDetails.vue";
 import Loader from "@/components/global/Loader.vue";
+import RegisterSmall from "@/components/common/RegisterSmall.vue"
+
 
 export default {
     head() {
@@ -91,7 +96,8 @@ export default {
         SendMessage,
         Questions,
         UserDetails,
-        Loader
+        Loader,
+        RegisterSmall
     },
 
     computed: {

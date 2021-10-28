@@ -59,6 +59,13 @@
                                 </span>
                             </a>
                         </li>
+                        <li v-else>
+                            <a><i class="fa fa-tags" aria-hidden="true"></i> 
+                                <span>
+                                Lipsă categorii
+                                </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -105,5 +112,9 @@ export default {
 }
 .single-listings-box .listings-image::before {
     background-color: initial!important;
+}
+
+.single-listings-box .listings-content .listings-meta li {
+    display: block!important;
 }
 </style>

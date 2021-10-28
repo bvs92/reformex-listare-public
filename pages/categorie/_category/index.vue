@@ -29,6 +29,9 @@
             </div>
             </div>
         </div>
+
+        <RegisterSmall />
+
     </section>
 </div>
 </template>
@@ -39,6 +42,7 @@ import FiltersSidebar from "@/components/categorie/FiltersSidebar.vue"
 import SingleListItem from "@/components/cautare/SingleListItem.vue"
 import Pagination from "@/components/cautare/Pagination.vue"
 import LoadingElements from "@/components/common/LoadingElements.vue"
+import RegisterSmall from "@/components/common/RegisterSmall.vue"
 
 export default {
 
@@ -60,7 +64,8 @@ export default {
         FiltersSidebar,
         SingleListItem,
         Pagination,
-        LoadingElements
+        LoadingElements,
+        RegisterSmall
     },
 
     data(){
@@ -95,7 +100,7 @@ export default {
         await this.$store.dispatch('judete/initJudete').finally(() => {
                 this.loading_comp = false;
         });
-        
+
     },
 
     methods: {
@@ -112,7 +117,7 @@ export default {
 
     mounted(){
         // console.log(this.$route.params.category);
-        // this.scrollToElement();
+        this.scrollToElement();
     }
 
 

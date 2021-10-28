@@ -17,7 +17,7 @@
                 <p>
                     Îți oferim vizibilitate în rândul clienților noștri și posibilitatea de a folosi platfoma noastră cu șantiere și proiecte, gratuit!
                 </p>
-                <NuxtLink to=''>
+                <NuxtLink to='/inscriere-firma'>
                     <a class='default-btn'>
                     <i class='flaticon-more'></i> Adaugă firmă
                     </a>
