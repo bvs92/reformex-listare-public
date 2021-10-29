@@ -1,19 +1,17 @@
 <template>
-    <div class="feedback-area bg-image mt-5 pt-5">
+    <div class="feedback-area bg-image mt-5 pt-5" v-if="display">
         <div class='container'>
             <div class='section-title pt-5'>
               <h2 class="mt-100">Recenziile utilizatorilor</h2>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis
-                ipsum suspendisse ultrices gravida. Risus commodo viverra.
+                Ce spun utilizatorii despre experiența în platformă și cum ce cred despre beneficiile oferite? Vezi recenziile de mai jos.
               </p>
             </div>
 
           <div class='feedback-slides' v-if="display">
               <client-only>
               <VueSlickCarousel :options="options" 
-                :slidesToShow="2"
+                :slidesToShow="getNumberOfSlides"
                 :infinite="true"
                 :responsive="options.responsive"
                 :arrows="false"
@@ -26,7 +24,7 @@
                 :pauseOnFocus="true"
                 class="py-5"
                 >
-                <SingleReviewSlide v-for="(item, index) in 10" :key="index" />
+                <SingleReviewSlide v-for="(item, index) in reviews" :key="index" :review="item" />
               </VueSlickCarousel>
               </client-only>
            
@@ -49,9 +47,20 @@ export default {
         VueSlickCarousel,
         SingleReviewSlide
     },
+
+    computed: {
+      reviews() {
+        return this.$store.state.reviews.reviews;
+      },
+      getNumberOfSlides: function(){
+          return this.reviews.length > 1 ? 2 : 1;
+      }
+    },
+
     data(){
         return {
             display: false,
+            numberOfSlides: 1,
 
             options: {
                 responsive: [
@@ -83,8 +92,14 @@ export default {
         }
     },
 
-    fetch(){
-        this.display = true;
+    async fetch(){
+        await this.$store.dispatch('reviews/initReviews');
+    },
+
+    created(){
+        if(this.reviews && this.reviews.length > 0){
+            this.display = true;
+        }
     }
 }
 </script>

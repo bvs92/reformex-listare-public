@@ -28,7 +28,7 @@ export const actions = {
           }).then(response => {
           if(response.data){
               commit('set_companies', response.data.users);
-              console.log('top companies', response.data.users)
+            //   console.log('top companies', response.data.users)
               // await commit('set_total_categories', response.data.total);
           } else if(response.data.errors){
               // await commit('set_errors', Object.values(response.data.errors));

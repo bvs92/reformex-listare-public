@@ -15,7 +15,7 @@
                         Ai o firmă? Obține vizibilitate și clienți.
                     </h2>
                     <p>
-                        Înregistrează firma în platforma noastră și vei găsi clienții ușor și gratuit folosind platforma noastră. De asemenea, vei fi listat ca în rezultatele de mai sus.
+                        Înregistrează firma în platforma noastră, vei găsi clienții ușor și gratuit. De asemenea, vei fi listat ca în rezultatele de mai sus la căutările clienților.
                     </p>
                     <NuxtLink to='/inscriere-firma'>
                         <a class='default-btn'>

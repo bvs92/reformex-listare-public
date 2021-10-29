@@ -97,10 +97,10 @@
                   required
                 ></textarea>
                 <template v-if="validation_errors">
-                <span v-if="validation_errors['message']" class="error-text">
-                    <i class="fa fa-times" aria-hidden="true"></i> Această informație este obligatorie.
-                </span>
-            </template>
+                    <span v-if="validation_errors['message']" class="error-text">
+                        <i class="fa fa-times" aria-hidden="true"></i> Această informație este obligatorie.
+                    </span>
+                </template>
               </div>
         </div>
 
