@@ -16,6 +16,12 @@
                     Portofoliu proiecte
                 </a>
             </li>
+
+            <li class='nav-item' v-if="company.company.questions && company.company.questions.length > 0">
+                <a class='nav-link to-section' @click.prevent="goToSection('questions')">
+                    Întrebări frecvente
+                </a>
+            </li>
         </ul>
         </div>
     </div>
@@ -32,7 +38,7 @@
             <br/>
             <WorkProjects :projects="company.projects" ref="proiecte" />
             <br/>
-            <Questions />
+            <Questions :questions="company.company.questions" />
 
         
 
@@ -116,14 +122,16 @@ export default {
     methods: {
         goToSection: function(section_name){
             let element = document.getElementById(section_name);
-            element.scrollIntoView({behavior: 'smooth'});
+            if(element){
+                element.scrollIntoView({behavior: 'smooth'});
+            }
         },
     },
 
     async fetch(){
         await this.$store.dispatch('company/initCompany', this.$route.params.slug);
         // await console.log(this.$route.params.slug);
-        console.log(this.company);
+        // console.log(this.company);
     }
 }
 </script>

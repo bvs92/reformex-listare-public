@@ -4,7 +4,7 @@
             <div class='section-title pt-5'>
               <h2 class="mt-100">Recenziile utilizatorilor</h2>
               <p>
-                Ce spun utilizatorii despre experiența în platformă și cum ce cred despre beneficiile oferite? Vezi recenziile de mai jos.
+                Ce spun utilizatorii despre experiența în platformă și ce cred despre beneficiile oferite? Vezi recenziile de mai jos.
               </p>
             </div>
 
