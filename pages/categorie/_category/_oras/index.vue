@@ -4,30 +4,31 @@
     <section class='listings-area ptb-100'>
         <div class='container'>
             <div class='row'>
-            <div class='col-lg-4 col-md-12'>
-            <FiltersSidebar /> 
-            <BannerSidebar :full="false" />
-            </div>
 
-            <div class='col-lg-8 col-md-12' id="results" ref="results">
-                <div class='listings-grid-sorting row align-items-center' >
-                    <div class='col-lg-12 col-md-12 result-count'>
-                        <h2 class="small-title" v-if="current_category">Profesioniști și firme de {{current_category}} în {{ current_location }}.</h2>
+                <div class='col-lg-8 col-md-12' id="results" ref="results">
+                    <div class='listings-grid-sorting row align-items-center' >
+                        <div class='col-lg-12 col-md-12 result-count'>
+                            <h2 class="small-title" v-if="current_category">Profesioniști și firme de {{current_category}} în {{ current_location }}.</h2>
+                        </div>
                     </div>
+
+                    <template v-if="loading_comp">
+                        <LoadingElements />
+                    </template>
+                    <template v-else>
+                        <div class='row' v-if="category_companies && category_companies.length > 0" keep-alive>
+                            <SingleListItem v-for="item in category_companies" :key="item.id" :company="item.user" />
+
+                            <Pagination v-if="total_pages > 1" :pages="total_pages" keep-alive />
+                        </div>
+                    </template>
+
                 </div>
-
-                <template v-if="loading_comp">
-                    <LoadingElements />
-                </template>
-                <template v-else>
-                    <div class='row' v-if="category_companies && category_companies.length > 0" keep-alive>
-                        <SingleListItem v-for="item in category_companies" :key="item.id" :company="item.user" />
-
-                        <Pagination v-if="total_pages > 1" :pages="total_pages" keep-alive />
-                    </div>
-                </template>
-
-            </div>
+                <div class='col-lg-4 col-md-12'>
+                    <FiltersSidebar /> 
+                    <BannerSidebar :full="false" />
+                </div>
+                
             </div>
         </div>
 

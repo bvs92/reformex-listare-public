@@ -5,7 +5,7 @@
             <div class='col-lg-7 col-md-12'>
               <div class='banner-content' style="max-width:1240px!important;">
                     <span class='find-quick'>Găsești rapid</span>
-                    <h1 class="banner-two-heading" style="font-size: 40px!important;">
+                    <h1 class="banner-two-heading" style="font-size: 35px!important;">
                         <span class='typewrite'>
                         Firme și profesioniști în
                         </span> 

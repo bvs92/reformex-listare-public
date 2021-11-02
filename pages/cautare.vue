@@ -4,11 +4,6 @@
     <section class='listings-area ptb-100'>
         <div class='container'>
             <div class='row'>
-                <div class='col-lg-4 col-md-12'>
-                <FiltersSidebar /> 
-                <BannerSidebar :full="false" />
-                </div>
-
                 <div class='col-lg-8 col-md-12' id="results" ref="results">
                     <div class='listings-grid-sorting row align-items-center' >
                         <div class='col-lg-12 col-md-12 result-count'>
@@ -35,6 +30,12 @@
                     </template>
                     <Pagination v-if="total_pages && total_pages > 1" :pages="total_pages" @scrollTo="scrollToElement" />
                 </div>
+
+                <div class='col-lg-4 col-md-12'>
+                    <FiltersSidebar /> 
+                    <BannerSidebar :full="false" />
+                </div>
+
             </div>
 
             

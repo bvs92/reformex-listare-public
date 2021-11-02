@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-5" :class="{'listings-widget-area' : !full}">
+  <div class="pt-5" :class="{'listings-widget-area' : !full}" v-if="total_banners">
       <p class="sponsored">Sponsorizat</p>
       <client-only>
         <VueSlickCarousel :options="options" 
@@ -16,7 +16,7 @@
         :pauseOnFocus="true"
         class="pb-2"
         >
-        <img :src="require('@/assets/images/banner-sidebar.png')" v-for="(item, index) in 4" :key="index" :review="item" @click.prevent="openModal(index)" class="pointer" />
+        <img :src="require('@/assets/images/banner-sidebar.png')" v-for="(item, index) in total_banners" :key="index" :review="item" @click.prevent="openModal(index)" class="pointer" />
         </VueSlickCarousel>
     </client-only>
     <p class="promote"><a href=""><i class="fa fa-bullhorn" aria-hidden="true"></i> Promovează-te și tu. Detalii aici.</a></p>
@@ -54,6 +54,7 @@ export default {
             display: false,
             numberOfSlides: 1,
             modalShow: false,
+            total_banners: null,
 
             options: {
                 responsive: [
@@ -90,6 +91,12 @@ export default {
             this.modalShow = !this.modalShow;
             this.selected = incoming;
         }
+    },
+
+    created(){
+        setTimeout(() => {
+            this.total_banners = 3;
+        }, 1000);
     }
 
 }
