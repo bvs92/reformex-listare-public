@@ -18,10 +18,8 @@
         <div class='miran-nav show'>
           <div class='container-fluid'>
             <nav class='navbar navbar-expand-md navbar-light'>
-            <a href='/'>
-              <a class='navbar-brand'>
+            <a href='/' class="navbar-brand">
                 <Logo />
-              </a>
             </a>
               <div class='collapse navbar-collapse mean-menu'>
             
@@ -60,15 +58,6 @@
                 </ul>
 
                 <div class='others-option d-flex align-items-center'>
-                  <!-- <div class='option-item'>
-                    <span
-                      data-toggle='modal'
-                      onClick={toggleAuth}
-                      class='auth-one'
-                    >
-                      <i class='flaticon-user'></i> Login / Register
-                    </span>
-                  </div> -->
 
                   <div class='option-item'>
                     <NuxtLink
