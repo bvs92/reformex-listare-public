@@ -13,7 +13,15 @@ export const state = () => ({
     filter_judet_status: false,
 
     judet: 'toate',
-    status: false
+    status: false,
+
+    current_slug: null,
+
+
+    total_pages: null,
+    current_page: 1,
+
+    page_changed: false
 })
 
 export const actions = {
@@ -32,7 +40,7 @@ export const actions = {
                 mode: 'cors',
             }).then(async response => {
             if(response.data){
-                console.log(response.data);
+                // console.log(response.data);
                 // await commit('set_category', response.data.category.name);
                 // await commit('set_companies', response.data.companies);
                 // await commit('set_initial_companies', response.data.companies);
@@ -51,19 +59,25 @@ export const actions = {
 
     },
 
-    async initCategoryCompanies({commit}, category){
+    async initCategoryCompanies({commit}, payload){
         // await commit('set_category', null);
         await commit('set_loading_search', true);
+        await commit('set_current_slug', payload.category_slug);
+        await commit('set_current_page', payload.page);
+
+        await commit('set_page_changed', true);
+
         axios.defaults.httpsAgent = new https.Agent({
             rejectUnauthorized: false,
           });
 
-          let final_url = `${BASE_URL}/api/companies/category/get/${category}`;
+          let final_url = `${BASE_URL}/api/companies/category/get/${payload.category_slug}/${payload.page}`;
             await axios.get(final_url,{
                 headers: {'Access-Control-Allow-Origin': "*"},
                 mode: 'cors',
             }).then(async response => {
             if(response.data){
+                // console.log('preluam companii', response.data);
                 // await commit('set_category', response.data.category.name);
                 // await commit('set_companies', response.data.companies);
                 // await commit('set_initial_companies', response.data.companies);
@@ -74,9 +88,11 @@ export const actions = {
                     if(Array.isArray(response.data.companies)){
                         await commit('set_companies', response.data.companies);
                         await commit('set_initial_companies', response.data.companies);
+                        await commit('set_total_pages', parseInt(response.data.total_pages));
                     } else {
                         await commit('set_companies', [response.data.companies[Object.keys(response.data.companies)[0]]]);
                         await commit('set_initial_companies', [response.data.companies[Object.keys(response.data.companies)[0]]]);
+                        await commit('set_total_pages', parseInt(response.data.total_pages));
                     }
                 } else {
                     // commit('set_404_page', true)
@@ -87,6 +103,18 @@ export const actions = {
             }).finally(() => {
                 commit('set_loading_search', false);
             });
+    },
+
+    changePage: async function({state, dispatch, commit}, page){
+        let payload = {
+            category_slug: state.current_slug,
+            page: page
+        };
+
+        // await commit('set_page_changed', true);
+
+        await dispatch('initCategoryCompanies', payload);
+
     },
 
     toggleVerified: function({commit, state}, status){
@@ -211,6 +239,22 @@ export const mutations = {
         state.category = _category;
     },
 
+    set_current_slug(state, _current_slug) {
+        state.current_slug = _current_slug;
+    },
+
+    set_total_pages(state, _total_pages) {
+        state.total_pages = _total_pages;
+    },
+
+    set_current_page(state, _current_page) {
+        if(_current_page > state.total_pages){
+            state.current_page = 1;
+        }
+
+        state.current_page = _current_page;
+    },
+
     set_judet(state, _judet) {
         state.judet = _judet;
     },
@@ -231,4 +275,9 @@ export const mutations = {
     set_filter_judet_status: function(state, _status){
         state.filter_judet_status = _status;
     },
+
+
+    set_page_changed: function(state, _page_changed){
+        state.page_changed = _page_changed;
+    }
 }

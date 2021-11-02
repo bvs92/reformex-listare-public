@@ -6,12 +6,13 @@
             <div class='row'>
             <div class='col-lg-4 col-md-12'>
             <FiltersSidebar /> 
+            <BannerSidebar :full="false" />
             </div>
 
             <div class='col-lg-8 col-md-12' id="results" ref="results">
                 <div class='listings-grid-sorting row align-items-center' >
                     <div class='col-lg-12 col-md-12 result-count'>
-                        <h2 class="small-title" v-if="current_category">Am găsit <span class='count'>{{ category_companies.length }}</span> firme în {{current_category}}.</h2>
+                        <h2 class="small-title" v-if="current_category">Profesioniști și firme de {{current_category}}.</h2>
                     </div>
                 </div>
 
@@ -22,7 +23,7 @@
                     <div class='row' v-if="category_companies && category_companies.length > 0">
                         <SingleListItem v-for="item in category_companies" :key="item.id" :company="item.user" />
 
-                        <Pagination v-if="category_companies && category_companies.length > 10" />
+                        <Pagination v-if="total_pages > 1" :pages="total_pages" />
                     </div>
                 </template>
 
@@ -40,9 +41,10 @@
 import SearchHeader from "@/components/cautare/SearchHeader.vue"
 import FiltersSidebar from "@/components/categorie/FiltersSidebar.vue"
 import SingleListItem from "@/components/cautare/SingleListItem.vue"
-import Pagination from "@/components/cautare/Pagination.vue"
+import Pagination from "@/components/categorie/Pagination.vue"
 import LoadingElements from "@/components/common/LoadingElements.vue"
 import RegisterSmall from "@/components/common/RegisterSmall.vue"
+import BannerSidebar from "@/components/common/BannerSidebar.vue"
 
 export default {
 
@@ -65,7 +67,8 @@ export default {
         SingleListItem,
         Pagination,
         LoadingElements,
-        RegisterSmall
+        RegisterSmall,
+        BannerSidebar
     },
 
     data(){
@@ -80,26 +83,36 @@ export default {
         category_companies() {
             return this.$store.state.category_companies.companies;
         },
+        total_pages() {
+            return this.$store.state.category_companies.total_pages;
+        },
         search_loading_status() {
             return this.$store.state.category_companies.loading_status;
         },
         current_category() {
             return this.$store.state.category_companies.category;
         },
+        page_changed() {
+            return this.$store.state.category_companies.page_changed;
+        },
     },
     
     async fetch(){
-        let category_slug = decodeURI(this.$route.params.category);
-
-        // get category and check if exists. if false, redirect to 404. else continue the process
-        await this.$store.dispatch('category_companies/initCategory', category_slug); 
-
-        this.loading_comp = true;
-        await this.$store.dispatch('category_companies/initCategoryCompanies', category_slug);
-        await this.$store.dispatch('categories/initCategories');
-        await this.$store.dispatch('judete/initJudete').finally(() => {
-                this.loading_comp = false;
-        });
+        if(!this.page_changed){
+            
+            let category_slug = decodeURI(this.$route.params.category);
+    
+            // get category and check if exists. if false, redirect to 404. else continue the process
+            await this.$store.dispatch('category_companies/initCategory', category_slug); 
+    
+            this.loading_comp = true;
+            let page = 1;
+            await this.$store.dispatch('category_companies/initCategoryCompanies', {category_slug, page});
+            await this.$store.dispatch('categories/initCategories');
+            await this.$store.dispatch('judete/initJudete').finally(() => {
+                    this.loading_comp = false;
+            });
+        }
 
     },
 

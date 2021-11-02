@@ -22,6 +22,12 @@
                     Întrebări frecvente
                 </a>
             </li>
+
+            <li class='nav-item'>
+                <a class='nav-link to-section' @click.prevent="goToSection('contact')">
+                    Contact
+                </a>
+            </li>
         </ul>
         </div>
     </div>
@@ -49,11 +55,11 @@
         </div>
 
         <div class='col-lg-4 col-md-12'>
-            <div class='listings-sidebar'>
+            <div class='listings-sidebar' id="contact">
                 <ContactDetails :company="company" />
                 <UserDetails :company="company" />
                 <SendMessage :company="company" />
-
+                <BannerSidebar :full="true" />
             </div>
         </div>
         </div>
@@ -76,7 +82,7 @@ import SendMessage from "@/components/pagina-detalii/SendMessage.vue";
 import UserDetails from "@/components/pagina-detalii/UserDetails.vue";
 import Loader from "@/components/global/Loader.vue";
 import RegisterSmall from "@/components/common/RegisterSmall.vue"
-
+import BannerSidebar from "@/components/common/BannerSidebar.vue"
 
 export default {
     head() {
@@ -103,7 +109,8 @@ export default {
         Questions,
         UserDetails,
         Loader,
-        RegisterSmall
+        RegisterSmall,
+        BannerSidebar
     },
 
     computed: {

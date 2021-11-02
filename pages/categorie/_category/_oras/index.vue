@@ -6,12 +6,13 @@
             <div class='row'>
             <div class='col-lg-4 col-md-12'>
             <FiltersSidebar /> 
+            <BannerSidebar :full="false" />
             </div>
 
             <div class='col-lg-8 col-md-12' id="results" ref="results">
                 <div class='listings-grid-sorting row align-items-center' >
                     <div class='col-lg-12 col-md-12 result-count'>
-                        <h2 class="small-title" v-if="current_category">Am găsit <span class='count'>{{ category_companies.length }}</span> firme de {{current_category}} în {{ current_location }}.</h2>
+                        <h2 class="small-title" v-if="current_category">Profesioniști și firme de {{current_category}} în {{ current_location }}.</h2>
                     </div>
                 </div>
 
@@ -19,10 +20,10 @@
                     <LoadingElements />
                 </template>
                 <template v-else>
-                    <div class='row' v-if="category_companies && category_companies.length > 0">
+                    <div class='row' v-if="category_companies && category_companies.length > 0" keep-alive>
                         <SingleListItem v-for="item in category_companies" :key="item.id" :company="item.user" />
 
-                        <Pagination v-if="category_companies && category_companies.length > 10" />
+                        <Pagination v-if="total_pages > 1" :pages="total_pages" keep-alive />
                     </div>
                 </template>
 
@@ -40,9 +41,10 @@
 import SearchHeaderCity from "@/components/cautare/SearchHeaderCity.vue"
 import FiltersSidebar from "@/components/categorie/FiltersLocationSidebar.vue"
 import SingleListItem from "@/components/cautare/SingleListItem.vue"
-import Pagination from "@/components/cautare/Pagination.vue"
+import Pagination from "@/components/categorie/PaginationCity.vue"
 import LoadingElements from "@/components/common/LoadingElements.vue"
 import RegisterSmall from "@/components/common/RegisterSmall.vue"
+import BannerSidebar from "@/components/common/BannerSidebar.vue"
 
 export default {
 
@@ -65,7 +67,8 @@ export default {
         SingleListItem,
         Pagination,
         LoadingElements,
-        RegisterSmall
+        RegisterSmall,
+        BannerSidebar
     },
 
     data(){
@@ -95,6 +98,14 @@ export default {
         page_404() {
             return this.$store.state.category_city_companies.page_404;
         },
+
+        total_pages() {
+            return this.$store.state.category_city_companies.total_pages;
+        },
+
+        page_changed() {
+            return this.$store.state.category_city_companies.page_changed;
+        },
     },
     
     async fetch(){
@@ -102,24 +113,28 @@ export default {
         // this.$store.commit('category_city_companies/set_companies', []);
 
 
-        let payload = {
-            category_slug: decodeURI(this.$route.params.category),
-            location_slug: decodeURI(this.$route.params.oras)
+        if(!this.page_changed){
+            let payload = {
+                category_slug: decodeURI(this.$route.params.category),
+                location_slug: decodeURI(this.$route.params.oras),
+                page: 1
+            }
+    
+            // get category and check if exists. if false, redirect to 404. else continue the process
+            await this.$store.dispatch('category_city_companies/initCategory', payload.category_slug); 
+            await this.$store.dispatch('category_city_companies/initLocation', payload.location_slug); 
+    
+    
+            // load companies and categories + judets
+            this.loading_comp = true; 
+            await this.$store.dispatch('category_city_companies/initCompanies', payload);
+    
+            await this.$store.dispatch('categories/initCategories');
+            await this.$store.dispatch('judete/initJudete').finally(() => {
+                this.loading_comp = false;
+            });
         }
 
-        // get category and check if exists. if false, redirect to 404. else continue the process
-        await this.$store.dispatch('category_city_companies/initCategory', payload.category_slug); 
-        await this.$store.dispatch('category_city_companies/initLocation', payload.location_slug); 
-
-
-        // load companies and categories + judets
-        this.loading_comp = true; 
-        await this.$store.dispatch('category_city_companies/initCompanies', payload);
-
-        await this.$store.dispatch('categories/initCategories');
-        await this.$store.dispatch('judete/initJudete').finally(() => {
-            this.loading_comp = false;
-        });
 
     },
 
@@ -136,7 +151,7 @@ export default {
     },
 
     mounted(){
-        console.log(this.$route.params.category);
+        // console.log(this.$route.params.category);
         this.scrollToElement();
     }
 

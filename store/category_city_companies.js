@@ -15,7 +15,15 @@ export const state = () => ({
     filter_verified_status: false,
 
 
-    status: false
+    status: false,
+
+    current_slug: null,
+    current_location: null,
+
+
+    total_pages: null,
+    current_page: 1,
+    page_changed: false
 })
 
 export const actions = {
@@ -34,7 +42,7 @@ export const actions = {
                 mode: 'cors',
             }).then(async response => {
             if(response.data){
-                console.log('nuxtServerInit',response.data);
+                // console.log('nuxtServerInit',response.data);
                 // await commit('set_category', response.data.category.name);
                 // await commit('set_companies', response.data.companies);
                 // await commit('set_initial_companies', response.data.companies);
@@ -67,7 +75,7 @@ export const actions = {
                 mode: 'cors',
             }).then(async response => {
             if(response.data){
-                console.log(response.data);
+                // console.log(response.data);
                 // await commit('set_category', response.data.category.name);
                 // await commit('set_companies', response.data.companies);
                 // await commit('set_initial_companies', response.data.companies);
@@ -93,11 +101,18 @@ export const actions = {
         await commit('set_companies', []);
         await commit('set_initial_companies', []);
         await commit('set_loading_search', true);
+
+        await commit('set_current_slug', payload.category_slug);
+        await commit('set_current_location', payload.location_slug);
+        await commit('set_current_page', payload.page);
+
+        await commit('set_page_changed', true);
+
         axios.defaults.httpsAgent = new https.Agent({
             rejectUnauthorized: false,
           });
 
-          let final_url = `${BASE_URL}/api/companies/location/category/get/${payload.category_slug}/${payload.location_slug}`;
+          let final_url = `${BASE_URL}/api/companies/location/category/get/${payload.category_slug}/${payload.location_slug}/${payload.page}`;
             await axios.get(final_url,{
                 headers: {'Access-Control-Allow-Origin': "*"},
                 mode: 'cors',
@@ -110,9 +125,11 @@ export const actions = {
                     if(Array.isArray(response.data.companies)){
                         await commit('set_companies', response.data.companies);
                         await commit('set_initial_companies', response.data.companies);
+                        await commit('set_total_pages', parseInt(response.data.total_pages));
                     } else {
                         await commit('set_companies', [response.data.companies[Object.keys(response.data.companies)[0]]]);
                         await commit('set_initial_companies', [response.data.companies[Object.keys(response.data.companies)[0]]]);
+                        await commit('set_total_pages', parseInt(response.data.total_pages));
                     }
                 } else {
                     // commit('set_404_page', true)
@@ -122,6 +139,17 @@ export const actions = {
             }).finally(() => {
                 commit('set_loading_search', false);
             });
+    },
+
+    changePage: async function({state, dispatch, commit}, page){
+        let payload = {
+            category_slug: state.current_slug,
+            location_slug: state.current_location,
+            page: page
+        };
+        // await commit('set_page_changed', true);
+        await dispatch('initCompanies', payload);
+
     },
 
     toggleVerified: function({commit, state}, status){
@@ -157,6 +185,30 @@ export const mutations = {
     },
     set_location(state, _location) {
         state.location = _location;
+    },
+
+    set_current_slug(state, _current_slug) {
+        state.current_slug = _current_slug;
+    },
+
+    set_current_location(state, _current_location) {
+        state.current_location = _current_location;
+    },
+
+    set_total_pages(state, _total_pages) {
+        state.total_pages = _total_pages;
+    },
+
+    set_current_page(state, _current_page) {
+        if(_current_page > state.total_pages){
+            state.current_page = 1;
+        }
+
+        state.current_page = _current_page;
+    },
+
+    set_page_changed: function(state, _page_changed){
+        state.page_changed = _page_changed;
     },
 
 

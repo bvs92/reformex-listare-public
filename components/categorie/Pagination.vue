@@ -38,26 +38,24 @@ export default {
 
     computed: {
         current_page: function(){
-            return this.$store.state.search_companies.current_page;
+            return this.$store.state.category_companies.current_page;
         },
         current_slug: function(){
-            return this.$store.state.search_companies.current_slug;
+            return this.$store.state.category_companies.current_slug;
         },
         total_pages() {
-            return this.$store.state.search_companies.total_pages;
+            return this.$store.state.category_companies.total_pages;
         },
     },
 
     methods: {
         getCompanies: async function(page){
-            await this.$store.commit('search_companies/set_current_page', page);
-            await this.$store.dispatch('search_companies/changePage', page);
-        },
-
+            // await this.$store.commit('category_companies/set_current_page', page);
+            await this.$store.dispatch('category_companies/changePage', page);
+        }
     },
 
     created(){
-        // console.log('pagination is on');
     }
 }
 </script>

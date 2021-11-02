@@ -22,8 +22,9 @@
             <template v-for="(category, index) in categories">
             <div class='col-lg-2 col-sm-6 col-md-4' :class="{hide: (index > 16 && isHidden)}" :key="category.uuid">
               <div class='single-category-box'>
-                <div class='icon'>
-                  <i class='flaticon-cooking'></i>
+                <div class='icon-normal'>
+                  <!-- <img src="~assets/icons/arhitectura.svg" /> -->
+                  <img :src="getIcon(category.slug)" />
                 </div>
                 <h3>{{ category.name }}</h3>
                 <span>16 membri</span>
@@ -52,7 +53,9 @@
 </template>
 
 <script>
+
 export default {
+
     data(){
         return {
             titleOne: true,
@@ -67,6 +70,17 @@ export default {
       }
     },
 
+    methods: {
+      getIcon: function(slug){
+        try {
+          return require(`@/assets/icons/${slug}.svg`)
+        } catch(error){
+          return require(`@/assets/icons/default.svg`)
+        }
+        
+      }
+    }
+
     
 }
 </script>
@@ -79,4 +93,22 @@ export default {
 .hide {
   display: none;
 }
+
+.single-category-box .icon-normal {
+  border-radius: 5%!important;
+  background: none!important;
+}
+
+
+
+
+.architecture {
+  /* background-image: url('@/assets/icons/arhitectura.svg?inline'); */
+  
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow: visible;
+}
+
 </style>

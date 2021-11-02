@@ -1,7 +1,7 @@
 <template>
 <div class='page-title-bg background-pattern'>
     <div class='container'>
-        <h1 class="page-title" v-if="title">Firme și profesioniști în <span>{{ title }}</span></h1>
+        <h1 class="page-title" v-if="title">Profesioniști și firme de <span>{{ title }}</span></h1>
         <h1 class="page-title" v-else>Caută firme și profesioniști</h1>
         <form @submit.prevent="searchCompanies">
         <div class='row m-0 align-items-center'>
@@ -59,8 +59,12 @@ export default {
         return this.$store.state.judete.judete;
       },
       last_search() {
-        return this.$store.state.companies.lastSearch;
+        return this.$store.state.search_companies.lastSearch;
       },
+
+      current_page(){
+          return this.$store.state.search_companies.current_page;
+      }
       
     },
 
@@ -95,20 +99,23 @@ export default {
         searchCompanies: async function(){
             // await this.$store.commit('companies/set_loading_search', true);
             let payload = {
-                category: this.category,
-                location: this.location
+                category_slug: this.category,
+                location_slug: this.location,
+                page: 1
             };
 
-            await this.$store.dispatch('companies/searchCompanies', payload);
+            await this.$store.dispatch('search_companies/searchCompanies', payload);
             
             let _last_search = {
                 category: this.category_name,
                 location: this.location_name
             }
-            await this.$store.commit('companies/set_last_search', _last_search);
+            await this.$store.commit('search_companies/set_last_search', _last_search);
+
+            // await this.$store.commit('search_companies/set_current_page');
             
             if(this.redirecting){
-                await this.$store.commit('companies/set_search_homepage', true);
+                // await this.$store.commit('search_companies/set_search_homepage', true);
                 await this.$router.push('/cautare');
             }
             // await this.$store.commit('companies/set_loading_search', false);

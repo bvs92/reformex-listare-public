@@ -1,7 +1,7 @@
 <template>
 <div class='page-title-bg background-pattern'>
     <div class='container'>
-        <h1 class="page-title" v-if="title">Firme de <span>{{ title }}</span> în {{ city }}</h1>
+        <h1 class="page-title" v-if="title">Profesioniști și firme de <span>{{ title }}</span> în {{ city }}</h1>
         <h1 class="page-title" v-else>Caută firme și profesioniști</h1>
         <form @submit.prevent="searchCompanies">
         <div class='row m-0 align-items-center'>
@@ -95,20 +95,21 @@ export default {
         searchCompanies: async function(){
             // await this.$store.commit('companies/set_loading_search', true);
             let payload = {
-                category: this.category,
-                location: this.location
+                category_slug: this.category,
+                location_slug: this.location,
+                page: this.current_page
             };
 
-            await this.$store.dispatch('companies/searchCompanies', payload);
+            await this.$store.dispatch('search_companies/searchCompanies', payload);
             
             let _last_search = {
                 category: this.category_name,
                 location: this.location_name
             }
-            await this.$store.commit('companies/set_last_search', _last_search);
+            await this.$store.commit('search_companies/set_last_search', _last_search);
             
             if(this.redirecting){
-                await this.$store.commit('companies/set_search_homepage', true);
+                // await this.$store.commit('search_companies/set_search_homepage', true);
                 await this.$router.push('/cautare');
             }
             // await this.$store.commit('companies/set_loading_search', false);

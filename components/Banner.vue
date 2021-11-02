@@ -139,22 +139,25 @@ export default {
         searchCompanies: async function(){
             // await this.$store.commit('companies/set_loading_search', true);
             let payload = {
-                category: this.category,
-                location: this.location
+                category_slug: this.category,
+                location_slug: this.location,
+                page: 1
             };
 
-            await this.$store.dispatch('companies/searchCompanies', payload);
+            await this.$store.dispatch('search_companies/searchCompanies', payload);
             
             let _last_search = {
                 category: this.category_name,
                 location: this.location_name
             }
-            await this.$store.commit('companies/set_last_search', _last_search);
-            await this.$store.commit('companies/set_search_homepage', true);
+            await this.$store.commit('search_companies/set_last_search', _last_search);
+
+            
+           
+            await this.$store.commit('search_companies/set_search_homepage', true);
+
             if(!this.search_loading_status){
-              setTimeout(() => {
-                this.$router.push('/cautare');
-              }, 200);
+              this.$router.push('/cautare');
             }
             // await this.$store.commit('companies/set_loading_search', false);
         }

@@ -7185,7 +7185,8 @@ Category Area CSS
   padding: 25px 14px;
 }
 
-.single-category-box .icon {
+.single-category-box .icon,
+.single-category-box .icon-normal {
   margin-bottom: 15px;
   width: 55px;
   height: 55px;

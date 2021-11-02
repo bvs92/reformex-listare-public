@@ -2,18 +2,15 @@
     <div class='col-xl-4 col-lg-6 col-md-6'>
         <NuxtLink :to="{name: 'detalii-firma-slug', params: {slug: slug}}">
         <div class='single-listings-box'>
-            <div class='listings-image'>
-                <img src='~assets/images/listings/reformex-cover-small-grey.jpg' :alt='company.company.name' />
-
-                <!-- <NuxtLink to='/single-listings'>
-                <a class='link-btn'></a>
-                </NuxtLink> -->
-                <!-- <a href='#' class='bookmark-save'>
-                    <i class='flaticon-heart'></i>
-                </a>
-                <a href='#' class='category'>
-                    <i class='flaticon-cooking'></i>
-                </a> -->
+            <div class='listings-image' v-if="company.company">
+                
+                    <template v-if="company.company.card">
+                        <img :src="BASE +'/storage/cards/' + company.company.card.image" :alt='company.company.name'  class="fit-image" v-if="statusImage == 1" />
+                        <img src="~assets/images/listings/reformex-cover-small-grey.jpg" :alt='company.company.name'  class="fit-image" v-else />
+                    </template>
+                    <template v-else>
+                        <img src='~assets/images/listings/reformex-cover-small-grey.jpg' :alt='company.company.name' class="fit-image" />
+                    </template>
             </div>
 
             <div class='listings-content'>
@@ -32,12 +29,12 @@
                 <ul class='listings-meta'>
                     <li v-if="company.badge">
                         <a v-if="company.badge.verified == 1">
-                            <i class="fa fa-info" aria-hidden="true"></i>
-                            Verificata
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                            Verificată
                         </a>
                         <a v-else>
-                            <i class="fa fa-info" aria-hidden="true"></i>
-                            Neverificata
+                            <i class="fa fa-times unverified" aria-hidden="true"></i>
+                            Neverificată
                         </a>
                     </li>
                 </ul>
@@ -75,17 +72,26 @@
 </template>
 
 <script>
+import axios from 'axios';
+import https from 'https';
 import {BASE_URL} from '@/config.js';
 
 export default {
     data(){
         return {
             BASE: null,
-            slug: null
+            slug: null,
+            statusImage: false
         }
     },
     props: {
         company: Object
+    },
+
+    computed: {
+        checkIfImageExistsComputed: function(){
+            return this.checkIfImageExists(this.company.company.card.image);
+        }
     },
 
     methods: {
@@ -96,12 +102,36 @@ export default {
             }
             return final;
         },
+
+
+
+
+        checkImage: async function(){
+            let path_url = 'cards';
+            let name_url = this.company.company.card.image;
+            axios.defaults.httpsAgent = new https.Agent({
+                rejectUnauthorized: false,
+            });
+            
+            let config = {
+                headers: {'Access-Control-Allow-Origin': "*"},
+                mode: 'no-cors',
+            };
+
+            await axios.get(this.BASE + '/api/files/check/' + path_url + '/' + name_url, config).then(response => {
+                this.statusImage = Boolean(response.data);
+            });
+        }
+        
     },
 
     created(){
         this.BASE = BASE_URL;
         this.slug = this.company.user_name_profile ? this.company.user_name_profile.username : this.company.username;
-        // console.log(this.company);
+        
+        if(this.company.company.card){
+            this.checkImage();
+        }
     }
 }
 </script>
@@ -117,4 +147,22 @@ export default {
 .single-listings-box .listings-content .listings-meta li {
     display: block!important;
 }
+
+.unverified {
+    color: rgb(118, 118, 118)!important;
+}
+
+.figure-stil {
+ 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;height: 260px!important;max-height: 260px!important;
+}
+
+.fit-image {
+    width: 100%;height: 260px!important;max-height: 260px!important;
+    object-fit: cover;
+}
+
 </style>

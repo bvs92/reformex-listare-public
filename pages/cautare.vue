@@ -6,6 +6,7 @@
             <div class='row'>
                 <div class='col-lg-4 col-md-12'>
                 <FiltersSidebar /> 
+                <BannerSidebar :full="false" />
                 </div>
 
                 <div class='col-lg-8 col-md-12' id="results" ref="results">
@@ -13,34 +14,23 @@
                         <div class='col-lg-12 col-md-12 result-count'>
                             <p v-if="search_made">
                                 <template v-if="!search_loading_status">
-                                    Am găsit <span class='count'>{{ result_companies.length }}</span> rezultat<template v-if="result_companies.length != 1">e</template> pentru căutarea ta.
+                                    Am găsit <span class='count'>{{ result_companies }}</span> rezultat<template v-if="result_companies != 1">e</template> pentru căutarea ta.
                                 </template>
                             </p>
                             <p v-else>Ultimele firme înscrise.</p>
                         </div>
                     </div>
 
-                    <template v-if="!search_made">
-                        <template v-if="loading_comp">
-                            <LoadingElements />
-                        </template>
-                        <template v-else>
-                            <div class='row' v-if="latest_companies && latest_companies.length > 0">
-                                <SingleListItem v-for="item in latest_companies" :key="item.id" :company="item" />
-
-                                <Pagination v-if="latest_companies && latest_companies.length > 10" />
-                            </div>
-                        </template>
-                    </template>
-                    <template else>
+                
+                    <template>
                         <template v-if="search_loading_status">
                         <LoadingElements />
                         </template>
                         <template v-else>
-                            <div class='row' v-if="result_companies && result_companies.length > 0">
-                                <SingleListItem v-for="item in result_companies" :key="item.id" :company="item.user" />
+                            <div class='row' v-if="result_companies && result_companies > 0">
+                                <SingleListItem v-for="item in companies" :key="item.id" :company="item.user" keep-alive />
 
-                                <Pagination v-if="result_companies && result_companies.length > 10" />
+                                <Pagination v-if="total_pages && total_pages > 1" :pages="total_pages" />
                             </div>
                         </template>
                     </template>
@@ -63,6 +53,7 @@ import SingleListItem from "@/components/cautare/SingleListItem.vue"
 import Pagination from "@/components/cautare/Pagination.vue"
 import LoadingElements from "@/components/common/LoadingElements.vue"
 import RegisterSmall from "@/components/common/RegisterSmall.vue"
+import BannerSidebar from "@/components/common/BannerSidebar.vue"
 
 export default {
     head: {
@@ -82,7 +73,8 @@ export default {
         SingleListItem,
         Pagination,
         LoadingElements,
-        RegisterSmall
+        RegisterSmall,
+        BannerSidebar
     },
 
     data(){
@@ -98,25 +90,60 @@ export default {
             return this.$store.state.companies.latest_companies;
         },
         search_made(){
-            return this.$store.state.companies.searchMade;
+            return this.$store.state.search_companies.searchMade;
         },
         result_companies() {
-            return this.$store.state.companies.search_companies;
+            return this.$store.state.search_companies.total_results;
+        },
+        companies() {
+            return this.$store.state.search_companies.search_companies;
         },
         search_loading_status() {
-            return this.$store.state.companies.loading_status;
+            return this.$store.state.search_companies.loading_status;
         },
+
+        total_pages() {
+            return this.$store.state.search_companies.total_pages;
+        },
+
     },
     
     async fetch(){
         this.loading_comp = true;
         await this.$store.dispatch('categories/initCategories');
         await this.$store.dispatch('judete/initJudete');
-        await this.$store.dispatch('companies/initLatestCompanies').finally(() => {
-            setTimeout(() => {
-                this.loading_comp = false;
-            }, 1000);
-        });
+
+        // console.log('this.search_made', this.search_made);
+        
+        if(!this.search_made){
+            console.log('se executa all?');
+            let payload = {
+                category_slug: 'all',
+                location_slug:  'all',
+                page: 1
+            };
+
+            await this.$store.dispatch('search_companies/searchCompanies', payload).finally(() => {
+                setTimeout(() => {
+                    this.loading_comp = false;
+                }, 1000);
+            });
+            
+            let _last_search = {
+                category: 'Toate',
+                location: 'România'
+            }
+            await this.$store.commit('search_companies/set_last_search', _last_search);
+        }
+
+        
+
+        
+        // await this.$store.dispatch('search_companies/initLatestCompanies').finally(() => {
+        //     setTimeout(() => {
+        //         this.loading_comp = false;
+        //     }, 1000);
+        // });
     },
 
     methods: {
@@ -142,7 +169,7 @@ export default {
 
     mounted(){
         setTimeout(() => {
-            if(this.$store.state.companies.search_homepage){
+            if(this.$store.state.search_companies.search_homepage){
                 // await this.goToSection('results');
                 this.scrollToElement();
             }

@@ -1,18 +1,26 @@
 <template>
 <div class='col-lg-12 col-md-12' v-if="company">
     <NuxtLink :to="{name: 'detalii-firma-slug', params: {slug: slug}}">
-    <div class='single-listings-item'>
+    <div class='single-listings-item' :class="{'promoted' : slug == 'beton-expert'}">
     <div class='row m-0'>
         <div class='col-lg-4 col-md-4 p-0'>
-        <div class='listings-image bg-listing'>
+        <div class='listings-image ' v-if="company.company">
             <!-- <img src='~assets/images/listings/reformex-cover-small-grey.jpg' :alt='company.company.name' /> -->
+
+            <template v-if="company.company.card">
+                <img :src="BASE +'/storage/cards/' + company.company.card.image" :alt='company.company.name'  class="fit-image" v-if="statusImage == 1" />
+                <img src="~assets/images/listings/reformex-cover-small-grey.jpg" :alt='company.company.name'  class="fit-image" v-else />
+            </template>
+            <template v-else>
+                <img src='~assets/images/listings/reformex-cover-small-grey.jpg' :alt='company.company.name' class="fit-image" />
+            </template>
 
             <!-- <a href='#' class='bookmark-save'>
             <i class='flaticon-heart'></i>
             </a> -->
-            <!-- <a href='#' class='category'>
-            <i class='flaticon-cooking'></i>
-            </a> -->
+            <p class='promoted-icon' v-if="slug == 'beton-expert'">
+            <i class="fa fa-info-circle" aria-hidden="true"></i> Promovat
+            </p>
             <!-- <NuxtLink to='/single-listings'>
             <a class='link-btn'></a>
             </NuxtLink> -->
@@ -34,10 +42,10 @@
             
             <template v-if="company.badge">
                 <span class='status' v-if="company.badge.verified == 1">
-                    <i class="fa fa-certificate" aria-hidden="true"></i> Verificată
+                    <i class="fa fa-check" aria-hidden="true"></i> Verificată
                 </span>
                 <span class='status inactive' v-else>
-                    <i class="fa fa-certificate" aria-hidden="true"></i> Neverificată
+                   <i class="fa fa-times mb-1" aria-hidden="true"></i> Neverificată
                 </span>
             </template>
 
@@ -81,6 +89,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+import https from 'https';
 import {BASE_URL} from '@/config.js';
 
 export default {
@@ -89,17 +99,41 @@ export default {
         return {
             BASE: null,
             isHidden: true,
-            slug: null
+            slug: null,
+            statusImage: false
         }
     },
 
 
     props: ["company"],
 
+    methods: {
+        checkImage: async function(){
+            let path_url = 'cards';
+            let name_url = this.company.company.card.image;
+            axios.defaults.httpsAgent = new https.Agent({
+                rejectUnauthorized: false,
+            });
+            
+            let config = {
+                headers: {'Access-Control-Allow-Origin': "*"},
+                mode: 'no-cors',
+            };
+
+            await axios.get(this.BASE + '/api/files/check/' + path_url + '/' + name_url, config).then(response => {
+                this.statusImage = Boolean(response.data);
+            });
+        }
+    },
+
 
     created(){
         this.BASE = BASE_URL;
         this.slug = this.company.user_name_profile ? this.company.user_name_profile.username : this.company.username;
+
+        if(this.company.company.card){
+            this.checkImage();
+        }
     }
 }
 </script>
@@ -111,6 +145,10 @@ export default {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+.single-listings-item .listings-image img {
+    display: block;
 }
 
 .pointer {
@@ -139,5 +177,27 @@ export default {
 
 .hide {
     display: none;
+}
+
+.promoted {
+    border: 1px solid #f5a91f!important;
+}
+
+.promoted-icon {
+    font-size: 11px;
+    padding: 2px 6px;
+    color: black;
+    border: 1px solid #ffdf00;
+    background-color: #ffdf00;
+    border-radius: 5px;
+    width: fit-content;
+    top: 4px;
+    left: 4px;
+    position: absolute;
+}
+
+.fit-image {
+    width: 100%;height: 260px!important;max-height: 260px!important;
+    object-fit: cover;
 }
 </style>
