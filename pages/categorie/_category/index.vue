@@ -22,10 +22,9 @@
                 <template v-else>
                     <div class='row' v-if="category_companies && category_companies.length > 0">
                         <SingleListItem v-for="item in category_companies" :key="item.id" :company="item.user" />
-
-                        <Pagination v-if="total_pages > 1" :pages="total_pages" />
                     </div>
                 </template>
+                <Pagination v-if="total_pages > 1" :pages="total_pages" @scrollTo="scrollToElement" />
 
             </div>
             </div>
@@ -98,18 +97,17 @@ export default {
     },
     
     async fetch(){
+        await this.$store.dispatch('categories/initCategories');
+        await this.$store.dispatch('judete/initJudete');
+
+        let category_slug = decodeURI(this.$route.params.category);
+        // get category and check if exists. if false, redirect to 404. else continue the process
+        await this.$store.dispatch('category_companies/initCategory', category_slug); 
+
         if(!this.page_changed){
-            
-            let category_slug = decodeURI(this.$route.params.category);
-    
-            // get category and check if exists. if false, redirect to 404. else continue the process
-            await this.$store.dispatch('category_companies/initCategory', category_slug); 
-    
             this.loading_comp = true;
             let page = 1;
-            await this.$store.dispatch('category_companies/initCategoryCompanies', {category_slug, page});
-            await this.$store.dispatch('categories/initCategories');
-            await this.$store.dispatch('judete/initJudete').finally(() => {
+            await this.$store.dispatch('category_companies/initCategoryCompanies', {category_slug, page}).finally(() => {
                     this.loading_comp = false;
             });
         }
@@ -131,6 +129,10 @@ export default {
     mounted(){
         // console.log(this.$route.params.category);
         this.scrollToElement();
+    },
+
+    async created(){
+        
     }
 
 

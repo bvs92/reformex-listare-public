@@ -21,7 +21,9 @@ export const state = () => ({
     total_pages: null,
     current_page: 1,
 
-    page_changed: false
+    page_changed: false,
+
+    loading_page_change: false
 })
 
 export const actions = {
@@ -106,6 +108,7 @@ export const actions = {
     },
 
     changePage: async function({state, dispatch, commit}, page){
+        await commit('set_loading_page_change', true);
         let payload = {
             category_slug: state.current_slug,
             page: page
@@ -113,7 +116,11 @@ export const actions = {
 
         // await commit('set_page_changed', true);
 
-        await dispatch('initCategoryCompanies', payload);
+        await dispatch('initCategoryCompanies', payload).finally(async () => {
+            setTimeout(() => {
+                commit('set_loading_page_change', false);
+            }, 2000);
+        });
 
     },
 
@@ -279,5 +286,10 @@ export const mutations = {
 
     set_page_changed: function(state, _page_changed){
         state.page_changed = _page_changed;
-    }
+    },
+
+    set_loading_page_change(state, status) {
+        state.loading_page_change = status;
+    },
+
 }

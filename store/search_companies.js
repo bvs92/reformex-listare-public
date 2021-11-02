@@ -22,14 +22,16 @@ export const state = () => ({
 
     total_pages: 1,
     current_page: 1,
-    total_results: 0
+    total_results: 0,
+
+    loading_page_change: false
 })
 
 export const actions = {
   
 
     searchCompanies: async function({commit}, payload){
-        await commit('set_loading_search', true);
+        // await commit('set_loading_search', true);
 
         await commit('set_current_slug', payload.category_slug);
         await commit('set_current_location', payload.location_slug);
@@ -52,11 +54,11 @@ export const actions = {
             if(response.data.companies){
                 if(Array.isArray(response.data.companies)){
                     await commit('set_search_companies', response.data.companies)
-                    await commit('set_initial_search_companies', response.data.companies)
+                    // await commit('set_initial_search_companies', response.data.companies)
                     await commit('set_total_pages', parseInt(response.data.total_pages));
                     await commit('set_total_results', parseInt(response.data.total_results));
                 }else {
-                    await commit('set_initial_search_companies', [response.data.companies[Object.keys(response.data.companies)[0]]])
+                    // await commit('set_initial_search_companies', [response.data.companies[Object.keys(response.data.companies)[0]]])
                     await commit('set_search_companies', [response.data.companies[Object.keys(response.data.companies)[0]]])
                     await commit('set_total_pages', parseInt(response.data.total_pages));
                     await commit('set_total_results', parseInt(response.data.total_results));
@@ -68,23 +70,34 @@ export const actions = {
                 // console.log('search companies result', response.data.companies);
             } else {
                 commit('set_search_companies', []);
-                commit('set_initial_search_companies', []);
+                // commit('set_initial_search_companies', []);
             }
-      }).finally(() => {
+      }).catch(error => {
+          console.log('eroare server');
+      })
+      .finally(() => {
             commit('set_search_made', true);
-            commit('set_loading_search', false);
+            // commit('set_loading_search', false);
          
       });
     },
 
-    changePage: async function({state, dispatch}, page){
+    changePage: async function({state, dispatch, commit}, page){
+        await commit('set_loading_page_change', true);
+
         let payload = {
             category_slug: state.current_slug,
             location_slug: state.current_location,
             page: page
         };
-        // await commit('set_current_page', page);
-        await dispatch('searchCompanies', payload);
+        
+        
+        await dispatch('searchCompanies', payload).finally(async () => {
+            setTimeout(() => {
+                commit('set_loading_page_change', false);
+            }, 2000);
+        });
+
 
     },
 
@@ -104,6 +117,12 @@ export const mutations = {
     set_loading_search(state, status) {
         state.loading_status = status;
     },
+
+    set_loading_page_change(state, status) {
+        state.loading_page_change = status;
+    },
+
+
     set_search_homepage(state, status) {
         state.search_homepage = status;
     },

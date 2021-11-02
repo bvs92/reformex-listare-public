@@ -30,10 +30,10 @@
                             <div class='row' v-if="result_companies && result_companies > 0">
                                 <SingleListItem v-for="item in companies" :key="item.id" :company="item.user" keep-alive />
 
-                                <Pagination v-if="total_pages && total_pages > 1" :pages="total_pages" />
                             </div>
                         </template>
                     </template>
+                    <Pagination v-if="total_pages && total_pages > 1" :pages="total_pages" @scrollTo="scrollToElement" />
                 </div>
             </div>
 
@@ -109,25 +109,28 @@ export default {
     },
     
     async fetch(){
-        this.loading_comp = true;
+        // this.loading_comp = true;
+        
         await this.$store.dispatch('categories/initCategories');
         await this.$store.dispatch('judete/initJudete');
 
         // console.log('this.search_made', this.search_made);
         
         if(!this.search_made){
-            console.log('se executa all?');
+            // console.log('se executa all?');
+            await this.$store.commit('search_companies/set_loading_search', true);
+
             let payload = {
                 category_slug: 'all',
                 location_slug:  'all',
                 page: 1
             };
 
-            await this.$store.dispatch('search_companies/searchCompanies', payload).finally(() => {
-                setTimeout(() => {
-                    this.loading_comp = false;
-                }, 1000);
+            await this.$store.dispatch('search_companies/searchCompanies', payload)
+            .finally(() => {
+                this.$store.commit('search_companies/set_loading_search', false);
             });
+
             
             let _last_search = {
                 category: 'Toate',
@@ -156,6 +159,7 @@ export default {
                 el.scrollIntoView({behavior: 'smooth'});
             }
         },
+
 
 
         
