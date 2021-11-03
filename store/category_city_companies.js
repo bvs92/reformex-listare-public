@@ -137,7 +137,61 @@ export const actions = {
                     this.$router.push('/pagina-negasita');
                 }
             }
-            }).finally(() => {
+            })
+            .catch(error => {
+                console.log(error);
+            })
+            .finally(() => {
+                commit('set_loading_search', false);
+            });
+    },
+
+    async initVerifiedCompanies({commit}, payload){
+        // await commit('set_category', null);
+        // await commit('set_location', null);
+        // await commit('set_companies', []);
+        // await commit('set_initial_companies', []);
+        await commit('set_loading_search', true);
+
+        await commit('set_current_slug', payload.category_slug);
+        await commit('set_current_location', payload.location_slug);
+        await commit('set_current_page', payload.page);
+
+        await commit('set_page_changed', true);
+
+        axios.defaults.httpsAgent = new https.Agent({
+            rejectUnauthorized: false,
+          });
+
+          let final_url = `${BASE_URL}/api/companies/verified/location/category/get/${payload.category_slug}/${payload.location_slug}/${payload.page}`;
+            await axios.get(final_url,{
+                headers: {'Access-Control-Allow-Origin': "*"},
+                mode: 'cors',
+            }).then(async response => {
+            if(response.data){
+                if(response.data.companies){
+                    // await commit('set_category', response.data.category.name);
+                    // await commit('set_location', response.data.location.name);
+    
+                    if(Array.isArray(response.data.companies)){
+                        await commit('set_companies', response.data.companies);
+                        // await commit('set_initial_companies', response.data.companies);
+                        await commit('set_total_pages', parseInt(response.data.total_pages));
+                    } else {
+                        await commit('set_companies', [response.data.companies[Object.keys(response.data.companies)[0]]]);
+                        // await commit('set_initial_companies', [response.data.companies[Object.keys(response.data.companies)[0]]]);
+                        await commit('set_total_pages', parseInt(response.data.total_pages));
+                    }
+                } else {
+                    // commit('set_404_page', true)
+                    this.$router.push('/pagina-negasita');
+                }
+            }
+            })
+            .catch(() => {
+                console.log('error');
+            })
+            .finally(() => {
                 commit('set_loading_search', false);
             });
     },
@@ -159,21 +213,62 @@ export const actions = {
 
     },
 
-    toggleVerified: function({commit, state}, status){
-        if(status){
-            let filteredSearch = state.companies.filter(item => {
-                if(item.user.badge.verified == 1){
-                    return item;
-                }
+    filterSearch: async function({dispatch, commit, state}){
+        // normal search
+        if(state.current_slug && state.current_location){
+            await commit('set_loading_page_change', true);
+    
+            let payload = {
+                category_slug: state.current_slug,
+                location_slug: state.current_location,
+                page: 1
+            };
+            
+            
+            await dispatch('initCompanies', payload).finally(async () => {
+                setTimeout(() => {
+                    commit('set_loading_page_change', false);
+                }, 1000);
             });
-            commit('set_companies', filteredSearch)
-        } else {
-            commit('set_companies', state.initial_companies)
         }
-
-        commit('toggle_verified', status);
-        
     },
+
+    filterVerifiedCompanies: async function({commit, dispatch, state}, status){
+        if(status){
+            if(state.current_slug && state.current_location){
+                await commit('set_loading_page_change', true);
+        
+                let payload = {
+                    category_slug: state.current_slug,
+                    location_slug: state.current_location,
+                    page: 1
+                };
+                
+                
+                await dispatch('initVerifiedCompanies', payload).finally(async () => {
+                    setTimeout(() => {
+                        commit('set_loading_page_change', false);
+                    }, 1000);
+                });
+            }
+        }
+    }
+
+    // toggleVerified: function({commit, state}, status){
+    //     if(status){
+    //         let filteredSearch = state.companies.filter(item => {
+    //             if(item.user.badge.verified == 1){
+    //                 return item;
+    //             }
+    //         });
+    //         commit('set_companies', filteredSearch)
+    //     } else {
+    //         commit('set_companies', state.initial_companies)
+    //     }
+
+    //     commit('toggle_verified', status);
+        
+    // },
 
 
 

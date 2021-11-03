@@ -10,16 +10,15 @@
                     <h2>Beneficiile înscrierii firmei</h2>
                     <div class="mt-5">
                         <ul class="list-benefits">
-                            <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, odit!</li>
-                            <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, odit!</li>
-                            <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> Lifetime Availability</li>
-                            <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> One Time Fee</li>
-                            <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, odit!</li>
-                            <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> Basic Registration &amp; Ticketing</li>
-                            <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, odit!</li>
-                            <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, odit!</li>
-                            <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, odit!</li>
-                            <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, odit!</li>
+                            <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> Vei face parte dintr-o comunitate formată doar din firme verificate;</li>
+                            <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> Vei folosi platfoma cu șantiere în mod gratuit;</li>
+                            <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> Poți căuta proiecte în funcție de categorii și zona geografică;</li>
+                            <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> Vei obține mai multă vizibilitate pentru firma ta și mai mulți clienți;</li>
+                            <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> Proces transparent de obținere a clienților;</li>
+                            <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> Șanse reale, fiecare cerere permite 3 oferte inițial;</li>
+                            <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> Accesul într-un spațiu virtual specific domeniului construcțiilor;</li>
+                            <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> Îți vom crea un profil public personalizat;</li>
+                            <li><i class="fa fa-check-circle-o" aria-hidden="true"></i> Vei fi listat în căutările clienților în funcție de locațiile în care lucrezi și de categoriile alese;</li>
                         </ul>
                     </div>
                 </div>

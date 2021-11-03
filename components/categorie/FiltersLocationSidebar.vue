@@ -4,7 +4,7 @@
     <section class='widget widget_categories'>
         <h3 class='title'>Filtrări rezultate</h3>
         <div class="my-4">
-            <b-form-checkbox v-model="checkedVerified" name="check-button" switch @change="toggleVerified" :disabled="search_loading_status ? true : false">
+            <b-form-checkbox v-model="checkedVerified" name="check-button" switch @change="toggleVerified" :disabled="search_loading_status ? true : false || blockLoading ? true : false">
             Firme verificate
             </b-form-checkbox>
         </div>
@@ -41,6 +41,7 @@ export default {
             checkedVerified: false,
             checkedProjects: false,
             isHidden: true,
+            blockLoading: false
 
         }
     },
@@ -53,14 +54,31 @@ export default {
     },
 
     methods: {
-        toggleVerified: function(){
-            this.$store.commit('category_city_companies/toggle_verified', this.checkedVerified);
-            this.$store.dispatch('category_city_companies/toggleVerified', this.checkedVerified);
+        toggleVerified: async function(){
+            // this.$store.commit('companies/toggle_verified', this.checkedVerified);
+            // this.$store.dispatch('search_companies/toggle_verified', this.checkedVerified);
+            this.blockLoading = true;
+            if(this.checkedVerified == true){
+                await this.$store.dispatch('category_city_companies/filterVerifiedCompanies', this.checkedVerified).finally(() => {
+                    setTimeout(() => {
+                        this.blockLoading = false;
+                    }, 1000);
+                });
+            } else {
+                await this.$store.dispatch('category_city_companies/filterSearch').finally(() => {
+                    setTimeout(() => {
+                        this.blockLoading = false;
+                    }, 1000);
+                });
+            }
+
+            
+
         },
     },
 
     created(){
-        this.checkedVerified = this.$store.state.category_city_companies.checkedVerified;
+        // this.checkedVerified = this.$store.state.category_city_companies.checkedVerified;
     }
 }
 </script>

@@ -4,7 +4,7 @@
         <div class='section-title'>
         <h2>Cum funcționează?</h2>
         <p>
-           De completat pentru firme.
+           Știm cât de greu este să găsești clienți noi. De aceea am creat o platformă destinată proiectelor din construcții și nu doar atât.
         </p>
         </div>
 
@@ -14,9 +14,9 @@
             <div class='icon'>
                 <i class='flaticon-placeholder'></i>
             </div>
-            <h3>Caută în zona ta</h3>
+            <h3>Caută în mod personalizat</h3>
             <p>
-                Găsești firme sau meșteri la tine în oraș în funcție de proiect.
+                Filtrează proiectele lansate de către clienți în funcție de locație și de categorie.
             </p>
             </div>
         </div>
@@ -26,9 +26,9 @@
             <div class='icon'>
                 <i class='flaticon-support-1'></i>
             </div>
-            <h3>Contactezi firmele</h3>
+            <h3>Contactează clienții</h3>
             <p>
-                Suni sau trimiți un e-mail către firma ce corespunde nevoilor.
+                Deblochează proiectele clienților în mod gratuit și intră în contact cu aceștia.
             </p>
             </div>
         </div>
@@ -43,9 +43,9 @@
             <div class='icon'>
                 <i class='flaticon-tick'></i>
             </div>
-            <h3>Primești ofertă de preț</h3>
+            <h3>Ofertează proiecte</h3>
             <p>
-                Primești oferte de la firma aleasă sau de la alte firme recomandate.
+                Ofertează proiectele deblocate și comunică cu clienții spre obținerea acestora.
             </p>
             </div>
         </div>

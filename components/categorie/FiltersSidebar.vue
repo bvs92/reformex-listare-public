@@ -4,32 +4,12 @@
     <section class='widget widget_categories'>
         <h3 class='title'>Filtrări rezultate</h3>
         <div class="my-4">
-            <b-form-checkbox v-model="checkedVerified" name="check-button" switch @change="toggleVerified" :disabled="search_loading_status ? true : false">
+            <b-form-checkbox v-model="checkedVerified" name="check-button" switch @change="toggleVerified" :disabled="search_loading_status ? true : false || blockLoading ? true : false">
             Firme verificate
             </b-form-checkbox>
         </div>
-
-        <!-- <div class="my-4">
-            <b-form-checkbox v-model="checkedProjects" name="check-button" switch @change="toggleProjects">
-            Portofoliu proiecte <b>(S: {{ checkedProjects }})</b>
-            </b-form-checkbox>
-        </div> -->
     </section>
 
-
-    <!-- <section class='widget widget_categories'>
-        <h3 class='widget-title'>Categorii</h3>
-
-        <ul>
-        <li>
-            <input id='categories1' type='checkbox' />
-            <label htmlFor='categories1'>Arhitectură</label>
-        </li>
-        <li class='see-all-btn'>
-            <span>Arată tot</span>
-        </li>
-        </ul>
-    </section> -->
 
     <section class='widget widget_features'>
         <h3 class='title'>Județ</h3>
@@ -42,6 +22,7 @@
             text-field="name"
             disabled-field="notEnabled"
             stacked
+            :disabled="search_loading_status ? true : false || blockLoading ? true : false"
         ></b-form-radio-group>
         <ul>
             <li class='see-all-btn' @click.prevent="showLess = !showLess">
@@ -50,18 +31,8 @@
             </li>
         </ul>
     
-
-        <!-- <ul v-if="judete && judete.length > 0">
-            <li v-for="(judet, index) in judete" :key="judet.id" :class="{hide: index > 10 && isHidden}">
-                <input :id='judet.code' type='checkbox' />
-                <label :htmlFor='judet.code'>{{ judet.name }}</label>
-            </li>
-            <li class='see-all-btn' @click.prevent="isHidden = !isHidden">
-                <span v-if="isHidden">Arată mai multe</span>
-                <span v-else>Arată mai puține</span>
-            </li>
-        </ul> -->
     </section>
+
 </aside>
 </template>
 
@@ -77,12 +48,16 @@ export default {
             judeteOptions: [],
             judeteOptionsLess: [],
             showLess: true,
+            blockLoading: false
         }
     },
 
     computed:{
         search_loading_status() {
-            return this.$store.state.companies.loading_status;
+            return this.$store.state.category_companies.loading_status;
+        },
+        current_category_slug() {
+            return this.$store.state.category_companies.current_slug;
         },
         judete() {
             return this.$store.state.judete.judete;
@@ -90,18 +65,51 @@ export default {
     },
 
     methods: {
-        toggleVerified: function(){
-            this.$store.commit('category_companies/toggle_verified', this.checkedVerified);
-            this.$store.dispatch('category_companies/toggleVerified', this.checkedVerified);
+        toggleVerified: async function(){
+            // this.$store.commit('companies/toggle_verified', this.checkedVerified);
+            // this.$store.dispatch('search_companies/toggle_verified', this.checkedVerified);
+            this.blockLoading = true;
+            if(this.checkedVerified == true){
+                await this.$store.dispatch('category_companies/filterVerifiedCompanies', this.checkedVerified).finally(() => {
+                    setTimeout(() => {
+                        this.blockLoading = false;
+                    }, 1000);
+                });
+            } else {
+                await this.$store.dispatch('category_companies/filterCompanies').finally(() => {
+                    setTimeout(() => {
+                        this.blockLoading = false;
+                    }, 1000);
+                });
+            }
         },
+
+
         toggleProjects: function(){
             // this.$store.commit('companies/toggle_projects', this.checkedProjects);
             // this.$store.dispatch('companies/toggleProjects', this.checkedProjects)
         },
 
-        changeJudet: function(){
-            
-            this.$store.dispatch('category_companies/filterJudet', this.selected)
+        changeJudet: async function(){
+            // console.log(this.selected);
+            await this.$store.commit('category_companies/set_current_location', this.selected);
+
+            this.blockLoading = true;
+            if(this.checkedVerified == true){
+                await this.$store.dispatch('category_companies/filterVerifiedCompanies', this.checkedVerified).finally(() => {
+                    setTimeout(() => {
+                        this.blockLoading = false;
+                    }, 1000);
+                });
+            } else {
+                await this.$store.dispatch('category_companies/filterCompanies').finally(() => {
+                    setTimeout(() => {
+                        this.blockLoading = false;
+                    }, 1000);
+                });
+            }
+
+            // this.$store.dispatch('category_companies/filterJudet', this.selected)
         }
     },
 

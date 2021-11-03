@@ -53,7 +53,7 @@
 
                     <div class='col-lg-2 col-md-12 p-0'>
                       <div class='submit-btn'>
-                        <button type='submit'>Caută</button>
+                        <button type='submit' :disabled="block_search_button ? true : false">Caută</button>
                       </div>
                     </div>
                   </div>
@@ -101,7 +101,8 @@ export default {
           location: "all",
           category: "all",
           location_name: 'România',
-          category_name: 'Toate categoriile'
+          category_name: 'Toate categoriile',
+          block_search_button: false
       }
     },
 
@@ -138,13 +139,16 @@ export default {
 
         searchCompanies: async function(){
             // await this.$store.commit('companies/set_loading_search', true);
+            this.block_search_button = true;
             let payload = {
                 category_slug: this.category,
                 location_slug: this.location,
                 page: 1
             };
 
-            await this.$store.dispatch('search_companies/searchCompanies', payload);
+            await this.$store.dispatch('search_companies/searchCompanies', payload).then(() => {
+              this.block_search_button = false;
+            });
             
             let _last_search = {
                 category: this.category_name,
@@ -161,6 +165,14 @@ export default {
             }
             // await this.$store.commit('companies/set_loading_search', false);
         }
+    },
+
+    created(){
+      this.block_search_button = true;
+
+      setTimeout(() => {
+        this.block_search_button = false;
+      }, 1000);
     }
 }
 </script>

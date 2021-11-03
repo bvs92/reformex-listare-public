@@ -28,8 +28,8 @@ export default {
 
 <style scoped>
 .page-title-area {
-    padding-top: 80px!important;
-    padding-bottom: 80px!important;
-    opacity: 0.7;
+    padding-top: 100px!important;
+    padding-bottom: 100px!important;
+    opacity: 0.9;
 }
 </style>

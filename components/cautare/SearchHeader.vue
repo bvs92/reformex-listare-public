@@ -35,7 +35,7 @@
 
             <div class='col-lg-2 col-md-12 p-0'>
             <div class='submit-btn'>
-                <button type='submit'>Caută</button>
+                <button type='submit' :disabled="block_search_button ? true : false">Caută</button>
             </div>
             </div>
         </div>
@@ -64,7 +64,9 @@ export default {
 
       current_page(){
           return this.$store.state.search_companies.current_page;
-      }
+      },
+
+      
       
     },
 
@@ -75,7 +77,8 @@ export default {
             location: "all",
             category: "all",
             location_name: 'România',
-            category_name: 'Toate categoriile'
+            category_name: 'Toate categoriile',
+            block_search_button: false
         }
     },
 
@@ -97,20 +100,30 @@ export default {
         },
 
         searchCompanies: async function(){
-            // await this.$store.commit('companies/set_loading_search', true);
+            await this.$store.commit('search_companies/set_block_button', true);
+            
+            this.block_search_button = true;
+            await this.$store.commit('search_companies/set_loading_page_change', true);
             let payload = {
                 category_slug: this.category,
                 location_slug: this.location,
                 page: 1
             };
 
-            await this.$store.dispatch('search_companies/searchCompanies', payload);
+            await this.$store.dispatch('search_companies/searchCompanies', payload).finally(() => {
+                this.block_search_button = false;
+                this.$store.commit('search_companies/set_block_button', false);
+            });
             
             let _last_search = {
                 category: this.category_name,
                 location: this.location_name
             }
             await this.$store.commit('search_companies/set_last_search', _last_search);
+
+            await this.$store.commit('search_companies/set_loading_page_change', false);
+
+
 
             // await this.$store.commit('search_companies/set_current_page');
             

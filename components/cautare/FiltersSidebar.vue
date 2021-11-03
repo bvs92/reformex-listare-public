@@ -4,7 +4,18 @@
     <section class='widget widget_categories'>
         <h3 class='title'>Filtrări rezultate</h3>
         <div class="my-4">
-            <b-form-checkbox v-model="checkedVerified" name="check-button" switch @change="toggleVerified" :disabled="search_loading_status ? true : false">
+            <b-form-checkbox 
+            v-if="result_companies && result_companies > 0"
+            v-model="checkedVerified" name="check-button" switch 
+            @change="toggleVerified" 
+            :disabled="search_loading_status ? true : false || blockLoading ? true : false || block_button ? true : false">
+            Firme verificate
+            </b-form-checkbox>
+            <b-form-checkbox 
+            v-else
+            name="check-button" switch 
+            @change="toggleVerified" 
+            :disabled="true">
             Firme verificate
             </b-form-checkbox>
         </div>
@@ -81,29 +92,53 @@ export default {
         return {
             checkedVerified: false,
             checkedProjects: false,
+            blockLoading: false
         }
     },
 
     computed:{
         search_loading_status() {
-            return this.$store.state.companies.loading_status;
+            return this.$store.state.search_companies.loading_status;
+        },
+        block_button: function(){
+            return this.$store.state.search_companies.block_button;
+        },
+        result_companies() {
+            return this.$store.state.search_companies.total_results;
         },
     },
 
     methods: {
-        toggleVerified: function(){
+        toggleVerified: async function(){
             // this.$store.commit('companies/toggle_verified', this.checkedVerified);
-            this.$store.dispatch('companies/toggleVerified', this.checkedVerified);
+            // this.$store.dispatch('search_companies/toggle_verified', this.checkedVerified);
+            this.blockLoading = true;
+            if(this.checkedVerified == true){
+                await this.$store.dispatch('search_companies/filterVerifiedCompanies', this.checkedVerified).finally(() => {
+                    setTimeout(() => {
+                        this.blockLoading = false;
+                    }, 1000);
+                });
+            } else {
+                await this.$store.dispatch('search_companies/filterSearch').finally(() => {
+                    setTimeout(() => {
+                        this.blockLoading = false;
+                    }, 1000);
+                });
+            }
+
+            
+
         },
         toggleProjects: function(){
             // this.$store.commit('companies/toggle_projects', this.checkedProjects);
-            this.$store.dispatch('companies/toggleProjects', this.checkedProjects)
+            // this.$store.dispatch('companies/toggleProjects', this.checkedProjects)
         },
     },
 
     created(){
-        this.checkedVerified = this.$store.state.companies.checkedVerified;
-        this.checkedProjects = this.$store.state.companies.checkedProjects;
+        // this.checkedVerified = this.$store.state.search_companies.checkedVerified;
+        // this.checkedProjects = this.$store.state.companies.checkedProjects;
     }
 }
 </script>

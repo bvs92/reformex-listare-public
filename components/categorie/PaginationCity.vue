@@ -2,37 +2,44 @@
 <div class='col-lg-12 col-md-12' v-if="pages">
     <!-- <p v-if="current_page">Pagina curenta: {{ current_page }}</p>
     <p v-if="current_page">Slug curent: {{ current_slug }}</p> -->
-    <div class='pagination-area text-center'>
     
-    <a href='#' class='prev page-numbers' 
-    @click.prevent="getCompanies(current_page - 1)" v-if="current_page > 1"
-    :class="{'disabled' : loading_page_change}">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-    </a>
+        <div class='pagination-area text-center'>
+ 
+            <a href='#' class='prev page-numbers' 
+            @click.prevent="getCompanies(current_page - 1)" v-if="current_page > 1"
+            :class="{'disabled' : loading_page_change}">
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            </a>
 
-    <a class='none prev page-numbers' v-else>
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-    </a>
+            <a class='none prev page-numbers' v-else>
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            </a>
 
-    
-    <template v-for="page in pages">
-    <a @click.prevent="getCompanies(page)" class="pointer" :key="page" v-if="page < 7">
-        <span class='page-numbers' :class="{'current' : current_page == page, 'disabled' : loading_page_change}" aria-current='page' >
-            {{ page }}
-        </span>
-    </a>
-    <span class="more" :key="page" v-else>...</span>
-    </template>
 
-    <a href='#' class='next page-numbers' 
-    @click.prevent="getCompanies(current_page + 1)" v-if="current_page < total_pages"
-    :class="{'disabled' : loading_page_change}">
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-    </a>
-    <a class='none next page-numbers' disabled="disabled" v-else>
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-    </a>
-    </div>
+        
+        <template v-for="page in pages">
+        <a @click.prevent="getCompanies(page)" class="pointer" :key="page" v-if="page < 7">
+  
+            <span class='page-numbers' :class="{'current' : current_page == page, 'disabled' : loading_page_change}" aria-current='page' >
+                {{ page }}
+            </span>
+
+        </a>
+        <span class="more" :key="page" v-else>...</span>
+        </template>
+
+
+            <a href='#' class='next page-numbers' 
+            @click.prevent="getCompanies(current_page + 1)" v-if="current_page < total_pages"
+            :class="{'disabled' : loading_page_change}">
+                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </a>
+            <a class='none next page-numbers' disabled="disabled" v-else>
+                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </a>
+
+        </div>
+
 </div><!-- end pagination -->
 </template>
 

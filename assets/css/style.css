@@ -57,10 +57,11 @@ This files table contents are outlined below>>>>>
 /*================================================
 Default CSS
 =================================================*/
-@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"); */
 :root {
   --fontFamily: "Work Sans", sans-serif;
-  --mainColor: #0ec6c6;
+  /* --mainColor: #0ec6c6; */
+  --mainColor: #20bdbd;
   --mainColor2: #30eded;
   --optionalColor: #666666;
   --whiteColor: #ffffff;
@@ -10293,13 +10294,13 @@ Page Title Area CSS
 }
 
 .background-pattern {
-  background-color: #43d3c4;
+  background-color: #22c1b1;
   opacity: 0.8;
   background-image: radial-gradient(
       #283736 0.7000000000000001px,
       transparent 0.7000000000000001px
     ),
-    radial-gradient(#283736 0.7000000000000001px, #43d3c4 0.7000000000000001px);
+    radial-gradient(#283736 0.7000000000000001px, #22c1b1 0.7000000000000001px);
   background-size: 28px 28px;
   background-position: 0 0, 14px 14px;
 }

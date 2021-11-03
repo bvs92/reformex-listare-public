@@ -6,6 +6,7 @@ export const state = () => ({
     companies: [],
     initial_companies: [],
     category: null,
+    category_uuid: null,
 
     loading_status: false,
     checkedVerified: false,
@@ -16,6 +17,7 @@ export const state = () => ({
     status: false,
 
     current_slug: null,
+    current_location: 'all',
 
 
     total_pages: null,
@@ -49,6 +51,7 @@ export const actions = {
 
                 if(response.data.category){
                     await commit('set_category', response.data.category.name);
+                    await commit('set_category_uuid', response.data.category.uuid);
                 } else {
                     // commit('set_404_page', true)
                     this.$router.push('/pagina-negasita');
@@ -62,7 +65,6 @@ export const actions = {
     },
 
     async initCategoryCompanies({commit}, payload){
-        // await commit('set_category', null);
         await commit('set_loading_search', true);
         await commit('set_current_slug', payload.category_slug);
         await commit('set_current_page', payload.page);
@@ -79,25 +81,16 @@ export const actions = {
                 mode: 'cors',
             }).then(async response => {
             if(response.data){
-                // console.log('preluam companii', response.data);
-                // await commit('set_category', response.data.category.name);
-                // await commit('set_companies', response.data.companies);
-                // await commit('set_initial_companies', response.data.companies);
-
                 if(response.data.companies){
-                    // await commit('set_category', response.data.category.name);
     
                     if(Array.isArray(response.data.companies)){
                         await commit('set_companies', response.data.companies);
-                        // await commit('set_initial_companies', response.data.companies);
                         await commit('set_total_pages', parseInt(response.data.total_pages));
                     } else {
                         await commit('set_companies', [response.data.companies[Object.keys(response.data.companies)[0]]]);
-                        // await commit('set_initial_companies', [response.data.companies[Object.keys(response.data.companies)[0]]]);
                         await commit('set_total_pages', parseInt(response.data.total_pages));
                     }
                 } else {
-                    // commit('set_404_page', true)
                     this.$router.push('/pagina-negasita');
                 }
 
@@ -106,6 +99,137 @@ export const actions = {
                 commit('set_loading_search', false);
             });
     },
+
+
+    // for filters
+
+    searchCompanies: async function({commit}, payload){
+        await commit('set_current_page', payload.page);
+
+        axios.defaults.httpsAgent = await new https.Agent({
+            rejectUnauthorized: false,
+          });
+
+          let final_url = `${BASE_URL}/api/companies/search/${payload.category_slug}/${payload.location_slug}/${payload.page}`;
+
+        await axios.get(final_url,{
+            headers: {'Access-Control-Allow-Origin': "*"},
+             mode: 'cors',
+          }).then(async response => {
+
+            if(response.data.companies){
+                if(Array.isArray(response.data.companies)){
+                    await commit('set_companies', response.data.companies)
+                    await commit('set_total_pages', parseInt(response.data.total_pages));
+                    
+                }else {
+                    await commit('set_companies', [response.data.companies[Object.keys(response.data.companies)[0]]])
+                    await commit('set_total_pages', parseInt(response.data.total_pages));
+                }
+            } else {
+                commit('set_companies', []);
+            }
+      }).catch(error => {
+          console.log('eroare server');
+      })
+      .finally(() => {
+            // commit('set_search_made', true);
+            // commit('set_loading_search', false);
+         
+      });
+    },
+
+
+    searchVerifiedCompanies: async function({commit}, payload){
+        // await commit('set_loading_search', true);
+
+        // await commit('set_current_slug', payload.category_slug);
+        // await commit('set_current_location', payload.location_slug);
+        await commit('set_current_page', payload.page);
+        // await commit('set_search_made', true);
+
+        axios.defaults.httpsAgent = await new https.Agent({
+            rejectUnauthorized: false,
+          });
+
+          let final_url = `${BASE_URL}/api/companies/search/verified/${payload.category_slug}/${payload.location_slug}/${payload.page}`;
+
+        await axios.get(final_url,{
+            headers: {'Access-Control-Allow-Origin': "*"},
+             mode: 'cors',
+          }).then(async response => {
+
+            // console.log('suntem aici', response.data);
+
+            if(response.data.companies){
+                if(Array.isArray(response.data.companies)){
+                    await commit('set_companies', response.data.companies)
+                    // await commit('set_initial_search_companies', response.data.companies)
+                    await commit('set_total_pages', parseInt(response.data.total_pages));
+                    // await commit('set_total_results', parseInt(response.data.total_results));
+                }else {
+                    // await commit('set_initial_search_companies', [response.data.companies[Object.keys(response.data.companies)[0]]])
+                    await commit('set_companies', [response.data.companies[Object.keys(response.data.companies)[0]]])
+                    await commit('set_total_pages', parseInt(response.data.total_pages));
+                    
+                }
+               
+            } else {
+                commit('set_companies', []);
+            }
+      }).catch(error => {
+          console.log('eroare server');
+      });
+    },
+
+
+    filterCompanies: async function({commit, dispatch, state}){
+
+        if(state.current_slug){
+            await commit('set_loading_page_change', true);
+            console.log(state.category_uuid);
+            console.log(state.current_location);
+    
+            let payload = {
+                category_slug: state.category_uuid,
+                location_slug: state.current_location,
+                page: 1
+            };
+            
+            
+            await dispatch('searchCompanies', payload).finally(async () => {
+                setTimeout(() => {
+                    commit('set_loading_page_change', false);
+                }, 1000);
+            });
+        }
+
+    },
+
+
+    filterVerifiedCompanies: async function({commit, dispatch, state}, status){
+        if(status){
+            if(state.current_slug){
+                await commit('set_loading_page_change', true);
+                console.log(state.category_uuid);
+                console.log(state.current_location);
+        
+                let payload = {
+                    category_slug: state.category_uuid,
+                    location_slug: state.current_location,
+                    page: 1
+                };
+                
+                
+                await dispatch('searchVerifiedCompanies', payload).finally(async () => {
+                    setTimeout(() => {
+                        commit('set_loading_page_change', false);
+                    }, 1000);
+                });
+            }
+        }
+    },
+
 
     changePage: async function({state, dispatch, commit}, page){
         await commit('set_loading_page_change', true);
@@ -244,6 +368,12 @@ export const mutations = {
     },
     set_category(state, _category) {
         state.category = _category;
+    },
+    set_category_uuid(state, _category) {
+        state.category_uuid = _category;
+    },
+    set_current_location(state, _location) {
+        state.current_location = _location;
     },
 
     set_current_slug(state, _current_slug) {

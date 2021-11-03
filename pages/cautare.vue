@@ -38,7 +38,9 @@
 
                         </template>
                     </template>
-                    <Pagination v-if="total_pages && total_pages > 1" :pages="total_pages" @scrollTo="scrollToElement" />
+                    <transition name="fade" mode="out-in">
+                        <Pagination v-if="total_pages && total_pages > 1" :pages="total_pages" @scrollTo="scrollToElement" />
+                    </transition>
                 </div>
 
                 <div class='col-lg-4 col-md-12'>
