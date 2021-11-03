@@ -58,8 +58,8 @@ export default {
     methods: {
         getCompanies: async function(page){
             // await this.$store.commit('category_companies/set_current_page', page);
-            await this.$store.dispatch('category_companies/changePage', page);
             this.$emit('scrollTo');
+            await this.$store.dispatch('category_companies/changePage', page);
         }
     },
 

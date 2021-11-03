@@ -106,11 +106,11 @@ export default {
     },
 
 
-    props: ["company"],
+    props: ["company", "loading_change"],
 
     computed: {
         loading_page_change() {
-            return this.$store.state.search_companies.loading_page_change;
+            return this.loading_change;
         },
     },
 

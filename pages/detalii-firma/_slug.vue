@@ -1,5 +1,5 @@
 <template>
-
+<transition name="page">
  <section class='listings-details-area pb-70' v-if="company">
     <HeaderImage :company="company" />
 
@@ -68,6 +68,7 @@
     <RegisterSmall />
 
     </section>
+</transition>
 </template>
 
 <script>

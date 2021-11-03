@@ -95,7 +95,7 @@ export const actions = {
         await dispatch('searchCompanies', payload).finally(async () => {
             setTimeout(() => {
                 commit('set_loading_page_change', false);
-            }, 2000);
+            }, 1000);
         });
 
 

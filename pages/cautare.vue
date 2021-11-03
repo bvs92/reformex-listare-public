@@ -22,10 +22,20 @@
                         <LoadingElements />
                         </template>
                         <template v-else>
-                            <div class='row' v-if="result_companies && result_companies > 0">
-                                <SingleListItem v-for="item in companies" :key="item.id" :company="item.user" keep-alive />
+                                <transition name="slide-fade" mode="out-in">
+                                <div v-if="loading_page_change" class="text-center" style="z-index: 1;position: absolute;width: 100%">
+                                    <span class="wrapper-spinner">
+                                        <b-spinner label="Spinning"></b-spinner>
+                                    </span>
+                                </div>
+                                </transition>
 
-                            </div>
+                                <div class='row' v-if="result_companies && result_companies > 0">
+                                    <transition name="page" mode="out-in">
+                                    <SingleListItem v-for="item in companies" :key="item.id" :company="item.user" keep-alive  />
+                                    </transition>
+                                </div>
+
                         </template>
                     </template>
                     <Pagination v-if="total_pages && total_pages > 1" :pages="total_pages" @scrollTo="scrollToElement" />
@@ -101,6 +111,9 @@ export default {
         },
         search_loading_status() {
             return this.$store.state.search_companies.loading_status;
+        },
+        loading_page_change() {
+            return this.$store.state.search_companies.loading_page_change;
         },
 
         total_pages() {
@@ -184,3 +197,29 @@ export default {
 
 }
 </script>
+
+<style scoped>
+.spinner-border {
+    background: rgb(118, 217, 207);
+    border: 0.25em solid rgb(77, 151, 144);
+    border-right-color: transparent;
+}
+
+.wrapper-spinner {
+    background: white;
+    border-radius: 50%;
+    padding: 20px;
+    position: absolute;
+    -webkit-box-shadow: 0px 0px 5px 0px rgb(215 215 215);
+    -moz-box-shadow: 0px 0px 5px 0px rgb(215 215 215);
+    box-shadow: 0px 0px 5px 0px rgb(215 215 215);
+    opacity: 0.8;
+}
+
+
+
+
+
+
+
+</style>

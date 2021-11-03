@@ -10,7 +10,7 @@
 
         <div class='col-lg-6 col-md-12'>
             <div class='manage-your-business-content'>
-                <h2 class="littleH">Ești firmă și vrei mai mulți clienți?</h2>
+                <h2 class="littleH">Ai o firmă și vrei mai mulți clienți?</h2>
                 <h2>
                     Înregistrează-te pe REFORMEX. Este gratuit!
                 </h2>

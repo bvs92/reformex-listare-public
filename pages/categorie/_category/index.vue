@@ -16,8 +16,18 @@
                         <LoadingElements />
                     </template>
                     <template v-else>
+                        <transition name="slide-fade" mode="out-in">
+                            <div v-if="loading_page_change" class="text-center" style="z-index: 1;position: absolute;width: 100%">
+                                <span class="wrapper-spinner">
+                                    <b-spinner label="Spinning"></b-spinner>
+                                </span>
+                            </div>
+                        </transition>
+
                         <div class='row' v-if="category_companies && category_companies.length > 0">
-                            <SingleListItem v-for="item in category_companies" :key="item.id" :company="item.user" />
+                            <transition name="page" mode="out-in">
+                            <SingleListItem v-for="item in category_companies" :key="item.id" :company="item.user" :loading_change="loading_page_change" />
+                            </transition>
                         </div>
                     </template>
                     <Pagination v-if="total_pages > 1" :pages="total_pages" @scrollTo="scrollToElement" />
@@ -40,7 +50,7 @@
 <script>
 import SearchHeader from "@/components/cautare/SearchHeader.vue"
 import FiltersSidebar from "@/components/categorie/FiltersSidebar.vue"
-import SingleListItem from "@/components/cautare/SingleListItem.vue"
+import SingleListItem from "@/components/categorie/SingleListItem.vue"
 import Pagination from "@/components/categorie/Pagination.vue"
 import LoadingElements from "@/components/common/LoadingElements.vue"
 import RegisterSmall from "@/components/common/RegisterSmall.vue"
@@ -95,6 +105,9 @@ export default {
         page_changed() {
             return this.$store.state.category_companies.page_changed;
         },
+        loading_page_change() {
+            return this.$store.state.category_companies.loading_page_change;
+        },
     },
     
     async fetch(){
@@ -145,6 +158,24 @@ export default {
     font-size:20px!important;
     font-weight: 600!important;
 }
+
+.spinner-border {
+    background: rgb(118, 217, 207);
+    border: 0.25em solid rgb(77, 151, 144);
+    border-right-color: transparent;
+}
+
+.wrapper-spinner {
+    background: white;
+    border-radius: 50%;
+    padding: 20px;
+    position: absolute;
+    -webkit-box-shadow: 0px 0px 5px 0px rgb(215 215 215);
+    -moz-box-shadow: 0px 0px 5px 0px rgb(215 215 215);
+    box-shadow: 0px 0px 5px 0px rgb(215 215 215);
+    opacity: 0.8;
+}
+
 
 
 </style>

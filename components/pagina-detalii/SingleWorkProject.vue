@@ -38,7 +38,7 @@
     </div>
     </a>
 
-    <b-modal v-if="project" v-model="modalShow" size="xl" hide-footer :title="'Detalii proiect: ' + project.title">
+    <b-modal id="project_company" v-if="project" v-model="modalShow" size="xl" hide-footer :title="'Detalii proiect: ' + project.title">
         <SingleWorkProjectGallery :project="project" />
     </b-modal>
 </div>
@@ -107,5 +107,16 @@ export default {
     background-repeat: no-repeat;
     background-position: center;
     width: 100%;height: 300px!important;max-height: 300px!important;
+}
+</style>
+
+<style>
+#project_company___BV_modal_content_ {
+    background-color: white;
+    border: none;
+    border-radius: 0;
+    -webkit-box-shadow: 5px 5px #0ec6c6;
+    box-shadow: 5px 5px #0ec6c6;
+    border: 1px solid #0ec6c6;
 }
 </style>

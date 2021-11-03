@@ -13,6 +13,7 @@ export const state = () => ({
     loading_header: false,
     checkedVerified: false,
     filter_verified_status: false,
+    loading_page_change: false,
 
 
     status: false,
@@ -98,8 +99,8 @@ export const actions = {
     async initCompanies({commit}, payload){
         // await commit('set_category', null);
         // await commit('set_location', null);
-        await commit('set_companies', []);
-        await commit('set_initial_companies', []);
+        // await commit('set_companies', []);
+        // await commit('set_initial_companies', []);
         await commit('set_loading_search', true);
 
         await commit('set_current_slug', payload.category_slug);
@@ -124,11 +125,11 @@ export const actions = {
     
                     if(Array.isArray(response.data.companies)){
                         await commit('set_companies', response.data.companies);
-                        await commit('set_initial_companies', response.data.companies);
+                        // await commit('set_initial_companies', response.data.companies);
                         await commit('set_total_pages', parseInt(response.data.total_pages));
                     } else {
                         await commit('set_companies', [response.data.companies[Object.keys(response.data.companies)[0]]]);
-                        await commit('set_initial_companies', [response.data.companies[Object.keys(response.data.companies)[0]]]);
+                        // await commit('set_initial_companies', [response.data.companies[Object.keys(response.data.companies)[0]]]);
                         await commit('set_total_pages', parseInt(response.data.total_pages));
                     }
                 } else {
@@ -142,13 +143,19 @@ export const actions = {
     },
 
     changePage: async function({state, dispatch, commit}, page){
+        await commit('set_loading_page_change', true);
+
         let payload = {
             category_slug: state.current_slug,
             location_slug: state.current_location,
             page: page
         };
         // await commit('set_page_changed', true);
-        await dispatch('initCompanies', payload);
+        await dispatch('initCompanies', payload).finally(async () => {
+            setTimeout(() => {
+                commit('set_loading_page_change', false);
+            }, 1000);
+        });
 
     },
 
@@ -209,6 +216,10 @@ export const mutations = {
 
     set_page_changed: function(state, _page_changed){
         state.page_changed = _page_changed;
+    },
+
+    set_loading_page_change(state, status) {
+        state.loading_page_change = status;
     },
 
 

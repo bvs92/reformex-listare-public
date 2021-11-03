@@ -4,9 +4,7 @@
             <div class='section-title' v-if="titleOne">
               <h2>Categorii de lucru</h2>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis
-                ipsum suspendisse ultrices gravida. Risus commodo viverra.
+                Ce proiect ai în plan? Poate vrei să schimbi acoperișul sau să construiești o casă din lemn undeva la munte. Noi îți facem găsirea unei firme sau profesionist mai rapidă. Caută o firmă în funcție de categoria din care face parte proiectul tău.
               </p>
             </div>
             <div class='section-title text-left' v-else>
@@ -27,7 +25,7 @@
                   <img :src="getIcon(category.slug)" />
                 </div>
                 <h3>{{ category.name }}</h3>
-                <span>16 membri</span>
+                <!-- <span>16 membri</span> -->
                 <NuxtLink :to="{name: 'categorie-category', params: {category: category.slug}}">
                   <a class='link-btn'></a>
                 </NuxtLink>

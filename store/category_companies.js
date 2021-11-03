@@ -89,11 +89,11 @@ export const actions = {
     
                     if(Array.isArray(response.data.companies)){
                         await commit('set_companies', response.data.companies);
-                        await commit('set_initial_companies', response.data.companies);
+                        // await commit('set_initial_companies', response.data.companies);
                         await commit('set_total_pages', parseInt(response.data.total_pages));
                     } else {
                         await commit('set_companies', [response.data.companies[Object.keys(response.data.companies)[0]]]);
-                        await commit('set_initial_companies', [response.data.companies[Object.keys(response.data.companies)[0]]]);
+                        // await commit('set_initial_companies', [response.data.companies[Object.keys(response.data.companies)[0]]]);
                         await commit('set_total_pages', parseInt(response.data.total_pages));
                     }
                 } else {
@@ -119,7 +119,7 @@ export const actions = {
         await dispatch('initCategoryCompanies', payload).finally(async () => {
             setTimeout(() => {
                 commit('set_loading_page_change', false);
-            }, 2000);
+            }, 1000);
         });
 
     },

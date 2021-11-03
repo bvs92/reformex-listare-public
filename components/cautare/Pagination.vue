@@ -38,6 +38,12 @@
 
 <script>
 export default {
+    transition(to, from) {
+        if (!from) {
+        return 'slide-left'
+        }
+        return +to.query.page < +from.query.page ? 'slide-right' : 'slide-left'
+    },
     props: ["pages"],
 
     computed: {
@@ -57,9 +63,9 @@ export default {
 
     methods: {
         getCompanies: async function(page){
+            await this.$emit('scrollTo');
             await this.$store.commit('search_companies/set_current_page', page);
             await this.$store.dispatch('search_companies/changePage', page);
-            this.$emit('scrollTo');
         },
 
     },

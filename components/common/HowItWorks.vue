@@ -4,7 +4,7 @@
         <div class='section-title'>
         <h2>Cum funcționează?</h2>
         <p>
-            Ai un proiect nou de realizat? Caută pe REFORMEX profesioniști și firme în funcție de nevoile și de zona ta. La noi vei găsi doar firme verificate.
+            Ai un proiect nou de realizat? Caută profesioniști și firme în funcție de nevoile și de zona ta. La noi vei găsi doar firme verificate.
         </p>
         </div>
 

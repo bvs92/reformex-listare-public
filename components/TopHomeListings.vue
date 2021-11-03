@@ -2,9 +2,9 @@
     <section class="listings-area pt-100 paddingBottom70">
         <div class='container'>
             <div class='section-title'>
-              <h2>Top firme recomandate</h2>
+              <h2>Firme înscrise</h2>
               <p>
-                Firme și profesioniști recomandați de REFORMEX pentru proiectul tău.
+                Descoperă ultimele firme și profesioniști care s-au înscris.
               </p>
             </div>
 

@@ -9,12 +9,12 @@
                 <ul class='link-list'>
                   <li>
                     <a href='#'>
-                      <i class='flaticon-left-chevron'></i> Adaugă firma
+                      <i class='flaticon-left-chevron'></i> Adaugă firmă
                     </a>
                   </li>
                   <li>
                     <a href='#'>
-                      <i class='flaticon-left-chevron'></i> Căutare firme
+                      <i class='flaticon-left-chevron'></i> Cautp firme
                     </a>
                   </li>
                   <li>
@@ -53,7 +53,7 @@
                   </li>
                   <li>
                     <a href='#'>
-                      <i class='flaticon-left-chevron'></i> Pachet full
+                      <i class='flaticon-left-chevron'></i> Pachete publicitate
                     </a>
                   </li>
                 </ul>
@@ -73,6 +73,11 @@
                   <li>
                     <a href='#'>
                       <i class='flaticon-left-chevron'></i> Politica de confidențialitate
+                    </a>
+                  </li>
+                  <li>
+                    <a href='#'>
+                      <i class='flaticon-left-chevron'></i> Politică cookies
                     </a>
                   </li>
                   <li>

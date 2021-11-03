@@ -8,7 +8,7 @@
         Vei primi ofertă de la această firmă.
         </span>
 
-        <b-modal v-model="modalShow" size="lg" :title="'Trimite mesajul tău către ' + company.company.name" no-close-on-backdrop hide-footer>
+        <b-modal id="contact-company" v-model="modalShow" size="lg" :title="'Trimite mesajul tău către ' + company.company.name" no-close-on-backdrop hide-footer>
           <SendMessageForm :company="company" />
         </b-modal>
 
@@ -31,3 +31,14 @@ import SendMessageForm from './SendMessageForm.vue'
     props: ["company"]
   }
 </script>
+
+<style>
+#contact-company___BV_modal_content_ {
+    background-color: white;
+    border: none;
+    border-radius: 0;
+    -webkit-box-shadow: 5px 5px #0ec6c6;
+    box-shadow: 5px 5px #0ec6c6;
+    border: 1px solid #0ec6c6;
+}
+</style>
