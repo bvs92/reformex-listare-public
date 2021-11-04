@@ -28,6 +28,7 @@ export const state = () => ({
 
     loading_page_change: false,
     block_button: false,
+    filter_state: false
 })
 
 export const actions = {
@@ -35,6 +36,7 @@ export const actions = {
 
     searchCompanies: async function({commit}, payload){
         // await commit('set_loading_search', true);
+        await commit('set_filter_state', false);
 
         await commit('set_current_slug', payload.category_slug);
         await commit('set_current_location', payload.location_slug);
@@ -155,6 +157,7 @@ export const actions = {
     },
 
     filterSearch: async function({dispatch, commit, state}){
+        commit('set_filter_state', false)
         // normal search
         if(state.current_slug && state.current_location){
             await commit('set_loading_page_change', true);
@@ -175,6 +178,7 @@ export const actions = {
     },
 
     filterVerifiedCompanies: async function({commit, dispatch, state}, status){
+        commit('set_filter_state', true)
         if(status){
             if(state.current_slug && state.current_location){
                 await commit('set_loading_page_change', true);
@@ -257,5 +261,8 @@ export const mutations = {
     // filters
     set_toggle_verified: function(state, _toggle){
         state.toggleVerified = _toggle;
+    },
+    set_filter_state: function(state, _state){
+        state.filter_state = _state;
     }
 }

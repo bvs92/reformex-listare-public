@@ -117,6 +117,7 @@ export default {
         loading_page_change() {
             return this.$store.state.search_companies.loading_page_change;
         },
+        
 
         total_pages() {
             return this.$store.state.search_companies.total_pages;
@@ -127,33 +128,33 @@ export default {
     async fetch(){
         // this.loading_comp = true;
         
-        await this.$store.dispatch('categories/initCategories');
-        await this.$store.dispatch('judete/initJudete');
+        // await this.$store.dispatch('categories/initCategories');
+        // await this.$store.dispatch('judete/initJudete');
 
-        // console.log('this.search_made', this.search_made);
+        // // console.log('this.search_made', this.search_made);
         
-        if(!this.search_made){
-            // console.log('se executa all?');
-            await this.$store.commit('search_companies/set_loading_search', true);
+        // if(!this.search_made){
+        //     // console.log('se executa all?');
+        //     await this.$store.commit('search_companies/set_loading_search', true);
 
-            let payload = {
-                category_slug: 'all',
-                location_slug:  'all',
-                page: 1
-            };
+        //     let payload = {
+        //         category_slug: 'all',
+        //         location_slug:  'all',
+        //         page: 1
+        //     };
 
-            await this.$store.dispatch('search_companies/searchCompanies', payload)
-            .finally(() => {
-                this.$store.commit('search_companies/set_loading_search', false);
-            });
+        //     await this.$store.dispatch('search_companies/searchCompanies', payload)
+        //     .finally(() => {
+        //         this.$store.commit('search_companies/set_loading_search', false);
+        //     });
 
             
-            let _last_search = {
-                category: 'Toate',
-                location: 'România'
-            }
-            await this.$store.commit('search_companies/set_last_search', _last_search);
-        }
+        //     let _last_search = {
+        //         category: 'Toate',
+        //         location: 'România'
+        //     }
+        //     await this.$store.commit('search_companies/set_last_search', _last_search);
+        // }
 
         
 
@@ -182,10 +183,35 @@ export default {
 
     },
 
-    // created(){
-    //     this.latest_companies = this.$store.state.companies.latest_companies;
-    //     this.result_companies = this.$store.state.companies.result_companies;
-    // },
+    async created(){
+       await this.$store.dispatch('categories/initCategories');
+        await this.$store.dispatch('judete/initJudete');
+
+        // console.log('this.search_made', this.search_made);
+        
+        if(!this.search_made){
+            // console.log('se executa all?');
+            await this.$store.commit('search_companies/set_loading_search', true);
+
+            let payload = {
+                category_slug: 'all',
+                location_slug:  'all',
+                page: 1
+            };
+
+            await this.$store.dispatch('search_companies/searchCompanies', payload)
+            .finally(() => {
+                this.$store.commit('search_companies/set_loading_search', false);
+            });
+
+            
+            let _last_search = {
+                category: 'Toate',
+                location: 'România'
+            }
+            await this.$store.commit('search_companies/set_last_search', _last_search);
+        }
+    },
 
     mounted(){
         setTimeout(() => {

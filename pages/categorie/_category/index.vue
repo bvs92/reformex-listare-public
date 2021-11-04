@@ -110,23 +110,30 @@ export default {
         loading_page_change() {
             return this.$store.state.category_companies.loading_page_change;
         },
+        initial_load() {
+            return this.$store.state.category_companies.initial_load;
+        },
     },
     
-    async fetch(){
-        await this.$store.dispatch('categories/initCategories');
-        await this.$store.dispatch('judete/initJudete');
-
+    fetch(){
+        
+        this.$store.dispatch('categories/initCategories');
+        this.$store.dispatch('judete/initJudete');
         let category_slug = decodeURI(this.$route.params.category);
         // get category and check if exists. if false, redirect to 404. else continue the process
-        await this.$store.dispatch('category_companies/initCategory', category_slug); 
+        this.$store.dispatch('category_companies/initCategory', category_slug); 
 
-        if(!this.page_changed){
+        console.log('this.page_changed', this.page_changed);
+        if(!this.initial_load){
             this.loading_comp = true;
             let page = 1;
-            await this.$store.dispatch('category_companies/initCategoryCompanies', {category_slug, page}).finally(() => {
+            this.$store.dispatch('category_companies/initCategoryCompanies', {category_slug, page}).finally(() => {
                     this.loading_comp = false;
+                    this.$store.commit('category_companies/set_initial_load', true);
             });
         }
+
+        
 
     },
 

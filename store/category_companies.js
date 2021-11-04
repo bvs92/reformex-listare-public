@@ -25,7 +25,8 @@ export const state = () => ({
 
     page_changed: false,
 
-    loading_page_change: false
+    loading_page_change: false,
+    initial_load: false
 })
 
 export const actions = {
@@ -44,11 +45,6 @@ export const actions = {
                 mode: 'cors',
             }).then(async response => {
             if(response.data){
-                // console.log(response.data);
-                // await commit('set_category', response.data.category.name);
-                // await commit('set_companies', response.data.companies);
-                // await commit('set_initial_companies', response.data.companies);
-
                 if(response.data.category){
                     await commit('set_category', response.data.category.name);
                     await commit('set_category_uuid', response.data.category.uuid);
@@ -69,7 +65,7 @@ export const actions = {
         await commit('set_current_slug', payload.category_slug);
         await commit('set_current_page', payload.page);
 
-        await commit('set_page_changed', true);
+        
 
         axios.defaults.httpsAgent = new https.Agent({
             rejectUnauthorized: false,
@@ -99,6 +95,7 @@ export const actions = {
             }
             }).finally(() => {
                 commit('set_loading_search', false);
+                commit('set_page_changed', true);
             });
     },
 
@@ -422,6 +419,10 @@ export const mutations = {
 
     set_loading_page_change(state, status) {
         state.loading_page_change = status;
+    },
+
+    set_initial_load(state, status) {
+        state.initial_load = status;
     },
 
 }

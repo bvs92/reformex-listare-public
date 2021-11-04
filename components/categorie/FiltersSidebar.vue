@@ -11,7 +11,8 @@
     </section>
 
 
-    <section class='widget widget_features'>
+    <client-only>
+    <section class='widget widget_features' v-if="judete && judete.length > 0">
         <h3 class='title'>Județ</h3>
         <b-form-radio-group
             v-model="selected"
@@ -32,6 +33,7 @@
         </ul>
     
     </section>
+    </client-only>
 
 </aside>
 </template>
@@ -63,6 +65,8 @@ export default {
             return this.$store.state.judete.judete;
         },
     },
+
+    // props: ["judete"],
 
     methods: {
         toggleVerified: async function(){
@@ -113,11 +117,15 @@ export default {
         }
     },
 
-    created(){
+    async created(){
         this.checkedVerified = this.$store.state.companies.checkedVerified;
-        this.checkedProjects = this.$store.state.companies.checkedProjects;
+        // this.checkedProjects = this.$store.state.companies.checkedProjects;
 
-        if(this.judete.length > 0) {
+        await this.$store.dispatch('judete/initJudete');
+
+
+        if(this.judete && this.judete.length > 0) {
+            console.log('judelete filters', this.judete)
             let first_elem = {
                 item: 'toate',
                 name: 'Toată România'

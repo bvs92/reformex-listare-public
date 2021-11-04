@@ -7,12 +7,12 @@ export const state = () => ({
 })
 
 export const actions = {
-    initJudete({commit}){
+    async initJudete({commit}){
         axios.defaults.httpsAgent = new https.Agent({
             rejectUnauthorized: false,
           });
 
-        axios.get(`${BASE_URL}/api/judete/get/all`,{
+        await axios.get(`${BASE_URL}/api/judete/get/all`,{
             headers: {'Access-Control-Allow-Origin': "*"},
              mode: 'cors',
           }).then(response => {

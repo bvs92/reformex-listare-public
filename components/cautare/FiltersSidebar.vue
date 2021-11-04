@@ -106,6 +106,20 @@ export default {
         result_companies() {
             return this.$store.state.search_companies.total_results;
         },
+        filter_state() {
+            return this.$store.state.search_companies.filter_state;
+        },
+        // verified_state: function(){
+        //     this.checkedVerified = this.filter_state == true ? true : false;
+        //     return this.checkedVerified;
+        // }
+    },
+
+    watch: {
+        // whenever question changes, this function will run
+        filter_state: function () {
+            this.checkedVerified = this.filter_state
+        }
     },
 
     methods: {
@@ -137,7 +151,7 @@ export default {
     },
 
     created(){
-        // this.checkedVerified = this.$store.state.search_companies.checkedVerified;
+        this.checkedVerified = this.filter_state;
         // this.checkedProjects = this.$store.state.companies.checkedProjects;
     }
 }

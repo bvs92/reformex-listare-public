@@ -100,6 +100,7 @@ export default {
         },
 
         searchCompanies: async function(){
+            // await this.$store.commit('search_companies/set_filter_state', false);
             await this.$store.commit('search_companies/set_block_button', true);
             
             this.block_search_button = true;
