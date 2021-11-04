@@ -91,7 +91,9 @@ export const actions = {
                         await commit('set_total_pages', parseInt(response.data.total_pages));
                     }
                 } else {
-                    this.$router.push('/pagina-negasita');
+                    // this.$router.push('/pagina-negasita');
+                    await commit('set_companies', []);
+                    await commit('set_total_pages', 1);
                 }
 
             }
