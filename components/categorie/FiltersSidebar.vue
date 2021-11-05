@@ -4,7 +4,10 @@
     <section class='widget widget_categories'>
         <h3 class='title'>Filtrări rezultate</h3>
         <div class="my-4">
-            <b-form-checkbox v-model="checkedVerified" name="check-button" switch @change="toggleVerified" :disabled="search_loading_status ? true : false || blockLoading ? true : false">
+            <b-form-checkbox 
+            v-model="checkedVerified" 
+            name="check-button" switch 
+            @change="toggleVerified" :disabled="search_loading_status ? true : false || blockLoading ? true : false">
             Firme verificate
             </b-form-checkbox>
         </div>
@@ -15,7 +18,7 @@
     <section class='widget widget_features' v-if="judete && judete.length > 0">
         <h3 class='title'>Județ</h3>
         <b-form-radio-group
-            v-model="selected"
+            v-model="selected_judet"
             @change="changeJudet"
             :options="showLess ? judeteOptionsLess : judeteOptions"
             class="mb-3"
@@ -46,7 +49,7 @@ export default {
             checkedProjects: false,
             isHidden: true,
 
-            selected: 'toate',
+            selected_judet: 'toate',
             judeteOptions: [],
             judeteOptionsLess: [],
             showLess: true,
@@ -64,6 +67,20 @@ export default {
         judete() {
             return this.$store.state.judete.judete;
         },
+
+        filter_state() {
+            return this.$store.state.category_companies.filter_state;
+        },
+        current_location() {
+            return this.$store.state.category_companies.current_location;
+        },
+    },
+
+    watch: {
+        // whenever question changes, this function will run
+        filter_state: function () {
+            this.checkedVerified = this.filter_state
+        }
     },
 
     // props: ["judete"],
@@ -72,6 +89,7 @@ export default {
         toggleVerified: async function(){
             // this.$store.commit('companies/toggle_verified', this.checkedVerified);
             // this.$store.dispatch('search_companies/toggle_verified', this.checkedVerified);
+            
             this.blockLoading = true;
             if(this.checkedVerified == true){
                 await this.$store.dispatch('category_companies/filterVerifiedCompanies', this.checkedVerified).finally(() => {
@@ -95,8 +113,9 @@ export default {
         },
 
         changeJudet: async function(){
-            // console.log(this.selected);
-            await this.$store.commit('category_companies/set_current_location', this.selected);
+            // console.log(this.selected_judet);
+            await this.$store.commit('category_companies/set_current_location', this.selected_judet);
+            this.$store.commit('category_companies/set_initial_load', false);
 
             this.blockLoading = true;
             if(this.checkedVerified == true){
@@ -113,12 +132,15 @@ export default {
                 });
             }
 
-            // this.$store.dispatch('category_companies/filterJudet', this.selected)
+            // this.$store.dispatch('category_companies/filterJudet', this.selected_judet)
         }
     },
 
     async created(){
-        this.checkedVerified = this.$store.state.companies.checkedVerified;
+        this.checkedVerified = this.filter_state;
+        this.selected_judet = this.current_location;
+        // console.log('this.checkedVerified', this.checkedVerified);
+        // this.checkedVerified = this.$store.state.companies.checkedVerified;
         // this.checkedProjects = this.$store.state.companies.checkedProjects;
 
         await this.$store.dispatch('judete/initJudete');

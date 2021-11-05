@@ -50,7 +50,18 @@ export default {
         search_loading_status() {
             return this.$store.state.category_city_companies.loading_status;
         },
+
+        filter_state() {
+            return this.$store.state.category_city_companies.filter_state;
+        },
        
+    },
+
+    watch: {
+        // whenever question changes, this function will run
+        filter_state: function () {
+            this.checkedVerified = this.filter_state
+        }
     },
 
     methods: {
@@ -78,6 +89,7 @@ export default {
     },
 
     created(){
+        this.checkedVerified = this.filter_state;
         // this.checkedVerified = this.$store.state.category_city_companies.checkedVerified;
     }
 }

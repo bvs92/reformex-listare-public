@@ -27,7 +27,8 @@ export const state = () => ({
     page_changed: false,
 
     loading_page_change: false,
-    initial_load: false
+    initial_load: true,
+    filter_state: false
 })
 
 export const actions = {
@@ -142,6 +143,7 @@ export const actions = {
 
 
     searchVerifiedCompanies: async function({commit}, payload){
+        
         // await commit('set_loading_search', true);
 
         // await commit('set_current_slug', payload.category_slug);
@@ -185,7 +187,8 @@ export const actions = {
 
 
     filterCompanies: async function({commit, dispatch, state}){
-
+        await commit('set_filter_state', false)
+        await commit('set_initial_load', false);
         if(state.current_slug){
             await commit('set_loading_page_change', true);
             console.log(state.category_uuid);
@@ -209,11 +212,12 @@ export const actions = {
 
 
     filterVerifiedCompanies: async function({commit, dispatch, state}, status){
-
+        await commit('set_filter_state', true)
         if(status){
             if(state.current_slug){
                 await commit('set_initial_load', false);
                 await commit('set_loading_page_change', true);
+                
                 
         
                 let payload = {
@@ -235,6 +239,7 @@ export const actions = {
 
     changePage: async function({state, dispatch, commit}, page){
         await commit('set_loading_page_change', true);
+        commit('set_initial_load', false);
         let payload = {
             category_slug: state.current_slug,
             page: page
@@ -243,9 +248,6 @@ export const actions = {
         // await commit('set_page_changed', true);
 
         await dispatch('initCategoryCompanies', payload).finally(async () => {
-            
-            commit('set_initial_load', false);
-
             setTimeout(() => {
                 commit('set_loading_page_change', false);
             }, 1000);
@@ -436,5 +438,9 @@ export const mutations = {
     set_initial_load(state, status) {
         state.initial_load = status;
     },
+
+    set_filter_state: function(state, _state){
+        state.filter_state = _state;
+    }
 
 }

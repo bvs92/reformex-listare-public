@@ -26,7 +26,7 @@
 
                         <template v-if="initial_load == true">
                         <div class='row' v-if="result && result.companies.length > 0">
-                            <p>Initial</p>
+                           
                             <transition name="page" mode="out-in">
                             <SingleListItem v-for="item in result.companies" :key="item.id" :company="item.user" :loading_change="loading_page_change" />
                             </transition>
@@ -35,7 +35,7 @@
 
                         <template v-else> 
                         <div class='row' v-if="category_companies && category_companies.length > 0">
-                            <p>Normal</p>
+                        
                             <transition name="page" mode="out-in">
                             <SingleListItem v-for="item in category_companies" :key="item.id" :company="item.user" :loading_change="loading_page_change" />
                             </transition>
@@ -161,65 +161,65 @@ export default {
     // },
 
     async asyncData({ route, $http, store, redirect }) {
-        store.commit('category_companies/set_initial_load', true);
+        if(store.state.category_companies.initial_load){
+            await store.commit('category_companies/set_initial_load', true);
+    
+    
+            let httpsAgent = new https.Agent({
+                rejectUnauthorized: false,
+              });
+    
+    
+            let config = $http.onRequest(config => {
+                config.agent = httpsAgent;
+            })
+    
+    
+    
+            
+    
+            let page = 1;
+            let category_slug = decodeURI(route.params.category);
+    
+            
+    
+            let final_url_category = `${BASE_URL}/api/categories/get/single/${category_slug}`;
+            let final_url = `${BASE_URL}/api/companies/category/get/${category_slug}/${page}`;
+            
+            // requests to server
+            const [result] = await Promise.all([ 
+                $http.$get(final_url, config),
+                $http.$get(final_url_category, config),
+            ])
 
+    
+            if(!result || result.error){
+                redirect('/pagina-negasita')
+                return;
+            }
+    
+    
+            if(result.category){
+                await store.commit('category_companies/set_category', result.category.name);
+                await store.commit('category_companies/set_category_uuid', result.category.uuid);
+                await store.commit('category_companies/set_current_slug', category_slug);
+                await store.commit('category_companies/set_current_page', page);
+            } else {
+                redirect('/pagina-negasita')
+            }
+    
+    
+            if(Array.isArray(result.companies)){
+                await store.commit('category_companies/set_companies', result.companies);
+                await store.commit('category_companies/set_total_pages', parseInt(result.total_pages));
+            } else {
+                await store.commit('category_companies/set_companies', [result.companies[Object.keys(result.companies)[0]]]);
+                await store.commit('category_companies/set_total_pages', parseInt(result.total_pages));
+            }
 
-        let httpsAgent = new https.Agent({
-            rejectUnauthorized: false,
-          });
+            return {result}
 
-
-        let config = $http.onRequest(config => {
-            config.agent = httpsAgent;
-        })
-
-
-
-        
-
-        let page = 1;
-        let category_slug = decodeURI(route.params.category);
-
-        
-
-        let final_url_category = `${BASE_URL}/api/categories/get/single/${category_slug}`;
-        let final_url = `${BASE_URL}/api/companies/category/get/${category_slug}/${page}`;
-        
-        // requests to server
-        const [result] = await Promise.all([ 
-            $http.$get(final_url, config),
-            $http.$get(final_url_category, config),
-        ])
-
-        console.log(result)
-        // return;
-
-        if(!result || result.error){
-            redirect('/pagina-negasita')
-            return;
         }
-
-
-        if(result.category){
-            await store.commit('category_companies/set_category', result.category.name);
-            await store.commit('category_companies/set_category_uuid', result.category.uuid);
-            await store.commit('category_companies/set_current_slug', category_slug);
-            await store.commit('category_companies/set_current_page', page);
-        } else {
-            redirect('/pagina-negasita')
-        }
-
-
-        if(Array.isArray(result.companies)){
-            await store.commit('category_companies/set_companies', result.companies);
-            await store.commit('category_companies/set_total_pages', parseInt(result.total_pages));
-        } else {
-            await store.commit('category_companies/set_companies', [result.companies[Object.keys(result.companies)[0]]]);
-            await store.commit('category_companies/set_total_pages', parseInt(result.total_pages));
-        }
-
-        console.log(result);
-        return {result}
     },
 
     

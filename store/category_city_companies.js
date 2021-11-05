@@ -25,7 +25,8 @@ export const state = () => ({
     total_pages: null,
     current_page: 1,
     page_changed: false,
-    initial_load: false
+    initial_load: true,
+    filter_state: false
 })
 
 export const actions = {
@@ -219,6 +220,8 @@ export const actions = {
 
     filterSearch: async function({dispatch, commit, state}){
         // normal search
+        await commit('set_filter_state', false)
+        commit('set_initial_load', false);
         if(state.current_slug && state.current_location){
             await commit('set_loading_page_change', true);
     
@@ -238,6 +241,8 @@ export const actions = {
     },
 
     filterVerifiedCompanies: async function({commit, dispatch, state}, status){
+        await commit('set_filter_state', true)
+        commit('set_initial_load', false);
         if(status){
             if(state.current_slug && state.current_location){
                 await commit('set_loading_page_change', true);
@@ -347,5 +352,9 @@ export const mutations = {
     set_initial_load(state, status) {
         state.initial_load = status;
     },
+
+    set_filter_state: function(state, _state){
+        state.filter_state = _state;
+    }
    
 }

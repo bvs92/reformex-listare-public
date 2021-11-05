@@ -1,7 +1,8 @@
 <template>
-  <div class="pt-5" :class="{'listings-widget-area' : !full}" v-if="total_banners">
+<client-only>
+  <div class="pt-5" :class="{'listings-widget-area' : !full}" v-if="total_banners" ref="banner">
       <p class="sponsored">Sponsorizat</p>
-      <client-only>
+      
         <VueSlickCarousel :options="options" 
         :slidesToShow="getNumberOfSlides"
         :infinite="true"
@@ -18,7 +19,7 @@
         >
         <img :src="require('@/assets/images/banner-sidebar.png')" v-for="(item, index) in total_banners" :key="index" :review="item" @click.prevent="openModal(index)" class="pointer" />
         </VueSlickCarousel>
-    </client-only>
+   
     <p class="promote"><a href=""><i class="fa fa-bullhorn" aria-hidden="true"></i> Promovează-te și tu. Detalii aici.</a></p>
 
     <b-modal v-model="modalShow" 
@@ -29,6 +30,7 @@
         Hello From Modal!
     </b-modal>
   </div>
+</client-only>
 </template>
 
 <script>
@@ -90,13 +92,27 @@ export default {
         openModal: function(incoming){
             this.modalShow = !this.modalShow;
             this.selected = incoming;
-        }
+        },
+
+        initClientOnlyComp(count = 10) {
+            this.$nextTick(() => {
+            if (this.$refs.banner) {
+                //...
+            } else if (count > 0) {
+                this.initClientOnlyComp(count - 1);
+            }
+            });
+        },
     },
 
     created(){
         setTimeout(() => {
             this.total_banners = 3;
-        }, 1000);
+        }, 2000);
+    },
+
+    mounted(){
+        this.initClientOnlyComp()
     }
 
 }
