@@ -50,6 +50,8 @@
 </template>
 
 <script>
+import {BASE_URL} from '@/config.js'
+import https from 'https'
 import SearchHeaderCity from "@/components/cautare/SearchHeaderCity.vue"
 import FiltersSidebar from "@/components/categorie/FiltersLocationSidebar.vue"
 import SingleListItem from "@/components/categorie/SingleListItem.vue"
@@ -128,30 +130,100 @@ export default {
         // this.$store.commit('category_city_companies/set_companies', []);
 
 
-        if(!this.page_changed){
-            let payload = {
-                category_slug: decodeURI(this.$route.params.category),
-                location_slug: decodeURI(this.$route.params.oras),
-                page: 1
-            }
+        // if(!this.page_changed){
+        //     let payload = {
+        //         category_slug: decodeURI(this.$route.params.category),
+        //         location_slug: decodeURI(this.$route.params.oras),
+        //         page: 1
+        //     }
     
-            // get category and check if exists. if false, redirect to 404. else continue the process
-            await this.$store.dispatch('category_city_companies/initCategory', payload.category_slug); 
-            await this.$store.dispatch('category_city_companies/initLocation', payload.location_slug); 
+        //     // get category and check if exists. if false, redirect to 404. else continue the process
+        //     await this.$store.dispatch('category_city_companies/initCategory', payload.category_slug); 
+        //     await this.$store.dispatch('category_city_companies/initLocation', payload.location_slug); 
     
     
-            // load companies and categories + judets
-            this.loading_comp = true; 
-            await this.$store.dispatch('category_city_companies/initCompanies', payload);
+        //     // load companies and categories + judets
+        //     this.loading_comp = true; 
+        //     await this.$store.dispatch('category_city_companies/initCompanies', payload);
     
-            await this.$store.dispatch('categories/initCategories');
-            await this.$store.dispatch('judete/initJudete').finally(() => {
-                this.loading_comp = false;
-            });
-        }
+        //     await this.$store.dispatch('categories/initCategories');
+        //     await this.$store.dispatch('judete/initJudete').finally(() => {
+        //         this.loading_comp = false;
+        //     });
+        // }
 
 
     },
+
+    async asyncData({ route, $http, store, redirect }) {
+        store.commit('category_city_companies/set_initial_load', true);
+
+
+        let httpsAgent = new https.Agent({
+            rejectUnauthorized: false,
+          });
+
+
+        let config = $http.onRequest(config => {
+            config.agent = httpsAgent;
+        })
+
+
+        
+
+        let page = 1;
+        let category_slug = decodeURI(route.params.category);
+        let location_slug = decodeURI(route.params.oras);
+
+        let final_url_category = `${BASE_URL}/api/categories/get/single/${category_slug}`;
+        let final_url_location = `${BASE_URL}/api/locations/get/single/${location_slug}`;
+        let final_url = `${BASE_URL}/api/companies/location/category/get/${category_slug}/${location_slug}/${page}`;
+        
+        // requests to server
+        const [result] = await Promise.all([ 
+            $http.$get(final_url, config),
+            $http.$get(final_url_category, config),
+            $http.$get(final_url_location, config),
+        ])
+
+
+        if(!result || result.error){
+            redirect('/pagina-negasita')
+            return;
+        }
+
+
+        if(result.category){
+            await store.commit('category_city_companies/set_category', result.category.name);
+            // await store.commit('category_city_companies/set_category_uuid', result.category.uuid);
+            await store.commit('category_city_companies/set_current_slug', category_slug);
+            await store.commit('category_city_companies/set_current_page', page);
+        } else {
+            redirect('/pagina-negasita')
+        }
+
+        if(result.location){
+            await store.commit('category_city_companies/set_location', result.location.name);
+            // await store.commit('category_city_companies/set_category_uuid', result.category.uuid);
+            await store.commit('category_city_companies/set_current_location', location_slug);
+            // await store.commit('category_city_companies/set_current_page', page);
+        } else {
+            redirect('/pagina-negasita')
+        }
+
+
+        if(Array.isArray(result.companies)){
+            await store.commit('category_city_companies/set_companies', result.companies);
+            await store.commit('category_city_companies/set_total_pages', parseInt(result.total_pages));
+        } else {
+            await store.commit('category_city_companies/set_companies', [result.companies[Object.keys(result.companies)[0]]]);
+            await store.commit('category_city_companies/set_total_pages', parseInt(result.total_pages));
+        }
+
+        // console.log(result);
+        return {result}
+    },
+
 
     methods: {
 
@@ -167,7 +239,7 @@ export default {
 
     mounted(){
         // console.log(this.$route.params.category);
-        this.scrollToElement();
+        // this.scrollToElement();
     }
 
 

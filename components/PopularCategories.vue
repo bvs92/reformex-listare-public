@@ -25,7 +25,7 @@
                   <img :src="getIcon(category.slug)" />
                 </div>
                 <h3>{{ category.name }}</h3>
-                <!-- <span>16 membri</span> -->
+                <span><i class="fa fa-dot-circle-o" aria-hidden="true"></i></span>
                 <NuxtLink :to="{name: 'categorie-category', params: {category: category.slug}}">
                   <a class='link-btn'></a>
                 </NuxtLink>

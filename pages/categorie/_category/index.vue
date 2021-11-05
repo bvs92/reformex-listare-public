@@ -1,6 +1,6 @@
 <template>
 <div>
-    <SearchHeader :title="current_category" :redirecting="true" />
+    <SearchHeader :title="result.category.name" :redirecting="true" />
     <section class='listings-area ptb-100'>
         <div class='container'>
             <div class='row'>
@@ -8,7 +8,7 @@
                 <div class='col-lg-8 col-md-12' id="results" ref="results">
                     <div class='listings-grid-sorting row align-items-center' >
                         <div class='col-lg-12 col-md-12 result-count'>
-                            <h2 class="small-title" v-if="current_category">Profesioniști și firme de {{current_category}}.</h2>
+                            <h2 class="small-title" v-if="result && result.category">Profesioniști și firme de {{result.category.name}}.</h2>
                         </div>
                     </div>
 
@@ -24,12 +24,26 @@
                             </div>
                         </transition>
 
+                        <template v-if="initial_load == true">
+                        <div class='row' v-if="result && result.companies.length > 0">
+                            <p>Initial</p>
+                            <transition name="page" mode="out-in">
+                            <SingleListItem v-for="item in result.companies" :key="item.id" :company="item.user" :loading_change="loading_page_change" />
+                            </transition>
+                        </div>
+                        </template>
+
+                        <template v-else> 
                         <div class='row' v-if="category_companies && category_companies.length > 0">
+                            <p>Normal</p>
                             <transition name="page" mode="out-in">
                             <SingleListItem v-for="item in category_companies" :key="item.id" :company="item.user" :loading_change="loading_page_change" />
                             </transition>
                         </div>
+                        </template>
                     </template>
+
+                    
                     <transition name="fade" mode="out-in">
                         <Pagination v-if="total_pages > 1" :pages="total_pages" @scrollTo="scrollToElement" />
                     </transition>
@@ -50,6 +64,8 @@
 </template>
 
 <script>
+import {BASE_URL} from '@/config.js'
+import https from 'https'
 import SearchHeader from "@/components/cautare/SearchHeader.vue"
 import FiltersSidebar from "@/components/categorie/FiltersSidebar.vue"
 import SingleListItem from "@/components/categorie/SingleListItem.vue"
@@ -57,6 +73,8 @@ import Pagination from "@/components/categorie/Pagination.vue"
 import LoadingElements from "@/components/common/LoadingElements.vue"
 import RegisterSmall from "@/components/common/RegisterSmall.vue"
 import BannerSidebar from "@/components/common/BannerSidebar.vue"
+
+
 
 export default {
 
@@ -73,6 +91,8 @@ export default {
         }
     },
 
+    // fetchOnServer: true,
+
     components: {
         SearchHeader,
         FiltersSidebar,
@@ -88,6 +108,7 @@ export default {
             loading_comp: false,
             // category_companies: null,
             // result_companies: null
+            result: null,
         }
     },
 
@@ -115,27 +136,93 @@ export default {
         },
     },
     
-    fetch(){
+    // async fetch(){
         
-        this.$store.dispatch('categories/initCategories');
-        this.$store.dispatch('judete/initJudete');
-        let category_slug = decodeURI(this.$route.params.category);
-        // get category and check if exists. if false, redirect to 404. else continue the process
-        this.$store.dispatch('category_companies/initCategory', category_slug); 
+        // await this.$store.dispatch('categories/initCategories');
+        // await this.$store.dispatch('judete/initJudete');
 
-        console.log('this.page_changed', this.page_changed);
-        if(!this.initial_load){
-            this.loading_comp = true;
-            let page = 1;
-            this.$store.dispatch('category_companies/initCategoryCompanies', {category_slug, page}).finally(() => {
-                    this.loading_comp = false;
-                    this.$store.commit('category_companies/set_initial_load', true);
-            });
+
+        // let category_slug = decodeURI(this.$route.params.category);
+        // get category and check if exists. if false, redirect to 404. else continue the process
+        // await this.$store.dispatch('category_companies/initCategory', category_slug); 
+
+        // console.log('this.page_changed', this.page_changed);
+        // if(!this.initial_load){
+        //     this.loading_comp = true;
+        //     let page = 1;
+        //     this.$store.dispatch('category_companies/initCategoryCompanies', {category_slug, page}).finally(() => {
+        //             this.loading_comp = false;
+        //             this.$store.commit('category_companies/set_initial_load', true);
+        //     });
+        // }
+
+        
+
+    // },
+
+    async asyncData({ route, $http, store, redirect }) {
+        store.commit('category_companies/set_initial_load', true);
+
+
+        let httpsAgent = new https.Agent({
+            rejectUnauthorized: false,
+          });
+
+
+        let config = $http.onRequest(config => {
+            config.agent = httpsAgent;
+        })
+
+
+
+        
+
+        let page = 1;
+        let category_slug = decodeURI(route.params.category);
+
+        
+
+        let final_url_category = `${BASE_URL}/api/categories/get/single/${category_slug}`;
+        let final_url = `${BASE_URL}/api/companies/category/get/${category_slug}/${page}`;
+        
+        // requests to server
+        const [result] = await Promise.all([ 
+            $http.$get(final_url, config),
+            $http.$get(final_url_category, config),
+        ])
+
+        console.log(result)
+        // return;
+
+        if(!result || result.error){
+            redirect('/pagina-negasita')
+            return;
         }
 
-        
 
+        if(result.category){
+            await store.commit('category_companies/set_category', result.category.name);
+            await store.commit('category_companies/set_category_uuid', result.category.uuid);
+            await store.commit('category_companies/set_current_slug', category_slug);
+            await store.commit('category_companies/set_current_page', page);
+        } else {
+            redirect('/pagina-negasita')
+        }
+
+
+        if(Array.isArray(result.companies)){
+            await store.commit('category_companies/set_companies', result.companies);
+            await store.commit('category_companies/set_total_pages', parseInt(result.total_pages));
+        } else {
+            await store.commit('category_companies/set_companies', [result.companies[Object.keys(result.companies)[0]]]);
+            await store.commit('category_companies/set_total_pages', parseInt(result.total_pages));
+        }
+
+        console.log(result);
+        return {result}
     },
+
+    
 
     methods: {
 

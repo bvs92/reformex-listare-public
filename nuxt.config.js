@@ -13,6 +13,9 @@ export default {
     background: 'white'
   },
 
+  ssr: true,
+  target: 'static',
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Caută firme și profesioniști pentru proiectul tău',
@@ -66,6 +69,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/toast',
+    '@nuxt/http'
     // 'nuxt-svg-loader',
   ],
 

@@ -7,6 +7,7 @@ export const state = () => ({
     initial_companies: [],
     category: null,
     category_uuid: null,
+    category_slug: null,
 
     loading_status: false,
     checkedVerified: false,
@@ -34,6 +35,7 @@ export const actions = {
     async initCategory({commit}, category_slug){
         await commit('set_category', null);
         // await commit('set_loading_search', true);
+        
 
         axios.defaults.httpsAgent = new https.Agent({
             rejectUnauthorized: false,
@@ -207,11 +209,12 @@ export const actions = {
 
 
     filterVerifiedCompanies: async function({commit, dispatch, state}, status){
+
         if(status){
             if(state.current_slug){
+                await commit('set_initial_load', false);
                 await commit('set_loading_page_change', true);
-                console.log(state.category_uuid);
-                console.log(state.current_location);
+                
         
                 let payload = {
                     category_slug: state.category_uuid,
@@ -240,6 +243,9 @@ export const actions = {
         // await commit('set_page_changed', true);
 
         await dispatch('initCategoryCompanies', payload).finally(async () => {
+            
+            commit('set_initial_load', false);
+
             setTimeout(() => {
                 commit('set_loading_page_change', false);
             }, 1000);
@@ -368,9 +374,15 @@ export const mutations = {
     set_category(state, _category) {
         state.category = _category;
     },
+
     set_category_uuid(state, _category) {
         state.category_uuid = _category;
     },
+
+    set_category_slug(state, _category) {
+        state.category_slug = _category;
+    },
+
     set_current_location(state, _location) {
         state.current_location = _location;
     },

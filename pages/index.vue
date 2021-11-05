@@ -45,6 +45,8 @@ export default {
     }
   },
 
+
+
   async fetch(){
     // this.topUsers = await this.$store.state.users.topUsers;
 

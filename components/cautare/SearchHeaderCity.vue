@@ -120,7 +120,12 @@ export default {
             }
             // await this.$store.commit('companies/set_loading_search', false);
         }
-    }
+    },
+
+    async fetch(){
+        await this.$store.dispatch('categories/initCategories');
+        await this.$store.dispatch('judete/initJudete');       
+    },
 }
 </script>
 

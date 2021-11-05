@@ -24,11 +24,13 @@ export const state = () => ({
 
     total_pages: null,
     current_page: 1,
-    page_changed: false
+    page_changed: false,
+    initial_load: false
 })
 
 export const actions = {
 
+    // dezactivat
     async initCategory({commit}, category_slug){
         await commit('set_category', null);
         await commit('set_loading_header', true);
@@ -62,6 +64,7 @@ export const actions = {
 
     },
 
+    // dezactivat
     async initLocation({commit}, location_slug){
         await commit('set_location', null);
         await commit('set_loading_header', true);
@@ -198,6 +201,7 @@ export const actions = {
 
     changePage: async function({state, dispatch, commit}, page){
         await commit('set_loading_page_change', true);
+        await commit('set_initial_load', false);
 
         let payload = {
             category_slug: state.current_slug,
@@ -339,5 +343,9 @@ export const mutations = {
     // set_filter_verified_status: function(state, _status){
     //     state.filter_verified_status = _status;
     // },
+
+    set_initial_load(state, status) {
+        state.initial_load = status;
+    },
    
 }

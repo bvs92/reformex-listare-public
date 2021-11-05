@@ -5,17 +5,9 @@
         <h3 class='title'>Filtrări rezultate</h3>
         <div class="my-4">
             <b-form-checkbox 
-            v-if="result_companies && result_companies > 0"
             v-model="checkedVerified" name="check-button" switch 
             @change="toggleVerified" 
             :disabled="search_loading_status ? true : false || blockLoading ? true : false || block_button ? true : false">
-            Firme verificate
-            </b-form-checkbox>
-            <b-form-checkbox 
-            v-else
-            name="check-button" switch 
-            @change="toggleVerified" 
-            :disabled="true">
             Firme verificate
             </b-form-checkbox>
         </div>

@@ -157,7 +157,7 @@ export const actions = {
     },
 
     filterSearch: async function({dispatch, commit, state}){
-        commit('set_filter_state', false)
+        await commit('set_filter_state', false)
         // normal search
         if(state.current_slug && state.current_location){
             await commit('set_loading_page_change', true);
@@ -178,7 +178,7 @@ export const actions = {
     },
 
     filterVerifiedCompanies: async function({commit, dispatch, state}, status){
-        commit('set_filter_state', true)
+        await commit('set_filter_state', true)
         if(status){
             if(state.current_slug && state.current_location){
                 await commit('set_loading_page_change', true);
@@ -190,7 +190,7 @@ export const actions = {
                 };
                 
                 
-                await dispatch('searchVerifiedCompanies', payload).finally(async () => {
+                await dispatch('searchVerifiedCompanies', payload).finally(() => {
                     setTimeout(() => {
                         commit('set_loading_page_change', false);
                     }, 1000);

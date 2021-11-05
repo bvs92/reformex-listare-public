@@ -72,6 +72,8 @@
 </template>
 
 <script>
+import {BASE_URL} from '@/config.js'
+import https from 'https'
 import HeaderImage from "@/components/pagina-detalii/HeaderImage.vue";
 import WorkCategories from "@/components/pagina-detalii/WorkCategories.vue";
 import WorkZones from "@/components/pagina-detalii/WorkZones.vue";
@@ -114,9 +116,16 @@ export default {
         BannerSidebar
     },
 
+    data(){
+        return {
+            result: null
+        }
+    },
+
     computed: {
         company() {
             return this.$store.state.company.company;
+            // return this.result.company;
         },
         company_name: function(){
             if(this.company){
@@ -140,7 +149,46 @@ export default {
         await this.$store.dispatch('company/initCompany', this.$route.params.slug);
         // await console.log(this.$route.params.slug);
         // console.log(this.company);
-    }
+    },
+
+    // async asyncData({ route, $http, store, redirect }) {
+
+
+    //     let httpsAgent = new https.Agent({
+    //         rejectUnauthorized: false,
+    //       });
+
+
+    //     let config = $http.onRequest(config => {
+    //         config.agent = httpsAgent;
+    //     })
+
+
+    //     let username = decodeURI(route.params.slug);
+    //     let final_url = `${BASE_URL}/api/company/get/public/${username}`;
+
+        
+    //     // requests to server
+    //     const [result] = await Promise.all([ 
+    //         $http.$get(final_url, config),
+    //     ])
+
+
+    //     if(!result || result.error){
+    //         redirect('/pagina-negasita')
+    //         return;
+    //     }
+
+
+    //     if(result.company){
+    //         await store.commit('company/set_company', result.company);
+    //     } else {
+    //         redirect('/pagina-negasita')
+    //     }
+
+    //     // console.log(result);
+    //     return {result}
+    // },
 }
 </script>
 
