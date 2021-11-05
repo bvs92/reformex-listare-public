@@ -160,9 +160,16 @@ export default {
 
     // },
 
+    middleware({ store, redirect }) {
+    //   console.log('middleware initial_load', store.state.category_companies.initial_load);
+    },
+
     async asyncData({ route, $http, store, redirect }) {
+        
         if(store.state.category_companies.initial_load){
-            await store.commit('category_companies/set_initial_load', true);
+            // sidebar selected location
+            await store.commit('category_companies/set_current_location', 'all');
+            // await store.commit('category_companies/set_initial_load', true);
     
     
             let httpsAgent = new https.Agent({
@@ -241,8 +248,8 @@ export default {
         this.scrollToElement();
     },
 
-    async created(){
-        
+    created(){
+        // this.$store.commit('search_companies/set_last_search', null);
     }
 
 

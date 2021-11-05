@@ -49,7 +49,7 @@ export default {
             checkedProjects: false,
             isHidden: true,
 
-            selected_judet: 'toate',
+            selected_judet: 'all',
             judeteOptions: [],
             judeteOptionsLess: [],
             showLess: true,
@@ -143,13 +143,13 @@ export default {
         // this.checkedVerified = this.$store.state.companies.checkedVerified;
         // this.checkedProjects = this.$store.state.companies.checkedProjects;
 
-        await this.$store.dispatch('judete/initJudete');
+        // await this.$store.dispatch('judete/initJudete');
 
 
         if(this.judete && this.judete.length > 0) {
-            console.log('judelete filters', this.judete)
+            // console.log('judelete filters', this.judete)
             let first_elem = {
-                item: 'toate',
+                item: 'all',
                 name: 'Toată România'
             }
             this.judeteOptions.push(first_elem);

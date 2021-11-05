@@ -18,7 +18,7 @@
           <div class='row' v-if="categories && categories.length > 0">
 
             <template v-for="(category, index) in categories">
-            <div class='col-lg-2 col-sm-6 col-md-4' :class="{hide: (index > 16 && isHidden)}" :key="category.uuid">
+            <div class='col-lg-2 col-sm-6 col-md-4' :class="{hide: (index > 16 && isHidden)}" :key="category.uuid" >
               <div class='single-category-box'>
                 <div class='icon-normal'>
                   <!-- <img src="~assets/icons/arhitectura.svg" /> -->
@@ -26,8 +26,8 @@
                 </div>
                 <h3>{{ category.name }}</h3>
                 <span><i class="fa fa-dot-circle-o" aria-hidden="true"></i></span>
-                <NuxtLink :to="{name: 'categorie-category', params: {category: category.slug}}">
-                  <a class='link-btn'></a>
+                <NuxtLink :to="{name: 'categorie-category', params: {category: category.slug}}"  class="link-btn">
+                  <!-- <a class='link-btn'></a> -->
                 </NuxtLink>
               </div>
             </div>
@@ -76,7 +76,16 @@ export default {
           return require(`@/assets/icons/default.svg`)
         }
         
-      }
+      },
+
+      
+    },
+
+
+
+    created(){
+      // reset initial load when going back from a category
+      this.$store.commit('category_companies/set_initial_load', true);
     }
 
     

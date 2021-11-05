@@ -20,7 +20,9 @@ export const actions = {
               commit('set_judete', response.data.judete);
           }
       });
-    }
+    },
+
+    
 }
 
 export const mutations = {

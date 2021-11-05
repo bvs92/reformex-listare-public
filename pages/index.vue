@@ -51,8 +51,8 @@ export default {
     // this.topUsers = await this.$store.state.users.topUsers;
 
     await this.$store.dispatch('companies/initCompanies');
-    await this.$store.dispatch('categories/initCategories');
-    await this.$store.dispatch('judete/initJudete');
+    // await this.$store.dispatch('categories/initCategories');
+    // await this.$store.dispatch('judete/initJudete');
   }
 }
 </script>

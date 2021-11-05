@@ -184,8 +184,8 @@ export default {
     },
 
     async created(){
-       await this.$store.dispatch('categories/initCategories');
-        await this.$store.dispatch('judete/initJudete');
+    //    await this.$store.dispatch('categories/initCategories');
+        // await this.$store.dispatch('judete/initJudete');
 
         // console.log('this.search_made', this.search_made);
         
