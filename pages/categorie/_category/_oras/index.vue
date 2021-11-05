@@ -24,11 +24,30 @@
                             </div>
                         </transition>
 
-                        <div class='row' v-if="category_companies && category_companies.length > 0" keep-alive>
+                        <template v-if="initial_load == true">
+                        <div class='row' v-if="result && result.companies.length > 0">
+                            <p>Initial</p>
+                            <transition name="page" mode="out-in">
+                            <SingleListItem v-for="item in result.companies" :key="item.id" :company="item.user" :loading_change="loading_page_change" />
+                            </transition>
+                        </div>
+                        </template>
+
+                        <template v-else> 
+                        <div class='row' v-if="category_companies && category_companies.length > 0">
+                            <p>Normal</p>
                             <transition name="page" mode="out-in">
                             <SingleListItem v-for="item in category_companies" :key="item.id" :company="item.user" :loading_change="loading_page_change" />
                             </transition>
                         </div>
+                        </template>
+
+
+                        <!-- <div class='row' v-if="category_companies && category_companies.length > 0" keep-alive>
+                            <transition name="page" mode="out-in">
+                            <SingleListItem v-for="item in category_companies" :key="item.id" :company="item.user" :loading_change="loading_page_change" />
+                            </transition>
+                        </div> -->
                     </template>
                     <transition name="fade" mode="out-in">
                      <Pagination v-if="total_pages > 1" :pages="total_pages" keep-alive />
@@ -90,6 +109,7 @@ export default {
             loading_comp: false,
             // category_companies: null,
             // result_companies: null
+            result: null
         }
     },
 
@@ -122,6 +142,9 @@ export default {
         },
         loading_page_change() {
             return this.$store.state.category_city_companies.loading_page_change;
+        },
+        initial_load() {
+            return this.$store.state.category_city_companies.initial_load;
         },
     },
     
@@ -239,7 +262,7 @@ export default {
 
     mounted(){
         // console.log(this.$route.params.category);
-        // this.scrollToElement();
+        this.scrollToElement();
     }
 
 
