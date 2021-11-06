@@ -14,12 +14,12 @@
                   </li>
                   <li>
                     <a href='#'>
-                      <i class='flaticon-left-chevron'></i> Cautp firme
+                      <i class='flaticon-left-chevron'></i> Caută firme
                     </a>
                   </li>
                   <li>
                     <a href='#'>
-                      <i class='flaticon-left-chevron'></i> Pagina de start
+                      <i class='flaticon-left-chevron'></i> Pagină de start
                     </a>
                   </li>
                   <li>

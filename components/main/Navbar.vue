@@ -1,32 +1,24 @@
 <template>
    
       <div class="navbar-area">
-        <div class='miran-responsive-nav' v-if="windowWidth < 1200">
-          <div class='container d-inline-flex'>
-            <div class='miran-responsive-menu justify-content-start'>
-              <div class='logo'>
+        <div class='d-inline-flex justify-content-between' style="width: 100%;" v-if="windowWidth < 1200">
+          <div class="justify-content-start">
+            <div class='logo'>
                 <a href='/index-2'>
                   <a>
                     <Logo />
                   </a>
                 </a>
               </div>
-            </div>
-
-            <div class='justify-content-end'>
-              <div class='logo'>
-                <a href='/index-2'>
-                  <a>
-                    <Logo />
-                  </a>
-                </a>
-              </div>
-            </div>
-
           </div>
+
+          <div class='justify-content-end'>
+              <BurgerMenu />
+          </div>
+
         </div>
 
-        <div class='miran-nav show' v-if="windowWidth > 1200">
+        <div class='miran-nav show' v-if="windowWidth >= 1200">
           <div class='container-fluid'>
             <nav class='navbar navbar-expand-md navbar-light'>
             <a href='/' class="navbar-brand">
@@ -92,10 +84,13 @@
 
 <script>
 import Logo from "../global/Logo.vue";
+import BurgerMenu from "./BurgerMenu.vue";
+
 
 export default {
     components: {
-        Logo
+        Logo,
+        BurgerMenu
     },
 
     data(){
@@ -106,7 +101,7 @@ export default {
 
     watch: {
         windowWidth(newWidth, oldWidth) {
-            console.log(`it changed to ${newWidth} from ${oldWidth}`);
+            // console.log(`it changed to ${newWidth} from ${oldWidth}`);
         }
     },
 

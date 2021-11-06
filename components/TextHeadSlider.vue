@@ -1,14 +1,11 @@
 <template>
-<div>
-  <h1 class="banner-two-heading" :class="{'font35' : windowWidth > 700, 'font20' : windowWidth < 700, 'row' : windowWidth < 800}">
+<div class="my-4">
+  <h1 class="banner-two-heading" :class="{'font35' : windowWidth > 1000, 'font20' : windowWidth < 700, 'font25' : windowWidth <= 1000, 'row' : windowWidth < 800}">
         <span class='typewrite' :class="{'col-lg-12' : windowWidth < 800}">
         Firme și profesioniști în
         </span> 
         <vuejsTypist :class="{'col-lg-12' : windowWidth < 800}" :words="['arhitectură','amenajări','construcții','design interior','electricitate','instalații','renovări','zidărie','orice domeniu']" :human="true" :pause-interval="1000" />
     </h1>
-    <h3 class="title is-3">
-        Width: {{ windowWidth }} px
-    </h3>
 </div>
 </template>
 
@@ -28,7 +25,7 @@ export default {
 
     watch: {
         windowWidth(newWidth, oldWidth) {
-            console.log(`it changed to ${newWidth} from ${oldWidth}`);
+            // console.log(`it changed to ${newWidth} from ${oldWidth}`);
         }
     },
 
@@ -62,10 +59,14 @@ export default {
 }
 
 .font35 {
-    font-size: 35px!important;
+    font-size: 30px!important;
 }
 
 .font20 {
     font-size: 20px!important;
+}
+
+.font25 {
+    font-size: 27px!important;
 }
 </style>

@@ -54,6 +54,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     // {src: 'plugins/owl.js', ssr: false}
+    // { src: '~/plugins/vue-burger-menu.js', ssr: false, mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -80,7 +81,9 @@ export default {
   build: {
     babel: {
       compact: true
-    }
+    },
+
+    // vendor: ['vue-burger-menu'],
   },
 
 

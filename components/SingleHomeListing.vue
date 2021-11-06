@@ -18,12 +18,12 @@
                 <div class='d-flex align-items-center'>
                     <img :src="BASE + '/' + company.profile_photo" :alt='company.company.name' v-if="company.has_profile_photo" />
                     <img src='~assets/images/user3.jpg' :alt='company.company.name' v-else />
-                    <span>{{ company.first_name }} {{ company.last_name }}</span>
+                    <span>{{ slice_owner_name(company.first_name + ' ' +  company.last_name)}}</span>
                 </div>
                 </div>
 
-                <h3>
-                    <a>{{ company.company.name }}</a>
+                <h3 class="mt-3">
+                    <a>{{ slice_company_name(company.company.name) }}</a>
                 </h3>
 
                 <ul class='listings-meta'>
@@ -81,7 +81,8 @@ export default {
         return {
             BASE: null,
             slug: null,
-            statusImage: false
+            statusImage: false,
+            windowWidth: process.browser ? window.innerWidth : null
         }
     },
     props: {
@@ -96,10 +97,53 @@ export default {
 
     methods: {
         slice_text: function(str){
-            let final = str.substring(0, 45);
-            if(str.length > 45){
-                final += "..."
+            let numbet_cut;
+            let final;
+
+            if(this.windowWidth < 767){
+                final = str;
+            } else {
+                numbet_cut = this.windowWidth > 767 && this.windowWidth <= 1024 ? 35 : 40;
+                final = this.windowWidth > 767 && this.windowWidth <= 1024 ? str.substring(0, numbet_cut) : str.substring(0, numbet_cut);
+                if(str.length > numbet_cut){
+                    final += "..."
+                }
             }
+            
+            return final;
+        },
+
+        slice_company_name: function(str){
+            let numbet_cut;
+            let final;
+
+            if(this.windowWidth < 767){
+                final = str;
+            } else {
+                numbet_cut = this.windowWidth > 767 && this.windowWidth <= 1024 ? 20 : 25;
+                final = this.windowWidth > 767 && this.windowWidth <= 1024 ? str.substring(0, numbet_cut) : str.substring(0, numbet_cut);
+                if(str.length > numbet_cut){
+                    final += "..."
+                }
+            }
+            
+            return final;
+        },
+
+        slice_owner_name: function(str){
+            let numbet_cut;
+            let final;
+
+            if(this.windowWidth < 767){
+                final = str;
+            } else {
+                numbet_cut = this.windowWidth > 767 && this.windowWidth <= 1024 ? 25 : 35;
+                final = this.windowWidth > 767 && this.windowWidth <= 1024 ? str.substring(0, numbet_cut) : str.substring(0, numbet_cut);
+                if(str.length > numbet_cut){
+                    final += "..."
+                }
+            }
+            
             return final;
         },
 
@@ -121,6 +165,10 @@ export default {
             await axios.get(this.BASE + '/api/files/check/' + path_url + '/' + name_url, config).then(response => {
                 this.statusImage = Boolean(response.data);
             });
+        },
+
+        onResize() {
+            this.windowWidth = window.innerWidth
         }
         
     },
@@ -132,7 +180,24 @@ export default {
         if(this.company.company.card){
             this.checkImage();
         }
-    }
+
+
+        if (process.browser){
+            this.$nextTick(() => {
+                window.addEventListener('resize', this.onResize);
+            })
+        }
+
+    },
+
+
+
+    beforeDestroy() { 
+        if (process.browser){
+            window.removeEventListener('resize', this.onResize); 
+        }
+    },
+
 }
 </script>
 

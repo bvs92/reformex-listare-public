@@ -1,5 +1,5 @@
 <template>
-    <div class='single-feedback-box'>
+    <div class='single-feedback-box col-md-12'>
         <div class='rating'>
         <i class="fa fa-star pr-2" aria-hidden="true" v-for="(item, index) in parseInt(review.rating)" :key="index"></i>
         </div>

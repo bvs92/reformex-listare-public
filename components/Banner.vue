@@ -2,7 +2,7 @@
     <section class='banner-area'>
         <div class='container-fluid'>
           <div class='row'>
-            <div class='col-lg-7 col-md-12'>
+            <div class='col-lg-7 col-md-12' :class="{'col-lg-12' : windowWidth < 1200}">
               <div class='banner-content' style="max-width:1240px!important;">
                     <span class='find-quick'>Găsește simplu și rapid</span>
                     <TextHeadSlider />
@@ -22,7 +22,7 @@
                       </div>
                     </div> -->
 
-                    <div class='col-lg-5 col-md-6 p-0'>
+                    <div class='col-lg-5 col-md-12 col-sm-12 p-0'>
                       <div class='form-group category-select'>
                         <label class='category-icon'>
                           <i class='flaticon-pin'></i>
@@ -34,7 +34,7 @@
                       </div>
                     </div>
 
-                    <div class='col-lg-5 col-md-6 p-0'>
+                    <div class='col-lg-5 col-md-12 col-sm-12 p-0'>
                       <div class='form-group category-select'>
                         <label class='category-icon'>
                           <i class='flaticon-category'></i>
@@ -46,7 +46,7 @@
                       </div>
                     </div>
 
-                    <div class='col-lg-2 col-md-12 p-0'>
+                    <div class='col-lg-2 col-md-12 col-sm-12 p-0'>
                       <div class='submit-btn'>
                         <button type='submit' :disabled="block_search_button ? true : false">Caută</button>
                       </div>
@@ -74,7 +74,7 @@
               </div>
             </div>
 
-            <div class='col-lg-5 col-md-12'>
+            <div class='col-lg-5 col-md-12' v-if="windowWidth >= 1200">
               <div class='banner-image'>
                 <img src='~assets/images/banner-img1.png' alt='cauta o firma pentru proiectul tau' />
               </div>
@@ -99,7 +99,8 @@ export default {
           category: "all",
           location_name: 'România',
           category_name: 'Toate categoriile',
-          block_search_button: false
+          block_search_button: false,
+          windowWidth: process.browser ? window.innerWidth : null
       }
     },
 
@@ -161,6 +162,11 @@ export default {
               this.$router.push('/cautare');
             }
             // await this.$store.commit('companies/set_loading_search', false);
+        },
+
+
+        onResize() {
+            this.windowWidth = window.innerWidth
         }
     },
 
@@ -170,7 +176,19 @@ export default {
       setTimeout(() => {
         this.block_search_button = false;
       }, 1000);
-    }
+
+      if (process.browser){
+            this.$nextTick(() => {
+                window.addEventListener('resize', this.onResize);
+            })
+        }
+    },
+
+    beforeDestroy() { 
+        if (process.browser){
+            window.removeEventListener('resize', this.onResize); 
+        }
+    },
 }
 </script>
 
@@ -183,5 +201,10 @@ export default {
 
 .search-form {
   padding: 12px;
+}
+
+
+@media only screen and (max-width: 1000px) {
+
 }
 </style>

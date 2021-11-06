@@ -9,24 +9,24 @@
         </div>
 
         <div class='row'>
-        <div class='col-lg-4 col-md-6 col-sm-6'>
+        <div class='col-lg-4 col-md-4 col-sm-12'>
             <div class='single-how-it-works-box'>
             <div class='icon'>
                 <i class='flaticon-placeholder'></i>
             </div>
-            <h3>Caută în zona ta</h3>
+            <h3>Cauți personalizat</h3>
             <p>
                 Găsești firme sau meșteri la tine în oraș în funcție de proiect.
             </p>
             </div>
         </div>
 
-        <div class='col-lg-4 col-md-6 col-sm-6'>
+        <div class='col-lg-4 col-md-4 col-sm-12'>
             <div class='single-how-it-works-box'>
             <div class='icon'>
                 <i class='flaticon-support-1'></i>
             </div>
-            <h3>Contactezi firmele</h3>
+            <h3>Contactezi firme</h3>
             <p>
                 Suni sau trimiți un e-mail către firma ce corespunde nevoilor.
             </p>
@@ -35,15 +35,15 @@
 
         <div
             class='
-            col-lg-4 col-md-6 col-sm-6
-            offset-lg-0 offset-md-3 offset-sm-3
+            col-lg-4 col-md-4 col-sm-12
+            
         '
         >
             <div class='single-how-it-works-box'>
             <div class='icon'>
                 <i class='flaticon-tick'></i>
             </div>
-            <h3>Primești ofertă de preț</h3>
+            <h3>Primești oferte</h3>
             <p>
                 Primești oferte de la firma aleasă sau de la alte firme recomandate.
             </p>
@@ -53,3 +53,43 @@
     </div>
 </section>
 </template>
+
+<script>
+export default {
+    data(){
+        return {
+            windowWidth: process.browser ? window.innerWidth : null
+        }
+    },
+
+    watch: {
+        windowWidth(newWidth, oldWidth) {
+            // console.log(`it changed to ${newWidth} from ${oldWidth}`);
+        }
+    },
+
+    created() {
+        if (process.browser){
+            this.$nextTick(() => {
+                window.addEventListener('resize', this.onResize);
+            })
+        }
+    },
+
+    beforeDestroy() { 
+        if (process.browser){
+            window.removeEventListener('resize', this.onResize); 
+        }
+    },
+
+    methods: {  
+        onResize() {
+            this.windowWidth = window.innerWidth
+        }
+    },
+}
+</script>
+
+<style scoped>
+
+</style>
