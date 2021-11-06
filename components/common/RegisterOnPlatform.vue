@@ -3,7 +3,7 @@
     <div class='container mb-5'>
         <div class='row align-items-center'>
         <div class='col-lg-6 col-md-6 col-sm-12' >
-            <div class='manage-your-business-image' v-show="windowWidth > 767">
+            <div class='manage-your-business-image'>
             <img src='~assets/images/constructor.png' alt='constructor' />
             </div>
         </div>
@@ -32,39 +32,6 @@
 <script>
 
 export default {
-
-
-    data(){
-        return {
-            windowWidth: process.browser ? window.innerWidth : null
-        }
-    },
-
-    watch: {
-        windowWidth(newWidth, oldWidth) {
-            // console.log(`it changed to ${newWidth} from ${oldWidth}`);
-        }
-    },
-
-    created() {
-        if (process.browser){
-            this.$nextTick(() => {
-                window.addEventListener('resize', this.onResize);
-            })
-        }
-    },
-
-    beforeDestroy() { 
-        if (process.browser){
-            window.removeEventListener('resize', this.onResize); 
-        }
-    },
-
-    methods: {  
-        onResize() {
-            this.windowWidth = window.innerWidth
-        }
-    },
 
 
 }

@@ -2,7 +2,7 @@
     <section class='banner-area'>
         <div class='container-fluid'>
           <div class='row'>
-            <div class='col-lg-7 col-md-12' :class="{'col-lg-12' : windowWidth < 1200}">
+            <div class='col-lg-7 col-md-12 col-sm-12'>
               <div class='banner-content' style="max-width:1240px!important;">
                     <span class='find-quick'>Găsește simplu și rapid</span>
                     <TextHeadSlider />
@@ -53,7 +53,22 @@
                     </div>
                   </div>
                 </form>
-                <ul class='popular-search-list'>
+
+                <div class="my-5">
+                  <span class="d-block my-2 popular-terms">Căutări populare:</span>
+                  <div class="justify-content-between">
+                    <NuxtLink :to="{name: 'categorie-category-oras', params: {category: 'amenajare', oras: 'bucuresti'}}" class="search-term my-2">
+                        <i class="fa fa-search" aria-hidden="true"></i> Firme de amenajare în București
+                    </NuxtLink>
+                    <NuxtLink :to="{name: 'categorie-category-oras', params: {category: 'betoane', oras: 'bucuresti'}}" class="search-term my-2">
+                        <i class="fa fa-search" aria-hidden="true"></i> Firme de beton în București
+                    </NuxtLink>
+                    <NuxtLink :to="{name: 'categorie-category-oras', params: {category: 'constructie', oras: 'bucuresti'}}" class="search-term my-2">
+                        <i class="fa fa-search" aria-hidden="true"></i> Firme de construcții în București
+                    </NuxtLink>
+                  </div>
+                </div>
+                <!-- <ul class='popular-search-list'>
                   <li>Căutări populare:</li>
                   <li>
                     <NuxtLink :to="{name: 'categorie-category-oras', params: {category: 'amenajare', oras: 'bucuresti'}}">
@@ -70,11 +85,11 @@
                         Firme de construcții în București
                     </NuxtLink>
                   </li>
-                </ul>
+                </ul> -->
               </div>
             </div>
 
-            <div class='col-lg-5 col-md-12' v-if="windowWidth >= 1200">
+            <div class='col-lg-5 col-md-12' id="banner-image-home-page">
               <div class='banner-image'>
                 <img src='~assets/images/banner-img1.png' alt='cauta o firma pentru proiectul tau' />
               </div>
@@ -100,7 +115,6 @@ export default {
           location_name: 'România',
           category_name: 'Toate categoriile',
           block_search_button: false,
-          windowWidth: process.browser ? window.innerWidth : null
       }
     },
 
@@ -165,9 +179,6 @@ export default {
         },
 
 
-        onResize() {
-            this.windowWidth = window.innerWidth
-        }
     },
 
     created(){
@@ -177,18 +188,9 @@ export default {
         this.block_search_button = false;
       }, 1000);
 
-      if (process.browser){
-            this.$nextTick(() => {
-                window.addEventListener('resize', this.onResize);
-            })
-        }
+
     },
 
-    beforeDestroy() { 
-        if (process.browser){
-            window.removeEventListener('resize', this.onResize); 
-        }
-    },
 }
 </script>
 
@@ -204,7 +206,11 @@ export default {
 }
 
 
-@media only screen and (max-width: 1000px) {
-
+.search-term {
+  padding: 4px;
+  background: #ededed;
+  border-radius: 5px;
+  margin: 4px;
+  display: inline-block;
 }
 </style>

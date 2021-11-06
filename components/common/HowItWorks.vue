@@ -35,9 +35,7 @@
 
         <div
             class='
-            col-lg-4 col-md-4 col-sm-12
-            
-        '
+            col-lg-4 col-md-4 col-sm-12'
         >
             <div class='single-how-it-works-box'>
             <div class='icon'>
@@ -54,41 +52,7 @@
 </section>
 </template>
 
-<script>
-export default {
-    data(){
-        return {
-            windowWidth: process.browser ? window.innerWidth : null
-        }
-    },
 
-    watch: {
-        windowWidth(newWidth, oldWidth) {
-            // console.log(`it changed to ${newWidth} from ${oldWidth}`);
-        }
-    },
-
-    created() {
-        if (process.browser){
-            this.$nextTick(() => {
-                window.addEventListener('resize', this.onResize);
-            })
-        }
-    },
-
-    beforeDestroy() { 
-        if (process.browser){
-            window.removeEventListener('resize', this.onResize); 
-        }
-    },
-
-    methods: {  
-        onResize() {
-            this.windowWidth = window.innerWidth
-        }
-    },
-}
-</script>
 
 <style scoped>
 

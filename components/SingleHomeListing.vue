@@ -81,8 +81,7 @@ export default {
         return {
             BASE: null,
             slug: null,
-            statusImage: false,
-            windowWidth: process.browser ? window.innerWidth : null
+            statusImage: false
         }
     },
     props: {
@@ -100,14 +99,11 @@ export default {
             let numbet_cut;
             let final;
 
-            if(this.windowWidth < 767){
-                final = str;
-            } else {
-                numbet_cut = this.windowWidth > 767 && this.windowWidth <= 1024 ? 35 : 40;
-                final = this.windowWidth > 767 && this.windowWidth <= 1024 ? str.substring(0, numbet_cut) : str.substring(0, numbet_cut);
-                if(str.length > numbet_cut){
-                    final += "..."
-                }
+
+            numbet_cut = 35;
+            final =str.substring(0, numbet_cut);
+            if(str.length > numbet_cut){
+                final += "..."
             }
             
             return final;
@@ -117,15 +113,13 @@ export default {
             let numbet_cut;
             let final;
 
-            if(this.windowWidth < 767){
-                final = str;
-            } else {
-                numbet_cut = this.windowWidth > 767 && this.windowWidth <= 1024 ? 20 : 25;
-                final = this.windowWidth > 767 && this.windowWidth <= 1024 ? str.substring(0, numbet_cut) : str.substring(0, numbet_cut);
-                if(str.length > numbet_cut){
-                    final += "..."
-                }
+    
+            numbet_cut = 25;
+            final = str.substring(0, numbet_cut);
+            if(str.length > numbet_cut){
+                final += "..."
             }
+
             
             return final;
         },
@@ -134,14 +128,10 @@ export default {
             let numbet_cut;
             let final;
 
-            if(this.windowWidth < 767){
-                final = str;
-            } else {
-                numbet_cut = this.windowWidth > 767 && this.windowWidth <= 1024 ? 25 : 35;
-                final = this.windowWidth > 767 && this.windowWidth <= 1024 ? str.substring(0, numbet_cut) : str.substring(0, numbet_cut);
-                if(str.length > numbet_cut){
-                    final += "..."
-                }
+            numbet_cut = 35;
+            final = str.substring(0, numbet_cut);
+            if(str.length > numbet_cut){
+                final += "..."
             }
             
             return final;
@@ -167,9 +157,7 @@ export default {
             });
         },
 
-        onResize() {
-            this.windowWidth = window.innerWidth
-        }
+
         
     },
 
@@ -182,21 +170,9 @@ export default {
         }
 
 
-        if (process.browser){
-            this.$nextTick(() => {
-                window.addEventListener('resize', this.onResize);
-            })
-        }
 
     },
 
-
-
-    beforeDestroy() { 
-        if (process.browser){
-            window.removeEventListener('resize', this.onResize); 
-        }
-    },
 
 }
 </script>

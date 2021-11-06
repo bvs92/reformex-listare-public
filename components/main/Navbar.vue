@@ -1,13 +1,11 @@
 <template>
    
       <div class="navbar-area">
-        <div class='d-inline-flex justify-content-between' style="width: 100%;" v-if="windowWidth < 1200">
+        <div id="mobile-menu">
           <div class="justify-content-start">
             <div class='logo'>
-                <a href='/index-2'>
-                  <a>
+                <a href='/' class="">
                     <Logo />
-                  </a>
                 </a>
               </div>
           </div>
@@ -18,7 +16,7 @@
 
         </div>
 
-        <div class='miran-nav show' v-if="windowWidth >= 1200">
+        <div class='miran-nav show' id="normal-menu">
           <div class='container-fluid'>
             <nav class='navbar navbar-expand-md navbar-light'>
             <a href='/' class="navbar-brand">
@@ -91,38 +89,6 @@ export default {
     components: {
         Logo,
         BurgerMenu
-    },
-
-    data(){
-        return {
-            windowWidth: process.browser ? window.innerWidth : null
-        }
-    },
-
-    watch: {
-        windowWidth(newWidth, oldWidth) {
-            // console.log(`it changed to ${newWidth} from ${oldWidth}`);
-        }
-    },
-
-    created() {
-        if (process.browser){
-            this.$nextTick(() => {
-                window.addEventListener('resize', this.onResize);
-            })
-        }
-    },
-
-    beforeDestroy() { 
-        if (process.browser){
-            window.removeEventListener('resize', this.onResize); 
-        }
-    },
-
-    methods: {  
-        onResize() {
-            this.windowWidth = window.innerWidth
-        }
-    },
+    }
 }
 </script>

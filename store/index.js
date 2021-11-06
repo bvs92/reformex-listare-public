@@ -6,8 +6,8 @@ export const actions = {
         //   commit('user', req.session.user)
         // }
         // await console.log('nuxtServerInit from judete');
-        await dispatch('judete/initJudete');
-        await dispatch('categories/initCategories');
+        // await dispatch('judete/initJudete');
+        // await dispatch('categories/initCategories');
       }
   }
 

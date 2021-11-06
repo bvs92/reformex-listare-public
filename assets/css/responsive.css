@@ -1,5 +1,52 @@
 /* Max width 767px */
-@media only screen and (max-width: 768px) {
+
+#mobile-menu {
+  display: none !important;
+}
+
+.popular-terms {
+  text-align: left;
+}
+
+@media only screen and (max-width: 767px) {
+  #mobile-menu {
+    width: 100%;
+    display: inline-flex !important;
+    justify-content: space-between;
+  }
+
+  #normal-menu {
+    display: none !important;
+  }
+
+  #banner-image-home-page {
+    display: none;
+  }
+
+  /* header banner homepage */
+  h1.banner-two-heading {
+    display: block !important;
+  }
+  span.typewrite {
+    width: 100%;
+    display: block;
+  }
+
+  span.changing-text {
+    width: 100%;
+    display: block;
+  }
+
+  /* end header homepage */
+
+  .popular-terms {
+    text-align: center;
+  }
+
+  .manage-your-business-image {
+    display: none;
+  }
+
   .mean-menu .search-box-one {
     display: none !important;
   }
@@ -2650,6 +2697,20 @@
 
 /* Min width 576px to Max width 767px */
 @media only screen and (min-width: 576px) and (max-width: 767px) {
+  #mobile-menu {
+    width: 100%;
+    display: inline-flex !important;
+    justify-content: space-between;
+  }
+
+  #normal-menu {
+    display: none !important;
+  }
+
+  #banner-image-home-page {
+    display: none;
+  }
+
   .container {
     max-width: 540px;
   }
@@ -2700,6 +2761,24 @@
 
 /* Min width 768px to Max width 991px */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
+  #mobile-menu {
+    width: 100%;
+    display: inline-flex !important;
+    justify-content: space-between;
+  }
+
+  #normal-menu {
+    display: none !important;
+  }
+
+  #banner-image-home-page {
+    display: none;
+  }
+
+  .popular-terms {
+    text-align: center;
+  }
+
   body {
     font-size: 14px;
   }
@@ -3663,6 +3742,22 @@
 
 /* Min width 992px to Max width 1199px */
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
+  #mobile-menu {
+    width: 100%;
+    display: inline-flex !important;
+    justify-content: space-between;
+  }
+
+  #normal-menu {
+    display: none !important;
+  }
+
+  /* homepage font banner changing text */
+  .banner-two-heading.font35 {
+    font-size: 23px !important;
+  }
+  /* end homepage font banner changing text */
+
   .container {
     max-width: 960px;
   }

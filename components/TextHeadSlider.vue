@@ -1,10 +1,10 @@
 <template>
 <div class="my-4">
-  <h1 class="banner-two-heading" :class="{'font35' : windowWidth > 1000, 'font20' : windowWidth < 700, 'font25' : windowWidth <= 1000, 'row' : windowWidth < 800}">
-        <span class='typewrite' :class="{'col-lg-12' : windowWidth < 800}">
+  <h1 class="banner-two-heading font35" >
+        <span class='typewrite'>
         Firme și profesioniști în
         </span> 
-        <vuejsTypist :class="{'col-lg-12' : windowWidth < 800}" :words="['arhitectură','amenajări','construcții','design interior','electricitate','instalații','renovări','zidărie','orice domeniu']" :human="true" :pause-interval="1000" />
+        <vuejsTypist class="changing-text" :words="['arhitectură','amenajări','construcții','design interior','electricitate','instalații','renovări','zidărie','orice domeniu']" :human="true" :pause-interval="1000" />
     </h1>
 </div>
 </template>
@@ -15,38 +15,6 @@ import vuejsTypist from 'vuejs-typist'
 export default {
     components: {
         vuejsTypist
-    },
-
-    data(){
-        return {
-            windowWidth: process.browser ? window.innerWidth : null
-        }
-    },
-
-    watch: {
-        windowWidth(newWidth, oldWidth) {
-            // console.log(`it changed to ${newWidth} from ${oldWidth}`);
-        }
-    },
-
-    created() {
-        if (process.browser){
-            this.$nextTick(() => {
-                window.addEventListener('resize', this.onResize);
-            })
-        }
-    },
-
-    beforeDestroy() { 
-        if (process.browser){
-            window.removeEventListener('resize', this.onResize); 
-        }
-    },
-
-    methods: {  
-        onResize() {
-            this.windowWidth = window.innerWidth
-        }
     },
 
 
