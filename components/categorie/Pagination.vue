@@ -1,5 +1,5 @@
 <template>
-<div class='col-lg-12 col-md-12' v-if="pages">
+<div class='col-lg-12 col-md-12 col-sm-12 my-5' v-if="pages">
     <!-- <p v-if="current_page">Pagina curenta: {{ current_page }}</p>
     <p v-if="current_page">Slug curent: {{ current_slug }}</p> -->
     <div class='pagination-area text-center'>

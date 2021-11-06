@@ -8,11 +8,33 @@
   text-align: left;
 }
 
+.manage-your-business-image.hide {
+  display: block;
+}
+
+.single-listings-item .listings-image .author {
+  width: fit-content;
+}
+
+.spinner-loading {
+  z-index: 1;
+  position: absolute;
+  width: 100%;
+}
+
 @media only screen and (max-width: 767px) {
+  .spinner-loading {
+    left: -9%!important;
+  }
+
   #mobile-menu {
     width: 100%;
     display: inline-flex !important;
     justify-content: space-between;
+  }
+
+  .listings-details-image .listings-details-content {
+    margin-top: 50px;
   }
 
   #normal-menu {
@@ -39,11 +61,19 @@
 
   /* end header homepage */
 
+  .pro-cover-photo {
+    display: none !important;
+  }
+
   .popular-terms {
     text-align: center;
   }
 
   .manage-your-business-image {
+    display: none;
+  }
+
+  .manage-your-business-image.hide {
     display: none;
   }
 
@@ -1908,9 +1938,9 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #000000;
+    /* background-color: #000000; */
     padding: 20px 15px;
-    border-top: 1px solid #211f1f;
+    /* border-top: 1px solid #211f1f; */
   }
   .listings-details-image .container-fluid {
     padding-left: 15px;
@@ -2772,6 +2802,10 @@
   }
 
   #banner-image-home-page {
+    display: none !important;
+  }
+
+  .manage-your-business-image.hide {
     display: none;
   }
 

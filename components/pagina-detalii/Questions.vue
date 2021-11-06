@@ -3,10 +3,10 @@
         <h3>Întrebări frecvente</h3>
         <div>
             <ul class='pricing-list'>
-                <li v-b-toggle="`collapse-${index}`" v-for="(question, index) in questions" :key="index">
+                <li v-b-toggle="`collapse-${index}`" v-for="(question, index) in questions" :key="index" class="collapsed">
                     {{ question.title }} <span></span>
                     <!-- Element to collapse -->
-                    <b-collapse :id="`collapse-${index}`" class="mt-4">
+                    <b-collapse hidden :id="`collapse-${index}`" class="mt-4" >
                         <b-card class="content-small">{{ question.text }}</b-card>
                     </b-collapse>
                 </li>

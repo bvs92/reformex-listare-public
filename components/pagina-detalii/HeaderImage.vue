@@ -2,7 +2,7 @@
     <div class='listings-details-image' v-if="company">
      
         <div class="black-cover"></div>
-        <img src='~assets/images/reformex-cover-heads.png' alt='firma' />
+        <img src='~assets/images/reformex-cover-heads.png' alt='firma' class="pro-cover-photo" />
      
 
         <div class='container' v-if="company.company">
@@ -87,6 +87,11 @@ export default {
 <style scoped>
 .hiddenPhone {
     cursor: pointer;
+}
+
+.pro-cover-photo {
+    display: block;
+    margin: 0 auto;
 }
 
 .span-category {

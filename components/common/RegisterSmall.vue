@@ -3,13 +3,13 @@
     <div class=''>
         <div class='row align-items-center'>
             <div class='col-lg-4 col-md-12'>
-                <div class='manage-your-business-image'>
+                <div class='manage-your-business-image hide'>
                 <img src='~assets/images/comunitate.png' alt='Fii și tu parte din comunitatea Reformex!' />
                 </div>
             </div>
 
-            <div class='col-lg-8 col-md-12'>
-                <div class='manage-your-business-content'>
+            <div class='col-lg-8 col-md-12 col-sm-12 py-5'>
+                <div class='manage-your-business-content p-3'>
                     <h2 class="littleH">Fii și tu parte din comunitatea noastră!</h2>
                     <h2>
                         Ai o firmă? Obține vizibilitate și clienți.

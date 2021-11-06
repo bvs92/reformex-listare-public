@@ -44,7 +44,8 @@ export default {
 
 .littleH {
     font-size: 20px;
-    color: #696969;
+    /* color: #696969; */
+    color: #fcff31;
     font-weight: 600;
 }
 </style>

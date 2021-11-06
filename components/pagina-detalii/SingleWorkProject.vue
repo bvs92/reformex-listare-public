@@ -63,8 +63,8 @@ export default {
 
     methods: {
         slice_title: function(str){
-            let final = str.substring(0, 28);
-            if(str.length > 28){
+            let final = str.substring(0, 20);
+            if(str.length > 20){
                 final += "..."
             }
             return final;

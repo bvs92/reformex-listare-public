@@ -17,7 +17,7 @@
                     </template>
                     <template v-else>
                         <transition name="slide-fade" mode="out-in">
-                            <div v-if="loading_page_change" class="text-center" style="z-index: 1;position: absolute;width: 100%">
+                            <div v-if="loading_page_change" class="text-center spinner-loading">
                                 <span class="wrapper-spinner">
                                     <b-spinner label="Spinning"></b-spinner>
                                 </span>

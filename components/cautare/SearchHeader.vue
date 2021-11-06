@@ -41,8 +41,8 @@
         </div>
         </form>
 
-        <p class="text-center pt-5 pb-1" v-if="last_search"><span>{{ last_search }}</span></p>
-        <p class="text-center pt-5 pb-1" v-else><span>Lansează o căutare.</span></p>
+        <p class="text-center pt-5 pb-1 text-dark" v-if="last_search"><span>{{ last_search }}</span></p>
+        <p class="text-center pt-5 pb-1 text-dark" v-else><span>Lansează o căutare.</span></p>
 
     </div>
     </div>
