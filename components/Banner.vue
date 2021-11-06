@@ -5,12 +5,7 @@
             <div class='col-lg-7 col-md-12'>
               <div class='banner-content' style="max-width:1240px!important;">
                     <span class='find-quick'>Găsește simplu și rapid</span>
-                    <h1 class="banner-two-heading" style="font-size: 35px!important;">
-                        <span class='typewrite'>
-                        Firme și profesioniști în
-                        </span> 
-                        <vuejsTypist :words="['arhitectură','amenajări','construcții','design interior','electricitate','instalații','renovări','zidărie','orice domeniu']" :human="true" :pause-interval="1000" />
-                    </h1>
+                    <TextHeadSlider />
                 <p>Caută în funcție de zona geografică și categorie.</p>
                 <form class="search-form" @submit.prevent="searchCompanies">
                   <div class='row m-0 align-items-center'>
@@ -90,10 +85,12 @@
 </template>
 
 <script>
-import vuejsTypist from 'vuejs-typist'
+
+import TextHeadSlider from './TextHeadSlider'
+
 export default {
     components: {
-        vuejsTypist
+        TextHeadSlider
     },
 
     data(){

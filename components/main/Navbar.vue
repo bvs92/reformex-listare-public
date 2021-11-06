@@ -1,9 +1,9 @@
 <template>
    
       <div class="navbar-area">
-        <!-- <div class='miran-responsive-nav'>
-          <div class='container'>
-            <div class='miran-responsive-menu'>
+        <div class='miran-responsive-nav' v-if="windowWidth < 1200">
+          <div class='container d-inline-flex'>
+            <div class='miran-responsive-menu justify-content-start'>
               <div class='logo'>
                 <a href='/index-2'>
                   <a>
@@ -12,10 +12,21 @@
                 </a>
               </div>
             </div>
-          </div>
-        </div> -->
 
-        <div class='miran-nav show'>
+            <div class='justify-content-end'>
+              <div class='logo'>
+                <a href='/index-2'>
+                  <a>
+                    <Logo />
+                  </a>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class='miran-nav show' v-if="windowWidth > 1200">
           <div class='container-fluid'>
             <nav class='navbar navbar-expand-md navbar-light'>
             <a href='/' class="navbar-brand">
@@ -85,6 +96,38 @@ import Logo from "../global/Logo.vue";
 export default {
     components: {
         Logo
-    }    
+    },
+
+    data(){
+        return {
+            windowWidth: process.browser ? window.innerWidth : null
+        }
+    },
+
+    watch: {
+        windowWidth(newWidth, oldWidth) {
+            console.log(`it changed to ${newWidth} from ${oldWidth}`);
+        }
+    },
+
+    created() {
+        if (process.browser){
+            this.$nextTick(() => {
+                window.addEventListener('resize', this.onResize);
+            })
+        }
+    },
+
+    beforeDestroy() { 
+        if (process.browser){
+            window.removeEventListener('resize', this.onResize); 
+        }
+    },
+
+    methods: {  
+        onResize() {
+            this.windowWidth = window.innerWidth
+        }
+    },
 }
 </script>
