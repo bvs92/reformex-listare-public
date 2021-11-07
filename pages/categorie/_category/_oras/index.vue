@@ -65,7 +65,7 @@
 
                 </div>
                 <div class='col-lg-4 col-md-12'>
-                    <FiltersSidebar /> 
+                    <FiltersSidebar :empty="result.empty" /> 
                     <!-- <BannerSidebar :full="false" /> -->
                 </div>
                 

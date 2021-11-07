@@ -7,7 +7,7 @@
             <b-form-checkbox 
             v-model="checkedVerified" 
             name="check-button" switch 
-            @change="toggleVerified" :disabled="search_loading_status ? true : false || blockLoading ? true : false">
+            @change="toggleVerified" :disabled="search_loading_status ? true : false || blockLoading ? true : false || empty">
             Firme verificate
             </b-form-checkbox>
         </div>
@@ -26,7 +26,7 @@
             text-field="name"
             disabled-field="notEnabled"
             stacked
-            :disabled="search_loading_status ? true : false || blockLoading ? true : false"
+            :disabled="search_loading_status ? true : false || blockLoading ? true : false || empty"
         ></b-form-radio-group>
         <ul>
             <li class='see-all-btn' @click.prevent="showLess = !showLess">
@@ -83,7 +83,7 @@ export default {
         }
     },
 
-    // props: ["judete"],
+    props: ["empty"],
 
     methods: {
         toggleVerified: async function(){

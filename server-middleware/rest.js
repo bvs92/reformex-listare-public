@@ -9,6 +9,7 @@ app.get('/categories/all', function (req, res) {
     needle('get', base_url + `/api/categories/get/all`, {
       rejectUnauthorized: false,
       json: true,
+      'X-API-KEY': 'apiKey-biciu-vali'
     })
     .then(function(resp) {
       // console.log(resp.body);
@@ -58,6 +59,7 @@ app.get('/categories/all', function (req, res) {
     needle('get', base_url + `/api/judete/get/all`, {
       rejectUnauthorized: false,
       json: true,
+      'X-API-KEY': 'apiKey-biciu-vali'
     })
     .then(function(resp) {
       // console.log(resp.body);

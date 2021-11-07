@@ -88,6 +88,8 @@ export default {
         }
     },
 
+    // props: ['empty'],
+
     computed:{
         search_loading_status() {
             return this.$store.state.search_companies.loading_status;

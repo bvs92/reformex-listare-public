@@ -212,6 +212,7 @@ export default {
                 this.$store.commit('search_companies/set_loading_search', false);
             });
 
+
             
             let _last_search = {
                 category: 'Toate',

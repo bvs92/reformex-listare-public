@@ -4,7 +4,7 @@
     <section class='widget widget_categories'>
         <h3 class='title'>Filtrări rezultate</h3>
         <div class="my-4">
-            <b-form-checkbox v-model="checkedVerified" name="check-button" switch @change="toggleVerified" :disabled="search_loading_status ? true : false || blockLoading ? true : false">
+            <b-form-checkbox v-model="checkedVerified" name="check-button" switch @change="toggleVerified" :disabled="search_loading_status ? true : false || blockLoading ? true : false || empty">
             Firme verificate
             </b-form-checkbox>
         </div>
@@ -45,6 +45,8 @@ export default {
 
         }
     },
+
+    props: ['empty'],
 
     computed:{
         search_loading_status() {
