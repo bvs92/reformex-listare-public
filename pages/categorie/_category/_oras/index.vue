@@ -25,19 +25,31 @@
                         </transition>
 
                         <template v-if="initial_load == true">
-                        <div class='row' v-if="result && result.companies.length > 0">
-                            <transition name="page" mode="out-in">
-                            <SingleListItem v-for="item in result.companies" :key="item.id" :company="item.user" :loading_change="loading_page_change" />
-                            </transition>
-                        </div>
+                            <div class='row' v-if="result && result.companies && result.empty == false">
+                                <transition name="page" mode="out-in">
+                                <SingleListItem v-for="item in result.companies" :key="item.id" :company="item.user" :loading_change="loading_page_change" />
+                                </transition>
+                            </div>
+                            <div class='row justify-content-center' v-else>
+                                <transition name="page" mode="out-in">
+                                <NoResultsFound />
+                                </transition>
+                            </div>
+                            
                         </template>
 
                         <template v-else> 
-                        <div class='row' v-if="category_companies && category_companies.length > 0">
-                            <transition name="page" mode="out-in">
-                            <SingleListItem v-for="item in category_companies" :key="item.id" :company="item.user" :loading_change="loading_page_change" />
-                            </transition>
-                        </div>
+                            <div class='row' v-if="category_companies && category_companies.length > 0">
+                                <transition name="page" mode="out-in">
+                                <SingleListItem v-for="item in category_companies" :key="item.id" :company="item.user" :loading_change="loading_page_change" />
+                                </transition>
+                            </div>
+                            <div class='row justify-content-center' v-else>
+                                <transition name="page" mode="out-in">
+                                <NoResultsFound />
+                                </transition>
+                            </div>
+                            
                         </template>
 
 
@@ -54,7 +66,7 @@
                 </div>
                 <div class='col-lg-4 col-md-12'>
                     <FiltersSidebar /> 
-                    <BannerSidebar :full="false" />
+                    <!-- <BannerSidebar :full="false" /> -->
                 </div>
                 
             </div>
@@ -75,7 +87,8 @@ import SingleListItem from "@/components/categorie/SingleListItem.vue"
 import Pagination from "@/components/categorie/PaginationCity.vue"
 import LoadingElements from "@/components/common/LoadingElements.vue"
 import RegisterSmall from "@/components/common/RegisterSmall.vue"
-import BannerSidebar from "@/components/common/BannerSidebar.vue"
+import NoResultsFound from "@/components/common/NoResultsFound.vue"
+// import BannerSidebar from "@/components/common/BannerSidebar.vue"
 
 export default {
 
@@ -99,7 +112,8 @@ export default {
         Pagination,
         LoadingElements,
         RegisterSmall,
-        BannerSidebar
+        NoResultsFound
+        // BannerSidebar
     },
 
     data(){
@@ -176,74 +190,84 @@ export default {
 
     },
 
-    async asyncData({ route, $http, store, redirect }) {
+    async asyncData({ route, $http, store, redirect, error }) {
         if(store.state.category_city_companies.initial_load){
-            await store.commit('category_city_companies/set_initial_load', true);
+            // await store.commit('category_city_companies/set_initial_load', true);
     
-    
-            let httpsAgent = new https.Agent({
-                rejectUnauthorized: false,
-              });
-    
-    
-            let config = $http.onRequest(config => {
-                config.agent = httpsAgent;
-            })
-    
-    
-            
-    
-            let page = 1;
-            let category_slug = decodeURI(route.params.category);
-            let location_slug = decodeURI(route.params.oras);
-    
-            let final_url_category = `${BASE_URL}/api/categories/get/single/${category_slug}`;
-            let final_url_location = `${BASE_URL}/api/locations/get/single/${location_slug}`;
-            let final_url = `${BASE_URL}/api/companies/location/category/get/${category_slug}/${location_slug}/${page}`;
-            
-            // requests to server
-            const [result] = await Promise.all([ 
-                $http.$get(final_url, config),
-                $http.$get(final_url_category, config),
-                $http.$get(final_url_location, config),
-            ])
-    
-    
-            if(!result || result.error){
-                redirect('/pagina-negasita')
-                return;
+                try {
+                let httpsAgent = new https.Agent({
+                    rejectUnauthorized: false,
+                });
+        
+        
+                let config = $http.onRequest(config => {
+                    config.agent = httpsAgent;
+                })
+        
+        
+                
+        
+                let page = 1;
+                let category_slug = decodeURI(route.params.category);
+                let location_slug = decodeURI(route.params.oras);
+        
+                let final_url_category = `${BASE_URL}/api/categories/get/single/${category_slug}`;
+                let final_url_location = `${BASE_URL}/api/locations/get/single/${location_slug}`;
+                let final_url = `${BASE_URL}/api/companies/location/category/get/${category_slug}/${location_slug}/${page}`;
+                
+                // requests to server
+                const [result] = await Promise.all([ 
+                    $http.$get(final_url, config),
+                    $http.$get(final_url_category, config),
+                    $http.$get(final_url_location, config),
+                ])
+        
+        
+                if(!result || result.error){
+                    redirect('/pagina-negasita')
+                    return;
+                }
+        
+        
+                if(result.category){
+                    await store.commit('category_city_companies/set_category', result.category.name);
+                    // await store.commit('category_city_companies/set_category_uuid', result.category.uuid);
+                    await store.commit('category_city_companies/set_current_slug', category_slug);
+                    await store.commit('category_city_companies/set_current_page', page);
+                } else {
+                    redirect('/pagina-negasita')
+                }
+        
+                if(result.location){
+                    await store.commit('category_city_companies/set_location', result.location.name);
+                    // await store.commit('category_city_companies/set_category_uuid', result.category.uuid);
+                    await store.commit('category_city_companies/set_current_location', location_slug);
+                    // await store.commit('category_city_companies/set_current_page', page);
+                } else {
+                    redirect('/pagina-negasita')
+                }
+        
+        
+                if(Array.isArray(result.companies)){
+                    await store.commit('category_city_companies/set_companies', result.companies);
+                    await store.commit('category_city_companies/set_total_pages', parseInt(result.total_pages));
+                } else {
+                    await store.commit('category_city_companies/set_companies', [result.companies[Object.keys(result.companies)[0]]]);
+                    await store.commit('category_city_companies/set_total_pages', parseInt(result.total_pages));
+                }
+        
+                // console.log(result);
+
+                if(Array.isArray(result.companies)){
+                    result.empty = result.companies.length == 0 ? true : false;
+                } else {
+                    result.empty = false;
+                }
+
+                return {result}
+            } catch(err) {
+                error('Ceva nu a funcționat corect. Reîncarcă pagina.')
             }
-    
-    
-            if(result.category){
-                await store.commit('category_city_companies/set_category', result.category.name);
-                // await store.commit('category_city_companies/set_category_uuid', result.category.uuid);
-                await store.commit('category_city_companies/set_current_slug', category_slug);
-                await store.commit('category_city_companies/set_current_page', page);
-            } else {
-                redirect('/pagina-negasita')
-            }
-    
-            if(result.location){
-                await store.commit('category_city_companies/set_location', result.location.name);
-                // await store.commit('category_city_companies/set_category_uuid', result.category.uuid);
-                await store.commit('category_city_companies/set_current_location', location_slug);
-                // await store.commit('category_city_companies/set_current_page', page);
-            } else {
-                redirect('/pagina-negasita')
-            }
-    
-    
-            if(Array.isArray(result.companies)){
-                await store.commit('category_city_companies/set_companies', result.companies);
-                await store.commit('category_city_companies/set_total_pages', parseInt(result.total_pages));
-            } else {
-                await store.commit('category_city_companies/set_companies', [result.companies[Object.keys(result.companies)[0]]]);
-                await store.commit('category_city_companies/set_total_pages', parseInt(result.total_pages));
-            }
-    
-            // console.log(result);
-            return {result}
 
         }
     },

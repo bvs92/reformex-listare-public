@@ -36,6 +36,12 @@
                                     </transition>
                                 </div>
 
+                                <div class='row justify-content-center' v-else>
+                                    <transition name="page" mode="out-in">
+                                    <NoResultsFound />
+                                    </transition>
+                                </div>
+
                         </template>
                     </template>
                     <transition name="fade" mode="out-in">
@@ -45,7 +51,7 @@
 
                 <div class='col-lg-4 col-md-12'>
                     <FiltersSidebar /> 
-                    <BannerSidebar :full="false" />
+                    <!-- <BannerSidebar :full="false" /> -->
                 </div>
 
             </div>
@@ -63,10 +69,11 @@
 import SearchHeader from "@/components/cautare/SearchHeader.vue"
 import FiltersSidebar from "@/components/cautare/FiltersSidebar.vue"
 import SingleListItem from "@/components/cautare/SingleListItem.vue"
+import NoResultsFound from "@/components/common/NoResultsFound.vue"
 import Pagination from "@/components/cautare/Pagination.vue"
 import LoadingElements from "@/components/common/LoadingElements.vue"
 import RegisterSmall from "@/components/common/RegisterSmall.vue"
-import BannerSidebar from "@/components/common/BannerSidebar.vue"
+// import BannerSidebar from "@/components/common/BannerSidebar.vue"
 
 export default {
     head: {
@@ -87,7 +94,8 @@ export default {
         Pagination,
         LoadingElements,
         RegisterSmall,
-        BannerSidebar
+        NoResultsFound
+        // BannerSidebar
     },
 
     data(){

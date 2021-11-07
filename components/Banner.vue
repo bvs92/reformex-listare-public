@@ -181,7 +181,8 @@ export default {
 
     },
 
-    created(){
+    async created(){
+      await this.$store.commit('category_city_companies/set_initial_load', true);
       this.block_search_button = true;
 
       setTimeout(() => {
