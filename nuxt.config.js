@@ -1,9 +1,17 @@
+require('dotenv').config()
+
 export default {
 
   // loading: {
   //   color: 'blue',
   //   height: '5px'
   // },
+
+
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000'
+  },
+
 
   loading: '~/components/global/Loader.vue',
 
@@ -63,6 +71,11 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [],
 
+  serverMiddleware: [
+    { path: "/resources", handler: "~/server-middleware/rest.js" },
+  ],
+
+
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/bootstrap
@@ -70,7 +83,8 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/toast',
-    '@nuxt/http'
+    '@nuxt/http',
+    '@nuxtjs/dotenv',
     // 'nuxt-svg-loader',
   ],
 

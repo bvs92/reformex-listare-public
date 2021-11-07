@@ -15,7 +15,7 @@
         :nextArrow='`<button class="slick-next" href="#"><i class="flaticon-left-chevron"></i></button>`'
         
         :pauseOnFocus="true"
-        class="pb-2 mx-auto"
+        class="pb-2 mx-auto slick-banner-sidebar"
         >
         <img :src="require('@/assets/images/banner-sidebar.png')" v-for="(item, index) in total_banners" :key="index" :review="item" @click.prevent="openModal(index)" class="pointer" />
         </VueSlickCarousel>
@@ -120,7 +120,7 @@ export default {
 
 <style>
 
-.slick-slider{
+.slick-banner-sidebar{
     max-width: 400px;
 }
 
@@ -180,7 +180,7 @@ position: absolute;
 .slick-arrow.slick-prev {
     position: absolute;
     left: 0px;
-    z-index: 1;
+    z-index: 1!important;
 }
 
 .pointer {

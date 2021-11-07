@@ -12,9 +12,10 @@ export const actions = {
             rejectUnauthorized: false,
           });
 
-        axios.get(`${BASE_URL}/api/categories/get/all`,{
-            headers: {'Access-Control-Allow-Origin': "*"},
-             mode: 'cors',
+        // axios.get(`${BASE_URL}/api/categories/get/all`,{
+        axios.get(`${process.env.BASE_URL}/resources/categories/all`,{
+            // headers: {'Access-Control-Allow-Origin': "*"},
+            //  mode: 'cors',
           }).then(response => {
           if(response.data){
               commit('set_categories', response.data.categories);
