@@ -194,77 +194,86 @@ export default {
         if(store.state.category_city_companies.initial_load){
             // await store.commit('category_city_companies/set_initial_load', true);
     
-                try {
-                let httpsAgent = new https.Agent({
-                    rejectUnauthorized: false,
-                });
-        
-        
-                let config = $http.onRequest(config => {
-                    config.agent = httpsAgent;
-                })
-        
-        
-                
-        
-                let page = 1;
-                let category_slug = decodeURI(route.params.category);
-                let location_slug = decodeURI(route.params.oras);
-        
-                let final_url_category = `${BASE_URL}/api/categories/get/single/${category_slug}`;
-                let final_url_location = `${BASE_URL}/api/locations/get/single/${location_slug}`;
-                let final_url = `${BASE_URL}/api/companies/location/category/get/${category_slug}/${location_slug}/${page}`;
-                
-                // requests to server
-                const [result] = await Promise.all([ 
-                    $http.$get(final_url, config),
-                    $http.$get(final_url_category, config),
-                    $http.$get(final_url_location, config),
-                ])
-        
-        
-                if(!result || result.error){
-                    redirect('/pagina-negasita')
-                    return;
-                }
-        
-        
-                if(result.category){
-                    await store.commit('category_city_companies/set_category', result.category.name);
-                    // await store.commit('category_city_companies/set_category_uuid', result.category.uuid);
-                    await store.commit('category_city_companies/set_current_slug', category_slug);
-                    await store.commit('category_city_companies/set_current_page', page);
-                } else {
-                    redirect('/pagina-negasita')
-                }
-        
-                if(result.location){
-                    await store.commit('category_city_companies/set_location', result.location.name);
-                    // await store.commit('category_city_companies/set_category_uuid', result.category.uuid);
-                    await store.commit('category_city_companies/set_current_location', location_slug);
-                    // await store.commit('category_city_companies/set_current_page', page);
-                } else {
-                    redirect('/pagina-negasita')
-                }
-        
-        
-                if(Array.isArray(result.companies)){
-                    await store.commit('category_city_companies/set_companies', result.companies);
-                    await store.commit('category_city_companies/set_total_pages', parseInt(result.total_pages));
-                } else {
-                    await store.commit('category_city_companies/set_companies', [result.companies[Object.keys(result.companies)[0]]]);
-                    await store.commit('category_city_companies/set_total_pages', parseInt(result.total_pages));
-                }
-        
-                // console.log(result);
+                    try {
+                    let httpsAgent = new https.Agent({
+                        rejectUnauthorized: false,
+                    });
+            
+            
+                    let config = $http.onRequest(config => {
+                        // config.agent = httpsAgent;
+                        config.agent = process.env.NODE_ENV == 'production' ? httpsAgent : undefined;
+                    })
+            
+            
+                    
+            
+                    let page = 1;
+                    let category_slug = decodeURI(route.params.category);
+                    let location_slug = decodeURI(route.params.oras);
+            
+                    // let final_url_category = `${BASE_URL}/api/categories/get/single/${category_slug}`;
+                    // let final_url_location = `${BASE_URL}/api/locations/get/single/${location_slug}`;
+                    // let final_url = `${BASE_URL}/api/companies/location/category/get/${category_slug}/${location_slug}/${page}`;
 
-                if(Array.isArray(result.companies)){
-                    result.empty = result.companies.length == 0 ? true : false;
-                } else {
-                    result.empty = false;
-                }
+                    // with middleware
+                    let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.BASE_URL
+                    let final_url_category = `${FINAL_URL}/resources/categories/single/${category_slug}`;
+                    let final_url_location = `${FINAL_URL}/resources/locations/single/${location_slug}`;
+                    let final_url = `${FINAL_URL}/resources/companies/location/category/get/${category_slug}/${location_slug}/${page}`;
+                    
+                    // requests to server
+                    const [result] = await Promise.all([ 
+                        $http.$get(final_url, config),
+                        $http.$get(final_url_category, config),
+                        $http.$get(final_url_location, config),
+                    ])
 
-                return {result}
+                    console.log(result)
+            
+            
+                    if(!result || result.error){
+                        redirect('/pagina-negasita')
+                        return;
+                    }
+            
+            
+                    if(result.category){
+                        await store.commit('category_city_companies/set_category', result.category.name);
+                        // await store.commit('category_city_companies/set_category_uuid', result.category.uuid);
+                        await store.commit('category_city_companies/set_current_slug', category_slug);
+                        await store.commit('category_city_companies/set_current_page', page);
+                    } else {
+                        redirect('/pagina-negasita')
+                    }
+            
+                    if(result.location){
+                        await store.commit('category_city_companies/set_location', result.location.name);
+                        // await store.commit('category_city_companies/set_category_uuid', result.category.uuid);
+                        await store.commit('category_city_companies/set_current_location', location_slug);
+                        // await store.commit('category_city_companies/set_current_page', page);
+                    } else {
+                        redirect('/pagina-negasita')
+                    }
+            
+            
+                    if(Array.isArray(result.companies)){
+                        await store.commit('category_city_companies/set_companies', result.companies);
+                        await store.commit('category_city_companies/set_total_pages', parseInt(result.total_pages));
+                    } else {
+                        await store.commit('category_city_companies/set_companies', [result.companies[Object.keys(result.companies)[0]]]);
+                        await store.commit('category_city_companies/set_total_pages', parseInt(result.total_pages));
+                    }
+            
+                    // console.log(result);
+
+                    if(Array.isArray(result.companies)){
+                        result.empty = result.companies.length == 0 ? true : false;
+                    } else {
+                        result.empty = false;
+                    }
+
+                    return {result}
             } catch(err) {
                 error('Ceva nu a funcționat corect. Reîncarcă pagina.')
             }

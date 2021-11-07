@@ -192,8 +192,8 @@ export default {
         
         
                 let config = $http.onRequest(config => {
-                    // config.agent = process.env.NODE_ENV == 'production' ? httpsAgent : undefined;
-                    config.agent =  httpsAgent;
+                    config.agent = process.env.NODE_ENV == 'production' ? httpsAgent : undefined;
+                    // config.agent =  httpsAgent;
                 })
         
         
@@ -205,13 +205,13 @@ export default {
         
                 
         
-                let final_url_category = `${BASE_URL}/api/categories/get/single/${category_slug}`;
-                let final_url = `${BASE_URL}/api/companies/category/get/${category_slug}/${page}`;
+                // let final_url_category = `${BASE_URL}/api/categories/get/single/${category_slug}`;
+                // let final_url = `${BASE_URL}/api/companies/category/get/${category_slug}/${page}`;
 
                 // with serverMiddleware
-                // let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.BASE_URL
-                // let final_url_category = `${FINAL_URL}/resources/categories/single/${category_slug}`;
-                // let final_url = `${FINAL_URL}/resources/companies/category/get/${category_slug}/${page}`;
+                let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.BASE_URL
+                let final_url_category = `${FINAL_URL}/resources/categories/single/${category_slug}`;
+                let final_url = `${FINAL_URL}/resources/companies/category/get/${category_slug}/${page}`;
                 
                 // requests to server
                 const [result] = await Promise.all([ 

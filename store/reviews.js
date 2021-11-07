@@ -12,7 +12,12 @@ export const actions = {
             rejectUnauthorized: false,
           });
 
-        await axios.get(`${BASE_URL}/api/company_reviews/get/all/public`, {
+
+          let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.BASE_URL
+        //   let the_url = `${BASE_URL}/api/company_reviews/get/all/public`;
+        let the_url = `${FINAL_URL}/resources/company_reviews/get/all/public`
+
+        await axios.get(the_url, {
             headers: {'Access-Control-Allow-Origin': "*"},
              mode: 'cors',
           })

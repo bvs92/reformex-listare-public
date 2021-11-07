@@ -47,7 +47,10 @@ export const actions = {
             rejectUnauthorized: false,
           });
 
-          let final_url = `${BASE_URL}/api/companies/search/${payload.category_slug}/${payload.location_slug}/${payload.page}`;
+          let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.BASE_URL
+
+        //   let final_url = `${BASE_URL}/api/companies/search/${payload.category_slug}/${payload.location_slug}/${payload.page}`;
+        let final_url = `${FINAL_URL}/resources/companies/search/${payload.category_slug}/${payload.location_slug}/${payload.page}`
 
         await axios.get(final_url,{
             headers: {'Access-Control-Allow-Origin': "*"},
@@ -99,7 +102,10 @@ export const actions = {
             rejectUnauthorized: false,
           });
 
-          let final_url = `${BASE_URL}/api/companies/search/verified/${payload.category_slug}/${payload.location_slug}/${payload.page}`;
+          let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.BASE_URL
+
+        //   let final_url = `${BASE_URL}/api/companies/search/verified/${payload.category_slug}/${payload.location_slug}/${payload.page}`;
+        let final_url = `${FINAL_URL}/resources/companies/search/verified/${payload.category_slug}/${payload.location_slug}/${payload.page}`
 
         await axios.get(final_url,{
             headers: {'Access-Control-Allow-Origin': "*"},

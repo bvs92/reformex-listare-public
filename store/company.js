@@ -12,10 +12,12 @@ export const actions = {
             rejectUnauthorized: false,
           });
 
-        let the_url = `${BASE_URL}/api/company/get/public/${username}`;
-        await axios.get(the_url,{
-            headers: {'Access-Control-Allow-Origin': "*"},
-             mode: 'cors',
+        let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.BASE_URL
+        // let the_url = `${BASE_URL}/api/company/get/public/${username}`;
+        // await axios.get(the_url,{
+        axios.get(`${FINAL_URL}/resources/company/get/public/${username}`,{
+            // headers: {'Access-Control-Allow-Origin': "*"},
+            //  mode: 'cors',
           }).then(async response => {
             if(response.data.company){
                 await commit('set_company', response.data.company);

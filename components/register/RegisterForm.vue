@@ -278,7 +278,11 @@ export default {
                 rejectUnauthorized: false,
             });
 
+            // let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.BASE_URL
+
             let the_url = `${BASE_URL}/api/company/form/register`;
+            // let the_url = `${FINAL_URL}/company/form/register`;
+
             await axios.post(the_url, formData, {
                 headers: {'Access-Control-Allow-Origin': "*"},
                 mode: 'cors',

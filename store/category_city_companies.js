@@ -117,7 +117,11 @@ export const actions = {
             rejectUnauthorized: false,
           });
 
-          let final_url = `${BASE_URL}/api/companies/location/category/get/${payload.category_slug}/${payload.location_slug}/${payload.page}`;
+          let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.BASE_URL
+
+        //   let final_url = `${BASE_URL}/api/companies/location/category/get/${payload.category_slug}/${payload.location_slug}/${payload.page}`;
+          let final_url = `${FINAL_URL}/resources/companies/location/category/get/${payload.category_slug}/${payload.location_slug}/${payload.page}`
+
             await axios.get(final_url,{
                 headers: {'Access-Control-Allow-Origin': "*"},
                 mode: 'cors',
@@ -167,7 +171,11 @@ export const actions = {
             rejectUnauthorized: false,
           });
 
-          let final_url = `${BASE_URL}/api/companies/verified/location/category/get/${payload.category_slug}/${payload.location_slug}/${payload.page}`;
+          let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.BASE_URL
+
+        //   let final_url = `${BASE_URL}/api/companies/verified/location/category/get/${payload.category_slug}/${payload.location_slug}/${payload.page}`;
+        let final_url = `${FINAL_URL}/resources/companies/verified/location/category/get/${payload.category_slug}/${payload.location_slug}/${payload.page}`
+
             await axios.get(final_url,{
                 headers: {'Access-Control-Allow-Origin': "*"},
                 mode: 'cors',

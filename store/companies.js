@@ -20,7 +20,10 @@ export const actions = {
             rejectUnauthorized: false,
           });
 
-        axios.get(`${BASE_URL}/api/companies/get/top`,{
+          let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.BASE_URL
+
+          axios.get(`${FINAL_URL}/resources/companies/get/top`,{
+        // axios.get(`${BASE_URL}/api/companies/get/top`,{
             headers: {'Access-Control-Allow-Origin': "*"},
              mode: 'cors',
           }).then(response => {
