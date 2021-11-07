@@ -12,8 +12,11 @@ export const actions = {
             rejectUnauthorized: false,
           });
 
+          let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.BASE_URL
+
+
         // axios.get(`${BASE_URL}/api/categories/get/all`,{
-        axios.get(`${process.env.BASE_URL}/resources/categories/all`,{
+        axios.get(`${FINAL_URL}/resources/categories/all`,{
             // headers: {'Access-Control-Allow-Origin': "*"},
             //  mode: 'cors',
           }).then(response => {
