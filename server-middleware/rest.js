@@ -1,9 +1,6 @@
 const app = require('express')()
 const needle = require('needle')
 
-
-// const API_LOCAL = '785cda3b-0e96-49f2-975a-1ea9d7fd18b5'
-// const API_LOCAL = '212d38d8-ff88-42bb-a1ed-b46a3fc69623'
 const API_LOCAL = process.env.API_LOCAL
 
 const base_url = 'https://reformexapp.eu'

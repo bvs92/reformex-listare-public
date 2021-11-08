@@ -59,7 +59,7 @@
                 <ContactDetails :company="company" />
                 <UserDetails :company="company" />
                 <SendMessage :company="company" />
-                <BannerSidebar :full="true" />
+                <!-- <BannerSidebar :full="true" /> -->
             </div>
         </div>
         </div>
@@ -85,7 +85,7 @@ import SendMessage from "@/components/pagina-detalii/SendMessage.vue";
 import UserDetails from "@/components/pagina-detalii/UserDetails.vue";
 import Loader from "@/components/global/Loader.vue";
 import RegisterSmall from "@/components/common/RegisterSmall.vue"
-import BannerSidebar from "@/components/common/BannerSidebar.vue"
+// import BannerSidebar from "@/components/common/BannerSidebar.vue"
 
 export default {
     head() {
@@ -113,7 +113,7 @@ export default {
         UserDetails,
         Loader,
         RegisterSmall,
-        BannerSidebar
+        // BannerSidebar
     },
 
     data(){

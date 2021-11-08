@@ -8,22 +8,28 @@
 
                 <ul class='link-list'>
                   <li>
-                    <a href='#'>
-                      <i class='flaticon-left-chevron'></i> Adaugă firmă
-                    </a>
+                    <NuxtLink
+                      to='/inscriere-firma'
+                    >
+                        <i class='flaticon-left-chevron'></i>  Adaugă firmă
+                    </NuxtLink>
                   </li>
                   <li>
-                    <a href='#'>
+                    <NuxtLink
+                      to='/cautare'
+                    >
                       <i class='flaticon-left-chevron'></i> Caută firme
-                    </a>
+                    </NuxtLink>
                   </li>
                   <li>
-                    <a href='#'>
+                    <NuxtLink
+                      to='/'
+                    >
                       <i class='flaticon-left-chevron'></i> Pagină de start
-                    </a>
+                    </NuxtLink>
                   </li>
                   <li>
-                    <a href='#'>
+                    <a href='https://www.reformex.ro/contact-2'>
                       <i class='flaticon-left-chevron'></i> Contact
                     </a>
                   </li>
@@ -37,22 +43,22 @@
 
                 <ul class='link-list'>
                   <li>
-                    <a href='#'>
+                    <a href='https://www.reformex.ro/publicitate-prin-anunturi/'>
                       <i class='flaticon-left-chevron'></i> Anunțuri
                     </a>
                   </li>
                   <li>
-                    <a href='#'>
+                    <a href='https://www.reformex.ro/publicitate/'>
                       <i class='flaticon-left-chevron'></i> Articole
                     </a>
                   </li>
                   <li>
-                    <a href='#'>
+                    <a href='https://www.reformex.ro/bannerzon/'>
                       <i class='flaticon-left-chevron'></i> Banner
                     </a>
                   </li>
                   <li>
-                    <a href='#'>
+                    <a href='https://www.reformex.ro/publicitate-pe-reformex/'>
                       <i class='flaticon-left-chevron'></i> Pachete publicitate
                     </a>
                   </li>
@@ -66,7 +72,7 @@
 
                 <ul class='link-list'>
                   <li>
-                    <a href='#'>
+                    <a href='https://www.reformex.ro/despre-noi/'>
                       <i class='flaticon-left-chevron'></i> Despre noi
                     </a>
                   </li>
@@ -93,7 +99,7 @@
 
           <div class='copyright-area mb-4'>
             <p class="p-bottom">
-              Găsești pe REFORMEX firme și profesioniști pentru proiectul tău.
+              Găsește pe REFORMEX firme și profesioniști pentru proiectul tău.
             </p>
           </div>
         </div>

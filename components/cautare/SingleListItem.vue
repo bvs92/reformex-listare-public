@@ -2,7 +2,8 @@
 <div class='col-lg-12 col-md-12' v-if="company">
 
     <NuxtLink :to="{name: 'detalii-firma-slug', params: {slug: slug}}" :event="loading_page_change ? '' : 'click'">
-    <div class='single-listings-item' :class="{'promoted' : slug == 'beton-expert'}">
+    <div class='single-listings-item' >
+        <!-- :class="{'promoted' : slug == 'beton-expert'}" -->
     <div class='row m-0' :class="{'disabled' : loading_page_change}">
         <div class='col-lg-4 col-md-4 p-0'>
         <div class='listings-image ' v-if="company.company">
@@ -19,9 +20,11 @@
             <!-- <a href='#' class='bookmark-save'>
             <i class='flaticon-heart'></i>
             </a> -->
-            <p class='promoted-icon' v-if="slug == 'beton-expert'">
+            
+            <!-- <p class='promoted-icon' v-if="slug == 'beton-expert'">
             <i class="fa fa-info-circle" aria-hidden="true"></i> Promovat
-            </p>
+            </p> -->
+
             <!-- <NuxtLink to='/single-listings'>
             <a class='link-btn'></a>
             </NuxtLink> -->
