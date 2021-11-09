@@ -31,9 +31,9 @@
                                 </transition>
 
                                 <div class='row' v-if="result_companies && result_companies > 0">
-                                    <transition name="page" mode="out-in">
+                                    <!-- <transition name="page" mode="out-in"> -->
                                     <SingleListItem v-for="item in companies" :key="item.id" :company="item.user" keep-alive  />
-                                    </transition>
+                                    <!-- </transition> -->
                                 </div>
 
                                 <div class='row justify-content-center' v-else>

@@ -1,6 +1,6 @@
 <template>
 <div class='col-lg-12 col-md-12' v-if="company">
-
+    <transition name="page" mode="out-in">
     <NuxtLink :to="{name: 'detalii-firma-slug', params: {slug: slug}}" :event="loading_page_change ? '' : 'click'">
     <div class='single-listings-item' >
         <!-- :class="{'promoted' : slug == 'beton-expert'}" -->
@@ -89,7 +89,7 @@
     </div>
     </div>
     </NuxtLink>
-    
+    </transition>
 </div>
 </template>
 

@@ -26,9 +26,9 @@
 
                         <template v-if="initial_load == true">
                             <div class='row' v-if="result && result.companies && result.empty == false">
-                                <transition name="page" mode="out-in">
+                                <!-- <transition name="page" mode="out-in"> -->
                                 <SingleListItem v-for="item in result.companies" :key="item.id" :company="item.user" :loading_change="loading_page_change" />
-                                </transition>
+                                <!-- </transition> -->
                             </div>
                             <div class='row justify-content-center' v-else>
                                 <transition name="page" mode="out-in">
@@ -40,9 +40,9 @@
 
                         <template v-else> 
                             <div class='row' v-if="category_companies && category_companies.length > 0">
-                                <transition name="page" mode="out-in">
+                                <!-- <transition name="page" mode="out-in"> -->
                                 <SingleListItem v-for="item in category_companies" :key="item.id" :company="item.user" :loading_change="loading_page_change" />
-                                </transition>
+                                <!-- </transition> -->
                             </div>
                             <div class='row justify-content-center' v-else>
                                 <transition name="page" mode="out-in">
@@ -225,11 +225,11 @@ export default {
                     // requests to server
                     const [result] = await Promise.all([ 
                         $http.$get(final_url, config),
-                        $http.$get(final_url_category, config),
-                        $http.$get(final_url_location, config),
+                        // $http.$get(final_url_category, config),
+                        // $http.$get(final_url_location, config),
                     ])
 
-                    console.log(result)
+                    // console.log(result)
             
             
                     if(!result || result.error){
