@@ -17,8 +17,8 @@ export const actions = {
 
         // axios.get(`${BASE_URL}/api/categories/get/all`,{
         axios.get(`${FINAL_URL}/resources/categories/all`,{
-            // headers: {'Access-Control-Allow-Origin': "*"},
-            //  mode: 'cors',
+            headers: {'Access-Control-Allow-Origin': "*"},
+             mode: 'cors',
           }).then(response => {
           if(response.data){
               commit('set_categories', response.data.categories);

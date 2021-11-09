@@ -16,8 +16,8 @@ export const actions = {
         // let the_url = `${BASE_URL}/api/company/get/public/${username}`;
         // await axios.get(the_url,{
         axios.get(`${FINAL_URL}/resources/company/get/public/${username}`,{
-            // headers: {'Access-Control-Allow-Origin': "*"},
-            //  mode: 'cors',
+            headers: {'Access-Control-Allow-Origin': "*"},
+             mode: 'cors',
           }).then(async response => {
             if(response.data.company){
                 await commit('set_company', response.data.company);

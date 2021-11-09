@@ -17,8 +17,8 @@ export const actions = {
 
         // await axios.get(`${BASE_URL}/api/judete/get/all`,{
         await axios.get(`${FINAL_URL}/resources/judete/all`,{
-            // headers: {'Access-Control-Allow-Origin': "*"},
-            //  mode: 'cors',
+            headers: {'Access-Control-Allow-Origin': "*"},
+             mode: 'cors',
           }).then(response => {
           if(response.data){
               commit('set_judete', response.data.judete);

@@ -12,7 +12,10 @@ app.get('/categories/all', function (req, res) {
     needle('get', base_url + `/api/categories/get/all`, {
       rejectUnauthorized: false,
       json: true,
-      headers: {'X-API-KEY': API_LOCAL}
+      headers: {
+        'X-API-KEY': API_LOCAL,
+        'Access-Control-Allow-Origin': '*'
+      }
     })
     .then(function(resp) {
       // console.log(resp.body);
@@ -30,7 +33,10 @@ app.get('/categories/all', function (req, res) {
     needle('get', base_url + `/api/categories/get/single/${req.params.category_slug}`, {
       rejectUnauthorized: false,
       json: true,
-      headers: {'X-API-KEY': API_LOCAL}
+      headers: {
+        'X-API-KEY': API_LOCAL,
+        'Access-Control-Allow-Origin': '*'
+      }
     })
     .then(function(resp) {
       res.send(resp.body);
@@ -47,7 +53,10 @@ app.get('/categories/all', function (req, res) {
     needle('get', base_url + `/api/companies/category/get/${req.params.category_slug}/${req.params.page}`, {
       rejectUnauthorized: false,
       json: true,
-      headers: {'X-API-KEY': API_LOCAL}
+      headers: {
+        'X-API-KEY': API_LOCAL,
+        'Access-Control-Allow-Origin': '*'
+      }
     })
     .then(function(resp) {
       res.send(resp.body);
@@ -62,7 +71,10 @@ app.get('/categories/all', function (req, res) {
     needle('get', base_url + `/api/companies/get/top`, {
       rejectUnauthorized: false,
       json: true,
-      headers: {'X-API-KEY': API_LOCAL}
+      headers: {
+        'X-API-KEY': API_LOCAL,
+        'Access-Control-Allow-Origin': '*'
+      }
     })
     .then(function(resp) {
       // console.log(resp.body);
@@ -79,7 +91,10 @@ app.get('/categories/all', function (req, res) {
     needle('get', base_url + `/api/companies/search/${req.params.category_slug}/${req.params.location_slug}/${req.params.page}`, {
       rejectUnauthorized: false,
       json: true,
-      headers: {'X-API-KEY': API_LOCAL}
+      headers: {
+        'X-API-KEY': API_LOCAL,
+        'Access-Control-Allow-Origin': '*'
+      }
     })
     .then(function(resp) {
       // console.log(resp.body);
@@ -95,7 +110,10 @@ app.get('/categories/all', function (req, res) {
     needle('get', base_url + `/api/companies/search/verified/${req.params.category_slug}/${req.params.location_slug}/${req.params.page}`, {
       rejectUnauthorized: false,
       json: true,
-      headers: {'X-API-KEY': API_LOCAL}
+      headers: {
+        'X-API-KEY': API_LOCAL,
+        'Access-Control-Allow-Origin': '*'
+      }
     })
     .then(function(resp) {
       // console.log(resp.body);
@@ -114,7 +132,10 @@ app.get('/categories/all', function (req, res) {
     needle('get', base_url + `/api/companies/location/category/get/${req.params.category_slug}/${req.params.location_slug}/${req.params.page}`, {
       rejectUnauthorized: false,
       json: true,
-      headers: {'X-API-KEY': API_LOCAL}
+      headers: {
+        'X-API-KEY': API_LOCAL,
+        'Access-Control-Allow-Origin': '*'
+      }
     })
     .then(function(resp) {
       res.send(resp.body);
@@ -130,7 +151,10 @@ app.get('/categories/all', function (req, res) {
     needle('get', base_url + `/api/companies/verified/location/category/get/${req.params.category_slug}/${req.params.location_slug}/${req.params.page}`, {
       rejectUnauthorized: false,
       json: true,
-      headers: {'X-API-KEY': API_LOCAL}
+      headers: {
+        'X-API-KEY': API_LOCAL,
+        'Access-Control-Allow-Origin': '*'
+      }
     })
     .then(function(resp) {
       res.send(resp.body);
@@ -147,7 +171,10 @@ app.get('/categories/all', function (req, res) {
     needle('get', base_url + `/api/company/get/public/${req.params.username}`, {
       rejectUnauthorized: false,
       json: true,
-      headers: {'X-API-KEY': API_LOCAL}
+      headers: {
+        'X-API-KEY': API_LOCAL,
+        'Access-Control-Allow-Origin': '*'
+      }
     })
     .then(function(resp) {
       // console.log(resp.body);
@@ -168,7 +195,10 @@ app.get('/categories/all', function (req, res) {
     needle('get', base_url + `/api/company/get/public/${req.params.user_id}`, {
       rejectUnauthorized: false,
       json: true,
-      headers: {'X-API-KEY': API_LOCAL}
+      headers: {
+        'X-API-KEY': API_LOCAL,
+        'Access-Control-Allow-Origin': '*'
+      }
     })
     .then(function(resp) {
       // console.log(resp.body);
@@ -185,7 +215,10 @@ app.get('/company_reviews/get/all/public', function (req, res) {
   needle('get', base_url + `/api/company_reviews/get/all/public`, {
     rejectUnauthorized: false,
     json: true,
-    headers: {'X-API-KEY': API_LOCAL}
+    headers: {
+      'X-API-KEY': API_LOCAL,
+      'Access-Control-Allow-Origin': '*'
+    }
   })
   .then(function(resp) {
     // console.log(resp.body);
@@ -202,7 +235,10 @@ app.get('/work-project/get/photos/:project_id', function (req, res) {
   needle('get', base_url + `/api/work-project/get/photos/${req.params.project_id}`, {
     rejectUnauthorized: false,
     json: true,
-    headers: {'X-API-KEY': API_LOCAL}
+    headers: {
+      'X-API-KEY': API_LOCAL,
+      'Access-Control-Allow-Origin': '*'
+    }
   })
   .then(function(resp) {
     // console.log(resp.body);
@@ -219,7 +255,10 @@ app.get('/work-project/get/photos/:project_id', function (req, res) {
     needle('get', base_url + `/api/judete/get/all`, {
       rejectUnauthorized: false,
       json: true,
-      headers: {'X-API-KEY': API_LOCAL}
+      headers: {
+        'X-API-KEY': API_LOCAL,
+        'Access-Control-Allow-Origin': '*'
+      }
     })
     .then(function(resp) {
       // console.log(resp.body);
@@ -238,7 +277,9 @@ app.get('/work-project/get/photos/:project_id', function (req, res) {
       needle('get', base_url + `/api/locations/get/single/${req.params.location_slug}`, {
         rejectUnauthorized: false,
         json: true,
-        headers: {'X-API-KEY': API_LOCAL}
+        headers: {
+          'X-API-KEY': API_LOCAL,
+          'Access-Control-Allow-Origin': '*'       }
       })
       .then(function(resp) {
         res.send(resp.body);

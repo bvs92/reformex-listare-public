@@ -12,9 +12,12 @@ export const actions = {
             rejectUnauthorized: false,
           });
 
-        await axios.get(`${BASE_URL}/api/company_questions/public/get/${user_id}`, {
-            headers: {'Access-Control-Allow-Origin': "*"},
-             mode: 'cors',
+          let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.BASE_URL
+
+          axios.get(`${FINAL_URL}/resources/company_questions/public/get/${user_id}`,{
+        // await axios.get(`${BASE_URL}/api/company_questions/public/get/${user_id}`, {
+            // headers: {'Access-Control-Allow-Origin': "*"},
+            //  mode: 'cors',
           })
             .then(async response => {
             if(response.data){
