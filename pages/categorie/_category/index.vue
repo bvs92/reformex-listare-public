@@ -214,10 +214,12 @@ export default {
                 let final_url = `${FINAL_URL}/resources/companies/category/get/${category_slug}/${page}`;
                 
                 // requests to server
-                const [result] = await Promise.all([ 
-                    $http.$get(final_url, config),
+                // const [result] = await Promise.all([ 
+                //     $http.$get(final_url, config),
                     // $http.$get(final_url_category, config),
-                ])
+                // ])
+
+                const result = await $http.$get(final_url, config);
 
                 // console.log(result)
 
