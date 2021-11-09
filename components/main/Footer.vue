@@ -77,17 +77,17 @@
                     </a>
                   </li>
                   <li>
-                    <a href='#'>
+                    <a href='https://www.reformex.ro/politica-de-confidentialitate/'>
                       <i class='flaticon-left-chevron'></i> Politica de confidențialitate
                     </a>
                   </li>
                   <li>
-                    <a href='#'>
+                    <a href='https://www.reformex.ro/politica-privind-cookie-urile/'>
                       <i class='flaticon-left-chevron'></i> Politică cookies
                     </a>
                   </li>
                   <li>
-                    <a href='#'>
+                    <a href='https://www.reformex.ro/termene-si-conditii/'>
                       <i class='flaticon-left-chevron'></i> Termene și condiții
                     </a>
                   </li>
