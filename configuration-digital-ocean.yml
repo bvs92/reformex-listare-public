@@ -1,43 +1,50 @@
 alerts:
-  - rule: DEPLOYMENT_FAILED
-  - rule: DOMAIN_FAILED
+- rule: DEPLOYMENT_FAILED
+- rule: DOMAIN_FAILED
+domains:
+- domain: firme.reformex.ro
+  type: PRIMARY
+  zone: reformex.ro
+- domain: firme.reformex.ro
+  type: ALIAS
+  zone: reformex.ro
 envs:
-  - key: API_LOCAL
-    scope: RUN_AND_BUILD_TIME
-    value: 212d38d8-ff88-42bb-a1ed-b46a3fc69623
-  - key: PROD_BASE_URL
-    scope: RUN_AND_BUILD_TIME
-    value: https://reformex-listare-795ti.ondigitalocean.app/
+- key: API_LOCAL
+  scope: RUN_AND_BUILD_TIME
+  value: 37e959ac-ea03-495e-96d1-b7adc15434bb
+- key: PROD_BASE_URL
+  scope: RUN_AND_BUILD_TIME
+  value: https://firme.reformex.ro
 name: reformex-listare
 region: fra
 services:
-  - build_command: npm run build
-    environment_slug: node-js
-    envs:
-      - key: NODE_ENV
-        scope: RUN_AND_BUILD_TIME
-        value: production
-      - key: HOST
-        scope: RUN_AND_BUILD_TIME
-        value: 0.0.0.0
-      - key: PROD_BASE_URL
-        scope: RUN_AND_BUILD_TIME
-        value: https://reformex-listare-795ti.ondigitalocean.app/
-      - key: API_LOCAL
-        scope: RUN_AND_BUILD_TIME
-        value: 212d38d8-ff88-42bb-a1ed-b46a3fc69623
-      - key: NPM_CONFIG_PRODUCTION
-        scope: RUN_AND_BUILD_TIME
-        value: "false"
-    github:
-      branch: main
-      deploy_on_push: true
-      repo: bvs92/reformex-listare
-    http_port: 8080
-    instance_count: 1
-    instance_size_slug: basic-xxs
-    name: reformex-listare
-    routes:
-      - path: /
-    run_command: npm start
-    source_dir: /
+- build_command: npm run build
+  environment_slug: node-js
+  envs:
+  - key: NODE_ENV
+    scope: RUN_AND_BUILD_TIME
+    value: production
+  - key: HOST
+    scope: RUN_AND_BUILD_TIME
+    value: 0.0.0.0
+  - key: PROD_BASE_URL
+    scope: RUN_AND_BUILD_TIME
+    value: https://firme.reformex.ro
+  - key: API_LOCAL
+    scope: RUN_AND_BUILD_TIME
+    value: 37e959ac-ea03-495e-96d1-b7adc15434bb
+  - key: NPM_CONFIG_PRODUCTION
+    scope: RUN_AND_BUILD_TIME
+    value: "false"
+  github:
+    branch: main
+    deploy_on_push: true
+    repo: bvs92/reformex-listare
+  http_port: 8080
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  name: reformex-listare
+  routes:
+  - path: /
+  run_command: npm start
+  source_dir: /

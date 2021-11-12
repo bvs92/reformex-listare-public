@@ -177,7 +177,8 @@ app.get('/categories/all', function (req, res) {
       }
     })
     .then(function(resp) {
-      // console.log(resp.body);
+      // console.log(base_url);
+      // console.log(req);
       res.send(resp.body);
     })
     .catch(function(err) {
