@@ -3,7 +3,7 @@ const needle = require('needle')
 
 const API_LOCAL = process.env.API_LOCAL
 
-const base_url = 'https://reformexapp.eu'
+const base_url = 'https://beta.reformex.ro'
 // const base_url = 'http://127.0.0.1:8000'
 
 app.get('/categories/all', function (req, res) {
