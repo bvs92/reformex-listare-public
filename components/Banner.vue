@@ -54,7 +54,7 @@
                   </div>
                 </form>
 
-                <div class="my-5">
+                <!-- <div class="my-5">
                   <span class="d-block my-2 popular-terms">Căutări populare:</span>
                   <div class="justify-content-between">
                     <NuxtLink :to="{name: 'categorie-category-oras', params: {category: 'amenajare', oras: 'bucuresti'}}" class="search-term my-2">
@@ -67,7 +67,7 @@
                         <i class="fa fa-search" aria-hidden="true"></i> Firme de construcții în București
                     </NuxtLink>
                   </div>
-                </div>
+                </div> -->
                 <!-- <ul class='popular-search-list'>
                   <li>Căutări populare:</li>
                   <li>
