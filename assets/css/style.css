@@ -8052,7 +8052,7 @@ Events Area CSS
   display: none;
 }
 
-.single-events-box .image.bg-1 {
+/* .single-events-box .image.bg-1 {
   background-image: url(../images/events/events1.jpg);
 }
 
@@ -8074,7 +8074,7 @@ Events Area CSS
 
 .single-events-box .image.bg-6 {
   background-image: url(../images/events/events6.jpg);
-}
+} */
 
 .single-events-box .image .link-btn {
   position: absolute;

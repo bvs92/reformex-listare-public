@@ -8,7 +8,7 @@
                     <div class='col-lg-4 col-md-4 p-0'>
                         <div class='user'>
                         <div class='d-flex'>
-                            <img src='~assets/images/user3.jpg' alt='image' />
+                            <img src='~assets/images/user3.png' alt='image' />
                             <div class='title'>
                             <h4>James Andy</h4>
                             <span>New York, USA</span>
@@ -64,7 +64,7 @@
                     <div class='col-lg-4 col-md-4 p-0'>
                         <div class='user'>
                         <div class='d-flex'>
-                            <img src='~assets/images/user3.jpg' alt='image' />
+                            <img src='~assets/images/user3.png' alt='image' />
                             <div class='title'>
                             <h4>Sarah Taylor</h4>
                             <span>New York, USA</span>
@@ -120,7 +120,7 @@
                     <div class='col-lg-4 col-md-4 p-0'>
                         <div class='user'>
                         <div class='d-flex'>
-                            <img src='~assets/images/user3.jpg' alt='image' />
+                            <img src='~assets/images/user3.png' alt='image' />
                             <div class='title'>
                             <h4>Jason Smith</h4>
                             <span>New York, USA</span>
