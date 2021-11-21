@@ -1,7 +1,7 @@
 <template>
 <div>
 
-  <img v-if="item.photo_exists" :src="'http://127.0.0.1:8000/storage/banners/' + item.image" @click.prevent="openModal" class="pointer fit-image" />
+  <img v-if="item.photo_exists" :src="BASE_URL + '/storage/banners/' + item.image" @click.prevent="openModal" class="pointer fit-image" />
   <img v-else :src="require('@/assets/images/default-banner.jpg')" class="pointer fit-image" />
 
 
@@ -41,6 +41,7 @@ export default {
     data(){
         return {
             modalShow: false,
+            BASE_URL: null
         }
     },
 
@@ -52,6 +53,7 @@ export default {
     },
 
     created(){
+        this.BASE_URL = process.env.NODE_ENV == 'production' ? process.env.PROD_URL : process.env.BASE_URL;
     }
 }
 </script>

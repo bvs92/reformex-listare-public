@@ -60,7 +60,7 @@ export default {
       }
     },
 
-    props: ["full"],
+    props: ["full", "category"],
 
     data(){
         return {
@@ -123,9 +123,11 @@ export default {
     },
 
     async mounted(){
-        console.log('categorie', this.$route.params.category);
+        // console.log('categorie', this.$route.params.category);
         await this.initClientOnlyComp();
-        await this.$store.dispatch('banners/initBannersByCategory', this.$route.params.category);
+        if(this.category){
+            await this.$store.dispatch('banners/initBannersByCategory', this.category);
+        }
     }
 
 }

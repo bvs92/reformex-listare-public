@@ -66,7 +66,7 @@
                 </div>
                 <div class='col-lg-4 col-md-12'>
                     <FiltersSidebar :empty="result.empty" /> 
-                    <BannerSidebar :full="false" />
+                    <BannerSidebar :full="false" :category="this.$route.params.category" />
                 </div>
                 
             </div>

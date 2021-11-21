@@ -125,6 +125,7 @@ export default {
             await this.$store.commit('search_companies/set_loading_page_change', false);
 
 
+            await this.$store.dispatch('banners/initBannersByCategory', this.category_name);
 
             // await this.$store.commit('search_companies/set_current_page');
             

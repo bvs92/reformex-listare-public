@@ -125,6 +125,10 @@ export default {
         loading_page_change() {
             return this.$store.state.search_companies.loading_page_change;
         },
+
+        current_category() {
+            return this.$store.state.search_companies.current_slug;
+        },
         
 
         total_pages() {
