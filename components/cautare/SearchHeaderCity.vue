@@ -7,12 +7,12 @@
         <div class='row m-0 align-items-center'>
             
             <div class='col-lg-5 col-md-6 p-0'>
-                <div class='form-group category-select pagebanner-select-custom'>
+                <div class='form-group category-select pageheader-select-custom'>
                     <label class="category-icon">
                         <i class='flaticon-pin'></i>
                     </label>
 
-                    <select class="banner-form-select-pagebanner" v-if="judete && judete.length > 0" v-model="location" @change="getLocation($event)">
+                    <select class="header-form-select-pageheader" v-if="judete && judete.length > 0" v-model="location" @change="getLocation($event)">
                         <option value="all">Toate</option>
                         <option v-for="judet in judete" :key="judet.uuid" :value="judet.code">{{ judet.name }}</option>
                     </select>
@@ -20,12 +20,12 @@
             </div>
 
             <div class='col-lg-5 col-md-6 p-0'>
-                <div class='form-group category-select pagebanner-select-custom'>
+                <div class='form-group category-select pageheader-select-custom'>
                     <label class="category-icon">
                     <i class='flaticon-category'></i>
                     </label>
 
-                    <select class="banner-form-select-pagebanner" v-if="categories && categories.length > 0" v-model="category" @change="getCategory($event)">
+                    <select class="header-form-select-pageheader" v-if="categories && categories.length > 0" v-model="category" @change="getCategory($event)">
                         <option value="all">Toate categoriile</option>
                         <option v-for="category in categories" :key="category.uuid" :value="category.uuid">{{ category.name }}</option>
                     </select>

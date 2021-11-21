@@ -1,9 +1,9 @@
 <template>
-    <section class='banner-area'>
+    <section class='header-area'>
         <div class='container-fluid'>
           <div class='row'>
             <div class='col-lg-7 col-md-12 col-sm-12'>
-              <div class='banner-content' style="max-width:1240px!important;">
+              <div class='header-content' style="max-width:1240px!important;">
                     <span class='find-quick'>Găsește simplu și rapid</span>
                     <TextHeadSlider />
                 <p>Caută în funcție de zona geografică și categorie.</p>
@@ -27,7 +27,7 @@
                         <label class='category-icon'>
                           <i class='flaticon-pin'></i>
                         </label>
-                        <select class="banner-form-select-two" v-if="judete && judete.length > 0" v-model="location" @change="getLocation($event)">
+                        <select class="header-form-select-two" v-if="judete && judete.length > 0" v-model="location" @change="getLocation($event)">
                           <option value="all">Toate</option>
                           <option v-for="judet in judete" :key="judet.uuid" :value="judet.code">{{ judet.name }}</option>
                         </select>
@@ -39,7 +39,7 @@
                         <label class='category-icon'>
                           <i class='flaticon-category'></i>
                         </label>
-                        <select class="banner-form-select-two" v-if="categories && categories.length > 0" v-model="category" @change="getCategory($event)">
+                        <select class="header-form-select-two" v-if="categories && categories.length > 0" v-model="category" @change="getCategory($event)">
                           <option value="all">Toate categoriile</option>
                           <option v-for="category in categories" :key="category.uuid" :value="category.uuid">{{ category.name }}</option>
                         </select>
@@ -89,8 +89,8 @@
               </div>
             </div>
 
-            <div class='col-lg-5 col-md-12' id="banner-image-home-page">
-              <div class='banner-image'>
+            <div class='col-lg-5 col-md-12' id="header-image-home-page">
+              <div class='header-image'>
                 <img src='~assets/images/banner-img1.png' alt='cauta o firma pentru proiectul tau' />
               </div>
             </div>

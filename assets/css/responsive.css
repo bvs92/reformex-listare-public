@@ -24,7 +24,7 @@
 
 @media only screen and (max-width: 767px) {
   .spinner-loading {
-    left: -9%!important;
+    left: -9% !important;
   }
 
   #mobile-menu {
@@ -41,12 +41,12 @@
     display: none !important;
   }
 
-  #banner-image-home-page {
+  #header-image-home-page {
     display: none;
   }
 
-  /* header banner homepage */
-  h1.banner-two-heading {
+  /* header header homepage */
+  h1.header-two-heading {
     display: block !important;
   }
   span.typewrite {
@@ -212,35 +212,35 @@
   .hamburger-two {
     color: #000 !important;
   }
-  .banner-content .banner-two-heading {
+  .header-content .header-two-heading {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
   }
-  .banner-three-heading {
+  .header-three-heading {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
   }
-  .pagebanner-select-custom {
+  .pageheader-select-custom {
     border: 1px solid #eee !important;
     padding: 14px;
     text-align: left;
   }
-  .banner-form-select-pagebanner {
+  .header-form-select-pageheader {
     margin-left: 14px;
     width: 97%;
   }
-  .banner-content form .form-group.category-select {
+  .header-content form .form-group.category-select {
     padding: 15px;
     border: 1px solid #eee;
     text-align: left;
   }
-  .banner-form-select-two {
+  .header-form-select-two {
     margin-left: 20px;
     width: 89%;
   }
-  .banner-three-select-custom {
+  .header-three-select-custom {
     border: 1px solid #eee !important;
     padding: 16px;
     width: 100%;
@@ -307,44 +307,44 @@
   .form-group .category-icon {
     top: 14px !important;
   }
-  .main-banner-area {
+  .main-header-area {
     padding-top: 170px;
     padding-bottom: 100px;
   }
-  .banner-form-select {
+  .header-form-select {
     width: 100%;
   }
-  .main-banner-content {
+  .main-header-content {
     max-width: 100%;
   }
-  .main-banner-content h1 {
+  .main-header-content h1 {
     font-size: 26px;
     margin-bottom: 12px;
   }
-  .main-banner-content p {
+  .main-header-content p {
     line-height: 1.8;
     font-size: 14px;
   }
-  .main-banner-content form {
+  .main-header-content form {
     margin-top: 25px;
     border-radius: 0;
     padding: 15px;
   }
-  .main-banner-content form .form-group {
+  .main-header-content form .form-group {
     border-right: none;
     margin-left: 0;
     margin-bottom: 10px;
   }
-  .main-banner-content form .form-group label {
+  .main-header-content form .form-group label {
     left: 10px;
     top: 16px;
     font-size: 18px;
   }
-  .main-banner-content form .form-group label .flaticon-category {
+  .main-header-content form .form-group label .flaticon-category {
     position: relative;
     top: 1px;
   }
-  .main-banner-content form .form-group .form-control {
+  .main-header-content form .form-group .form-control {
     height: 50px;
     line-height: 50px;
     font-size: 13px;
@@ -352,7 +352,7 @@
     padding-left: 35px;
     padding-right: 10px;
   }
-  .main-banner-content form .form-group .nice-select {
+  .main-header-content form .form-group .nice-select {
     height: 50px;
     line-height: 50px;
     font-size: 13px;
@@ -360,63 +360,63 @@
     padding-left: 35px;
     padding-right: 10px;
   }
-  .main-banner-content form .form-group .nice-select:after {
+  .main-header-content form .form-group .nice-select:after {
     right: 15px;
   }
-  .main-banner-content form .form-group.category-select {
+  .main-header-content form .form-group.category-select {
     padding: 15px 31px;
     border: 1px solid #eee;
     text-align: left;
   }
-  .main-banner-content form .submit-btn button {
+  .main-header-content form .submit-btn button {
     margin-top: 5px;
   }
-  .main-banner-content .popular-search-list {
+  .main-header-content .popular-search-list {
     text-align: center;
     padding-left: 0;
     margin-top: 15px;
   }
-  .main-banner-content .popular-search-list li {
+  .main-header-content .popular-search-list li {
     margin-top: 10px;
   }
-  .banner-area {
+  .header-area {
     padding-top: 90px;
   }
-  .banner-content {
+  .header-content {
     max-width: 100%;
     padding-right: 0;
     text-align: center;
     margin-left: 0;
     margin-top: 0;
   }
-  .banner-content h1 {
+  .header-content h1 {
     font-size: 26px;
     margin-bottom: 12px;
   }
-  .banner-content p {
+  .header-content p {
     line-height: 1.8;
     font-size: 14px;
   }
-  .banner-content form {
+  .header-content form {
     margin-top: 20px;
     border-radius: 0;
     padding: 15px;
   }
-  .banner-content form .form-group {
+  .header-content form .form-group {
     border-right: none;
     margin-left: 0;
     margin-bottom: 10px;
   }
-  .banner-content form .form-group label {
+  .header-content form .form-group label {
     left: 10px;
     top: 16px;
     font-size: 18px;
   }
-  .banner-content form .form-group label .flaticon-category {
+  .header-content form .form-group label .flaticon-category {
     position: relative;
     top: 1px;
   }
-  .banner-content form .form-group .form-control {
+  .header-content form .form-group .form-control {
     height: 50px;
     line-height: 50px;
     font-size: 13px;
@@ -424,7 +424,7 @@
     padding-left: 35px;
     padding-right: 10px;
   }
-  .banner-content form .form-group .nice-select {
+  .header-content form .form-group .nice-select {
     height: 50px;
     line-height: 50px;
     font-size: 13px;
@@ -432,66 +432,66 @@
     padding-left: 35px;
     padding-right: 10px;
   }
-  .banner-content form .form-group .nice-select:after {
+  .header-content form .form-group .nice-select:after {
     right: 15px;
   }
-  .banner-content form .form-group.category-select {
+  .header-content form .form-group.category-select {
     padding-right: 0;
   }
-  .banner-content form .submit-btn button {
+  .header-content form .submit-btn button {
     margin-top: 5px;
   }
-  .banner-content .popular-search-list {
+  .header-content .popular-search-list {
     text-align: center;
     padding-left: 0;
     margin-top: 15px;
   }
-  .banner-content .popular-search-list li {
+  .header-content .popular-search-list li {
     margin-top: 10px;
   }
-  .banner-image {
+  .header-image {
     margin-left: 0;
     margin-top: 35px;
   }
-  .banner-wrapper-area {
+  .header-wrapper-area {
     padding-top: 100px;
     padding-bottom: 100px;
   }
-  .banner-wrapper-content {
+  .header-wrapper-content {
     text-align: center;
     max-width: 100%;
   }
-  .banner-wrapper-content h1 {
+  .header-wrapper-content h1 {
     font-size: 26px;
     margin-bottom: 12px;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
   }
-  .banner-wrapper-content p {
+  .header-wrapper-content p {
     line-height: 1.8;
     font-size: 14px;
   }
-  .banner-wrapper-content form {
+  .header-wrapper-content form {
     margin-top: 20px;
     border-radius: 0;
     padding: 15px;
   }
-  .banner-wrapper-content form .form-group {
+  .header-wrapper-content form .form-group {
     border-right: none;
     margin-left: 0;
     margin-bottom: 10px;
   }
-  .banner-wrapper-content form .form-group label {
+  .header-wrapper-content form .form-group label {
     left: 10px;
     top: 16px;
     font-size: 18px;
   }
-  .banner-wrapper-content form .form-group label .flaticon-category {
+  .header-wrapper-content form .form-group label .flaticon-category {
     position: relative;
     top: 1px;
   }
-  .banner-wrapper-content form .form-group .form-control {
+  .header-wrapper-content form .form-group .form-control {
     height: 50px;
     line-height: 50px;
     font-size: 13px;
@@ -499,7 +499,7 @@
     padding-left: 35px;
     padding-right: 10px;
   }
-  .banner-wrapper-content form .form-group .nice-select {
+  .header-wrapper-content form .form-group .nice-select {
     height: 50px;
     line-height: 50px;
     font-size: 13px;
@@ -507,36 +507,36 @@
     padding-left: 35px;
     padding-right: 10px;
   }
-  .banner-wrapper-content form .form-group .nice-select:after {
+  .header-wrapper-content form .form-group .nice-select:after {
     right: 15px;
   }
-  .banner-wrapper-content form .form-group.category-select {
+  .header-wrapper-content form .form-group.category-select {
     padding-right: 0;
   }
-  .banner-wrapper-content form .submit-btn button {
+  .header-wrapper-content form .submit-btn button {
     margin-top: 5px;
   }
-  .banner-wrapper-content .popular-search-list {
+  .header-wrapper-content .popular-search-list {
     text-align: center;
     padding-left: 0;
     margin-top: 15px;
   }
-  .banner-wrapper-content .popular-search-list li {
+  .header-wrapper-content .popular-search-list li {
     margin-top: 10px;
   }
-  .home-slider-area .banner-content {
+  .home-slider-area .header-content {
     max-width: 100%;
     padding: 20px 15px;
     margin-left: 15px;
     margin-right: 15px;
   }
-  .home-slider-area .banner-content h1 {
+  .home-slider-area .header-content h1 {
     font-size: 26px;
   }
-  .home-slider-area .banner-content p {
+  .home-slider-area .header-content p {
     font-size: 14px;
   }
-  .single-banner-item {
+  .single-header-item {
     height: 850px;
   }
   .map-home-area #main-full-map {
@@ -2737,14 +2737,14 @@
     display: none !important;
   }
 
-  #banner-image-home-page {
+  #header-image-home-page {
     display: none;
   }
 
   .container {
     max-width: 540px;
   }
-  .banner-area .container-fluid {
+  .header-area .container-fluid {
     max-width: 540px;
   }
   .single-category-box.more-categories .icon {
@@ -2762,7 +2762,7 @@
     padding-left: 30px;
     padding-right: 30px;
   }
-  .home-slider-area .banner-content {
+  .home-slider-area .header-content {
     max-width: 540px;
     padding: 25px;
     margin-left: auto;
@@ -2801,7 +2801,7 @@
     display: none !important;
   }
 
-  #banner-image-home-page {
+  #header-image-home-page {
     display: none !important;
   }
 
@@ -2987,40 +2987,40 @@
   .hamburger-two {
     color: #000 !important;
   }
-  .banner-content .banner-two-heading {
+  .header-content .header-two-heading {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
   }
-  .banner-three-heading {
+  .header-three-heading {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
   }
-  .pagebanner-select-custom {
+  .pageheader-select-custom {
     border: 1px solid #eee !important;
     padding: 16px;
   }
-  .main-banner-area {
+  .main-header-area {
     padding-top: 200px;
     padding-bottom: 130px;
   }
-  .banner-content form .form-group.category-select {
+  .header-content form .form-group.category-select {
     padding-right: 0;
     margin-left: 15px;
     border: 1px solid #eee;
     padding: 16px;
   }
-  .banner-content form .form-group.category-select {
+  .header-content form .form-group.category-select {
     padding: 15px;
     border: 1px solid #eee;
     text-align: left;
   }
-  .banner-form-select-two {
+  .header-form-select-two {
     margin-left: 20px;
     width: 89%;
   }
-  .banner-three-select-custom {
+  .header-three-select-custom {
     border: 1px solid #eee !important;
     padding: 16px;
     width: 95%;
@@ -3028,79 +3028,79 @@
   .form-group .category-icon {
     top: 16px !important;
   }
-  .banner-form-select {
+  .header-form-select {
     margin-left: -97px;
   }
-  .main-banner-content {
+  .main-header-content {
     max-width: 100%;
   }
-  .main-banner-content h1 {
+  .main-header-content h1 {
     font-size: 40px;
     margin-bottom: 18px;
   }
-  .main-banner-content p {
+  .main-header-content p {
     font-size: 16px;
   }
-  .main-banner-content form {
+  .main-header-content form {
     border-radius: 0;
     padding: 25px;
     margin-top: 30px;
   }
-  .main-banner-content form .form-group {
+  .main-header-content form .form-group {
     border-right: none;
     margin-left: 0;
     margin-bottom: 15px;
   }
-  .main-banner-content form .form-group label {
+  .main-header-content form .form-group label {
     left: 12px;
     top: 16px;
     font-size: 22px;
   }
-  .main-banner-content form .form-group .form-control {
+  .main-header-content form .form-group .form-control {
     border: 1px solid #eeeeee !important;
     height: 55px;
     line-height: 55px;
     padding-left: 40px;
     padding-right: 10px;
   }
-  .main-banner-content form .form-group .nice-select {
+  .main-header-content form .form-group .nice-select {
     border: 1px solid #eeeeee;
     height: 55px;
     line-height: 55px;
     padding-left: 40px;
     padding-right: 10px;
   }
-  .main-banner-content form .form-group .nice-select:after {
+  .main-header-content form .form-group .nice-select:after {
     right: 15px;
   }
-  .main-banner-content form .form-group.category-select {
+  .main-header-content form .form-group.category-select {
     margin-left: 15px;
     border: 1px solid #eee;
     padding: 17px;
     margin-left: 15px;
   }
-  .main-banner-content form .submit-btn button {
+  .main-header-content form .submit-btn button {
     display: inline-block;
     width: auto;
     padding: 11px 40px;
     margin-top: 5px;
   }
-  .main-banner-content .popular-search-list {
+  .main-header-content .popular-search-list {
     text-align: center;
     padding-left: 0;
     margin-top: 15px;
   }
-  .main-banner-content .popular-search-list li {
+  .main-header-content .popular-search-list li {
     margin-top: 10px;
     font-size: 15px;
   }
-  .banner-area {
+  .header-area {
     padding-top: 130px;
   }
-  .banner-area .container-fluid {
+  .header-area .container-fluid {
     max-width: 720px;
   }
-  .banner-content {
+  .header-content {
     max-width: 100%;
     text-align: center;
     padding-right: 0;
@@ -3108,142 +3108,142 @@
     margin-left: 0;
     margin-bottom: 35px;
   }
-  .banner-content h1 {
+  .header-content h1 {
     font-size: 40px;
     margin-bottom: 18px;
   }
-  .banner-content p {
+  .header-content p {
     font-size: 16px;
   }
-  .banner-content form {
+  .header-content form {
     border-radius: 0;
     padding: 25px;
     margin-top: 30px;
   }
-  .banner-content form .form-group {
+  .header-content form .form-group {
     border-right: none;
     margin-left: 0;
     margin-bottom: 15px;
   }
-  .banner-content form .form-group label {
+  .header-content form .form-group label {
     left: 12px;
     top: 16px;
     font-size: 22px;
   }
-  .banner-content form .form-group .form-control {
+  .header-content form .form-group .form-control {
     border: 1px solid #eeeeee !important;
     height: 55px;
     line-height: 55px;
     padding-left: 40px;
     padding-right: 10px;
   }
-  .banner-content form .form-group .nice-select {
+  .header-content form .form-group .nice-select {
     border: 1px solid #eeeeee;
     height: 55px;
     line-height: 55px;
     padding-left: 40px;
     padding-right: 10px;
   }
-  .banner-content form .form-group .nice-select:after {
+  .header-content form .form-group .nice-select:after {
     right: 15px;
   }
-  .banner-content form .form-group.category-select {
+  .header-content form .form-group.category-select {
     padding-right: 0;
     margin-left: 15px;
   }
-  .banner-content form .submit-btn button {
+  .header-content form .submit-btn button {
     display: inline-block;
     width: auto;
     padding: 13px 40px;
     margin-top: 5px;
   }
-  .banner-content .popular-search-list {
+  .header-content .popular-search-list {
     text-align: center;
     padding-left: 0;
     margin-top: 15px;
   }
-  .banner-content .popular-search-list li {
+  .header-content .popular-search-list li {
     margin-top: 10px;
     font-size: 15px;
   }
-  .banner-image {
+  .header-image {
     margin-left: 0;
     text-align: center;
   }
-  .banner-wrapper-area {
+  .header-wrapper-area {
     padding-top: 150px;
     padding-bottom: 150px;
   }
-  .banner-wrapper-content {
+  .header-wrapper-content {
     text-align: center;
     max-width: 100%;
   }
-  .banner-wrapper-content h1 {
+  .header-wrapper-content h1 {
     font-size: 40px;
     margin-bottom: 18px;
   }
-  .banner-wrapper-content p {
+  .header-wrapper-content p {
     font-size: 16px;
   }
-  .banner-wrapper-content form {
+  .header-wrapper-content form {
     border-radius: 0;
     padding: 25px;
     margin-top: 30px;
   }
-  .banner-wrapper-content form .form-group {
+  .header-wrapper-content form .form-group {
     border-right: none;
     margin-left: 0;
     margin-bottom: 15px;
   }
-  .banner-wrapper-content form .form-group label {
+  .header-wrapper-content form .form-group label {
     left: 12px;
     top: 16px;
     font-size: 22px;
   }
-  .banner-wrapper-content form .form-group .form-control {
+  .header-wrapper-content form .form-group .form-control {
     border: 1px solid #eeeeee !important;
     height: 55px;
     line-height: 55px;
     padding-left: 40px;
     padding-right: 10px;
   }
-  .banner-wrapper-content form .form-group .nice-select {
+  .header-wrapper-content form .form-group .nice-select {
     border: 1px solid #eeeeee;
     height: 55px;
     line-height: 55px;
     padding-left: 40px;
     padding-right: 10px;
   }
-  .banner-wrapper-content form .form-group .nice-select:after {
+  .header-wrapper-content form .form-group .nice-select:after {
     right: 15px;
   }
-  .banner-wrapper-content form .form-group.category-select {
+  .header-wrapper-content form .form-group.category-select {
     padding-right: 0;
     margin-left: 15px;
   }
-  .banner-wrapper-content form .submit-btn button {
+  .header-wrapper-content form .submit-btn button {
     display: inline-block;
     width: auto;
     padding: 13px 40px;
     margin-top: 5px;
   }
-  .banner-wrapper-content .popular-search-list {
+  .header-wrapper-content .popular-search-list {
     text-align: center;
     padding-left: 0;
     margin-top: 15px;
   }
-  .banner-wrapper-content .popular-search-list li {
+  .header-wrapper-content .popular-search-list li {
     margin-top: 10px;
     font-size: 15px;
   }
-  .home-slider-area .banner-content {
+  .home-slider-area .header-content {
     max-width: 690px;
     margin-bottom: 0;
   }
-  .home-slider-area .banner-content h1 {
+  .home-slider-area .header-content h1 {
     font-size: 35px;
   }
-  .home-slider-area .banner-content p {
+  .home-slider-area .header-content p {
     font-size: 15px;
   }
   .map-home-area form {
@@ -3786,11 +3786,11 @@
     display: none !important;
   }
 
-  /* homepage font banner changing text */
-  .banner-two-heading.font35 {
+  /* homepage font header changing text */
+  .header-two-heading.font35 {
     font-size: 23px !important;
   }
-  /* end homepage font banner changing text */
+  /* end homepage font header changing text */
 
   .container {
     max-width: 960px;
@@ -3927,12 +3927,12 @@
   .navbar-area .navbar .navbar-nav::-webkit-scrollbar-thumb:hover {
     background: #3f3e3e;
   }
-  .banner-content .banner-two-heading {
+  .header-content .header-two-heading {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
   }
-  .banner-three-heading {
+  .header-three-heading {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
@@ -3949,59 +3949,59 @@
   .listings-row .single-item {
     max-width: 100%;
   }
-  .main-banner-area {
+  .main-header-area {
     padding-top: 240px;
     padding-bottom: 180px;
   }
-  .main-banner-content {
+  .main-header-content {
     max-width: 100%;
   }
-  .banner-content .banner-two-heading {
+  .header-content .header-two-heading {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
   }
-  .banner-area {
+  .header-area {
     padding-top: 150px;
     background-position: left center;
   }
-  .banner-area .container-fluid {
+  .header-area .container-fluid {
     max-width: 960px;
   }
-  .banner-area .col-lg-8 {
+  .header-area .col-lg-8 {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 100%;
     flex: 0 0 100%;
     max-width: 100%;
   }
-  .banner-area .col-lg-4 {
+  .header-area .col-lg-4 {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 100%;
     flex: 0 0 100%;
     max-width: 100%;
   }
-  .banner-content {
+  .header-content {
     text-align: center;
     padding-right: 0;
     margin-top: 0;
     max-width: 100%;
   }
-  .banner-content .col-lg-4 {
+  .header-content .col-lg-4 {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 33.333333%;
     flex: 0 0 33.333333%;
     max-width: 33.333333%;
   }
-  .banner-image {
+  .header-image {
     text-align: center;
     margin-left: 0;
     margin-top: 40px;
   }
-  .banner-wrapper-area {
+  .header-wrapper-area {
     padding-top: 200px;
     padding-bottom: 200px;
   }
-  .home-slider-area .banner-content {
+  .home-slider-area .header-content {
     max-width: 930px;
   }
   .map-home-area form {
@@ -4328,7 +4328,7 @@
   .container {
     max-width: 1140px;
   }
-  .banner-content form .form-group.category-select {
+  .header-content form .form-group.category-select {
     text-align: right;
   }
   .miran-nav .container-fluid {
@@ -4366,42 +4366,42 @@
   .others-option-for-responsive .option-inner .others-option .option-item span {
     display: none;
   }
-  .main-banner-area {
+  .main-header-area {
     padding-top: 300px;
     padding-bottom: 200px;
   }
-  .banner-area {
+  .header-area {
     background-position: top center;
   }
-  .banner-area .container-fluid {
+  .header-area .container-fluid {
     max-width: 1140px;
   }
-  .banner-content {
+  .header-content {
     padding-right: 0;
     max-width: 100%;
     margin-top: -20px;
     margin-left: 0;
   }
-  .banner-content h1 {
+  .header-content h1 {
     font-size: 40px;
   }
-  .banner-content p {
+  .header-content p {
     font-size: 15px;
   }
-  .banner-content form {
+  .header-content form {
     margin-top: 25px;
   }
-  .banner-content form .submit-btn button {
+  .header-content form .submit-btn button {
     padding: 12px 10px;
   }
-  .banner-content .popular-search-list {
+  .header-content .popular-search-list {
     margin-top: 20px;
   }
-  .banner-image {
+  .header-image {
     margin-left: 0;
     text-align: center;
   }
-  .home-slider-area .banner-content {
+  .home-slider-area .header-content {
     max-width: 1110px;
   }
   .map-home-area form {
@@ -4509,11 +4509,11 @@
     padding-left: 100px;
     padding-right: 100px;
   }
-  .banner-content {
+  .header-content {
     max-width: 900px;
     padding-right: 75px;
   }
-  .banner-image {
+  .header-image {
     margin-left: -55px;
   }
 }

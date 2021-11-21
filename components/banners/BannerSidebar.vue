@@ -15,7 +15,7 @@
         :nextArrow='`<button class="slick-next" href="#"><i class="flaticon-left-chevron"></i></button>`'
         
         :pauseOnFocus="true"
-        class="pb-2 mx-auto slick-banner-sidebar"
+        class="pb-2 mx-auto slick-spons-sidebar"
         >
       
         <ImageSidebarBanner :item="item" v-for="(item, index) in banners" :key="index" />
@@ -138,7 +138,7 @@ export default {
 
 <style>
 
-.slick-banner-sidebar{
+.slick-spons-sidebar{
     max-width: 400px;
 }
 
