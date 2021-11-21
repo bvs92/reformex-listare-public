@@ -19,13 +19,13 @@
         >
       
         <ImageSidebarBanner :item="item" v-for="(item, index) in banners" :key="index" />
-        <img :src="require('@/assets/images/banner-sidebar.png')" class="pointer fit-image" v-if="banners.length < 10" />
+        <img :src="require('@/assets/images/default-banner.jpg')" class="pointer fit-image" v-if="banners.length < 10" />
     
         <!-- <img :src="'http://127.0.0.1:8000/storage/banners/' + item.image" v-for="(item, index) in banners" :key="index" :review="item" @click.prevent="openModal(index)" class="pointer" /> -->
         </VueSlickCarousel>
     </client-only>
 
-    <img :src="require('@/assets/images/banner-sidebar.png')" class="pointer fit-image" v-if="banners && banners.length < 1" />
+    <img :src="require('@/assets/images/default-banner.jpg')" class="pointer fit-image" v-if="banners && banners.length < 1" />
 
     <p class="promote"><a href="https://www.reformex.ro/bannerzon/"><i class="fa fa-bullhorn" aria-hidden="true"></i> Promovează-te și tu. Detalii aici.</a></p>
 
