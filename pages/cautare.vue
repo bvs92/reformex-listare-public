@@ -51,7 +51,7 @@
 
                 <div class='col-lg-4 col-md-12'>
                     <FiltersSidebar /> 
-                    <!-- <BannerSidebar :full="false" /> -->
+                    <BannerSidebar :full="false" />
                 </div>
 
             </div>
@@ -73,7 +73,7 @@ import NoResultsFound from "@/components/common/NoResultsFound.vue"
 import Pagination from "@/components/cautare/Pagination.vue"
 import LoadingElements from "@/components/common/LoadingElements.vue"
 import RegisterSmall from "@/components/common/RegisterSmall.vue"
-// import BannerSidebar from "@/components/common/BannerSidebar.vue"
+import BannerSidebar from "@/components/banners/BannerSidebar.vue"
 
 export default {
     head: {
@@ -94,8 +94,8 @@ export default {
         Pagination,
         LoadingElements,
         RegisterSmall,
-        NoResultsFound
-        // BannerSidebar
+        NoResultsFound,
+        BannerSidebar
     },
 
     data(){

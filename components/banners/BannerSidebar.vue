@@ -1,8 +1,8 @@
 <template>
 
-  <div class="pt-5" :class="{'listings-widget-area' : !full}" v-if="total_banners" ref="banner">
-      <p class="sponsored">Sponsorizat</p>
-    <client-only>
+  <div class="pt-5" :class="{'listings-widget-area' : !full}"  ref="banner">
+    <p class="sponsored">Sponsorizat</p>
+    <client-only v-if="bannersExists">
         <VueSlickCarousel :options="options" 
         :slidesToShow="getNumberOfSlides"
         :infinite="true"
@@ -17,18 +17,19 @@
         :pauseOnFocus="true"
         class="pb-2 mx-auto slick-banner-sidebar"
         >
-        <img :src="require('@/assets/images/banner-sidebar.png')" v-for="(item, index) in total_banners" :key="index" :review="item" @click.prevent="openModal(index)" class="pointer" />
+      
+        <ImageSidebarBanner :item="item" v-for="(item, index) in banners" :key="index" />
+        <img :src="require('@/assets/images/banner-sidebar.png')" class="pointer fit-image" v-if="banners.length < 10" />
+    
+        <!-- <img :src="'http://127.0.0.1:8000/storage/banners/' + item.image" v-for="(item, index) in banners" :key="index" :review="item" @click.prevent="openModal(index)" class="pointer" /> -->
         </VueSlickCarousel>
     </client-only>
+
+    <img :src="require('@/assets/images/banner-sidebar.png')" class="pointer fit-image" v-if="banners && banners.length < 1" />
+
     <p class="promote"><a href=""><i class="fa fa-bullhorn" aria-hidden="true"></i> Promovează-te și tu. Detalii aici.</a></p>
 
-    <b-modal v-model="modalShow" 
-    class="modal-dialog" id="companyDetailsModal" 
-    hide-footer lazy size="lg" 
-    :title="selected != null ? `Detalii ${selected}` : 'Detalii companie'"
-    >
-        Hello From Modal!
-    </b-modal>
+    
   </div>
 
 </template>
@@ -36,15 +37,26 @@
 <script>
 import VueSlickCarousel from 'vue-slick-carousel';
 
+import ImageSidebarBanner from './ImageSidebarBanner.vue';
+
 export default {
     name: "BannerSidebar",
     components: {
-        VueSlickCarousel
+        VueSlickCarousel,
+        ImageSidebarBanner
     },
 
     computed: {
         getNumberOfSlides: function(){
           return 1;
+      },
+
+      banners: function(){
+          return this.$store.state.banners.banners;
+      },
+
+      bannersExists: function(){
+          return this.banners && this.banners.length > 0;
       }
     },
 
@@ -55,7 +67,7 @@ export default {
             selected: null,
             display: false,
             numberOfSlides: 1,
-            modalShow: false,
+            
             total_banners: null,
 
             options: {
@@ -89,10 +101,7 @@ export default {
     },
 
     methods: {
-        openModal: function(incoming){
-            this.modalShow = !this.modalShow;
-            this.selected = incoming;
-        },
+        
 
         initClientOnlyComp(count = 10) {
             this.$nextTick(() => {
@@ -106,13 +115,17 @@ export default {
     },
 
     created(){
-        setTimeout(() => {
-            this.total_banners = 3;
-        }, 2000);
+        // setTimeout(() => {
+        //     this.total_banners = 3;
+        // }, 2000);
+
+        // this.$store.dispatch('banners/initBannersByCategory', 'amenajare');
     },
 
-    mounted(){
-        this.initClientOnlyComp()
+    async mounted(){
+        console.log('categorie', this.$route.params.category);
+        await this.initClientOnlyComp();
+        await this.$store.dispatch('banners/initBannersByCategory', this.$route.params.category);
     }
 
 }
@@ -190,5 +203,10 @@ position: absolute;
 .bordered{
     border: 1px solid red;
     border-radius: 10px;
+}
+
+.fit-image {
+    width: 100%;height: 360px!important;max-height: 360px!important;
+    object-fit: cover;
 }
 </style>

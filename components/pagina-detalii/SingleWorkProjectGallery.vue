@@ -85,7 +85,7 @@ export default {
     // },
 
     async created(){
-        this.BASE = BASE_URL;
+        this.BASE = process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.BASE_URL;
 
         this.loading = true;
 

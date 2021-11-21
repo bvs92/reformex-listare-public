@@ -47,7 +47,7 @@ export const actions = {
             rejectUnauthorized: false,
           });
 
-          let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.BASE_URL
+          let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.LOCAL_BASE_URL
 
         //   let final_url = `${BASE_URL}/api/companies/search/${payload.category_slug}/${payload.location_slug}/${payload.page}`;
         let final_url = `${FINAL_URL}/resources/companies/search/${payload.category_slug}/${payload.location_slug}/${payload.page}`
@@ -102,7 +102,7 @@ export const actions = {
             rejectUnauthorized: false,
           });
 
-          let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.BASE_URL
+          let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.LOCAL_BASE_URL
 
         //   let final_url = `${BASE_URL}/api/companies/search/verified/${payload.category_slug}/${payload.location_slug}/${payload.page}`;
         let final_url = `${FINAL_URL}/resources/companies/search/verified/${payload.category_slug}/${payload.location_slug}/${payload.page}`

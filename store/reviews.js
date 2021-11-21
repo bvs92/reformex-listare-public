@@ -13,7 +13,7 @@ export const actions = {
           });
 
 
-          let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.BASE_URL
+          let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.LOCAL_BASE_URL
         //   let the_url = `${BASE_URL}/api/company_reviews/get/all/public`;
         let the_url = `${FINAL_URL}/resources/company_reviews/get/all/public`
 

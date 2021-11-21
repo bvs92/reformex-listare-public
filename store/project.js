@@ -12,7 +12,7 @@ export const actions = {
             rejectUnauthorized: false,
           });
 
-        let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.BASE_URL
+        let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.LOCAL_BASE_URL
 
         // let the_url = `${BASE_URL}/api/work-project/get/photos/${project_id}`;
         let the_url = `${FINAL_URL}/resources/work-project/get/photos/${project_id}`;

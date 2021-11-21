@@ -13,7 +13,7 @@ export const actions = {
             rejectUnauthorized: false,
           });
 
-        let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.BASE_URL
+        let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.LOCAL_BASE_URL;
 
         // await axios.get(`${BASE_URL}/api/judete/get/all`,{
         await axios.get(`${FINAL_URL}/resources/judete/all`,{

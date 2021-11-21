@@ -1,9 +1,9 @@
 const app = require('express')()
 const needle = require('needle')
 
-const API_LOCAL = process.env.API_LOCAL
+const API_KEY = process.env.NODE_ENV == 'development' ? process.env.API_LOCAL : process.env.API_KEY;
 
-const base_url = 'https://beta.reformex.ro'
+const base_url = process.env.NODE_ENV == 'development' ? process.env.BASE_URL : process.env.PROD_URL;
 // const base_url = 'http://127.0.0.1:8000'
 
 app.get('/categories/all', function (req, res) {
@@ -13,7 +13,7 @@ app.get('/categories/all', function (req, res) {
       rejectUnauthorized: false,
       json: true,
       headers: {
-        'X-API-KEY': API_LOCAL,
+        'X-API-KEY': API_KEY,
         'Access-Control-Allow-Origin': '*'
       }
     })
@@ -34,7 +34,7 @@ app.get('/categories/all', function (req, res) {
       rejectUnauthorized: false,
       json: true,
       headers: {
-        'X-API-KEY': API_LOCAL,
+        'X-API-KEY': API_KEY,
         'Access-Control-Allow-Origin': '*'
       }
     })
@@ -54,7 +54,7 @@ app.get('/categories/all', function (req, res) {
       rejectUnauthorized: false,
       json: true,
       headers: {
-        'X-API-KEY': API_LOCAL,
+        'X-API-KEY': API_KEY,
         'Access-Control-Allow-Origin': '*'
       }
     })
@@ -72,7 +72,7 @@ app.get('/categories/all', function (req, res) {
       rejectUnauthorized: false,
       json: true,
       headers: {
-        'X-API-KEY': API_LOCAL,
+        'X-API-KEY': API_KEY,
         'Access-Control-Allow-Origin': '*'
       }
     })
@@ -92,7 +92,7 @@ app.get('/categories/all', function (req, res) {
       rejectUnauthorized: false,
       json: true,
       headers: {
-        'X-API-KEY': API_LOCAL,
+        'X-API-KEY': API_KEY,
         'Access-Control-Allow-Origin': '*'
       }
     })
@@ -111,7 +111,7 @@ app.get('/categories/all', function (req, res) {
       rejectUnauthorized: false,
       json: true,
       headers: {
-        'X-API-KEY': API_LOCAL,
+        'X-API-KEY': API_KEY,
         'Access-Control-Allow-Origin': '*'
       }
     })
@@ -133,7 +133,7 @@ app.get('/categories/all', function (req, res) {
       rejectUnauthorized: false,
       json: true,
       headers: {
-        'X-API-KEY': API_LOCAL,
+        'X-API-KEY': API_KEY,
         'Access-Control-Allow-Origin': '*'
       }
     })
@@ -152,7 +152,7 @@ app.get('/categories/all', function (req, res) {
       rejectUnauthorized: false,
       json: true,
       headers: {
-        'X-API-KEY': API_LOCAL,
+        'X-API-KEY': API_KEY,
         'Access-Control-Allow-Origin': '*'
       }
     })
@@ -172,8 +172,8 @@ app.get('/categories/all', function (req, res) {
       rejectUnauthorized: false,
       json: true,
       headers: {
-        'X-API-KEY': API_LOCAL,
-        'Access-Control-Allow-Origin': '*'
+        'X-API-KEY': API_KEY,
+        'Access-Control-Allow-Origin': '*',
       }
     })
     .then(function(resp) {
@@ -197,7 +197,7 @@ app.get('/categories/all', function (req, res) {
       rejectUnauthorized: false,
       json: true,
       headers: {
-        'X-API-KEY': API_LOCAL,
+        'X-API-KEY': API_KEY,
         'Access-Control-Allow-Origin': '*'
       }
     })
@@ -217,7 +217,7 @@ app.get('/company_reviews/get/all/public', function (req, res) {
     rejectUnauthorized: false,
     json: true,
     headers: {
-      'X-API-KEY': API_LOCAL,
+      'X-API-KEY': API_KEY,
       'Access-Control-Allow-Origin': '*'
     }
   })
@@ -237,7 +237,7 @@ app.get('/work-project/get/photos/:project_id', function (req, res) {
     rejectUnauthorized: false,
     json: true,
     headers: {
-      'X-API-KEY': API_LOCAL,
+      'X-API-KEY': API_KEY,
       'Access-Control-Allow-Origin': '*'
     }
   })
@@ -257,7 +257,7 @@ app.get('/work-project/get/photos/:project_id', function (req, res) {
       rejectUnauthorized: false,
       json: true,
       headers: {
-        'X-API-KEY': API_LOCAL,
+        'X-API-KEY': API_KEY,
         'Access-Control-Allow-Origin': '*'
       }
     })
@@ -279,7 +279,7 @@ app.get('/work-project/get/photos/:project_id', function (req, res) {
         rejectUnauthorized: false,
         json: true,
         headers: {
-          'X-API-KEY': API_LOCAL,
+          'X-API-KEY': API_KEY,
           'Access-Control-Allow-Origin': '*'       }
       })
       .then(function(resp) {

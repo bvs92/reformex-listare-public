@@ -66,7 +66,7 @@
                 </div>
                 <div class='col-lg-4 col-md-12'>
                     <FiltersSidebar :empty="result.empty" /> 
-                    <!-- <BannerSidebar :full="false" /> -->
+                    <BannerSidebar :full="false" />
                 </div>
                 
             </div>
@@ -88,7 +88,7 @@ import Pagination from "@/components/categorie/PaginationCity.vue"
 import LoadingElements from "@/components/common/LoadingElements.vue"
 import RegisterSmall from "@/components/common/RegisterSmall.vue"
 import NoResultsFound from "@/components/common/NoResultsFound.vue"
-// import BannerSidebar from "@/components/common/BannerSidebar.vue"
+import BannerSidebar from "@/components/banners/BannerSidebar.vue"
 
 export default {
 
@@ -112,8 +112,8 @@ export default {
         Pagination,
         LoadingElements,
         RegisterSmall,
-        NoResultsFound
-        // BannerSidebar
+        NoResultsFound,
+        BannerSidebar
     },
 
     data(){
@@ -217,7 +217,7 @@ export default {
                 // let final_url = `${BASE_URL}/api/companies/location/category/get/${category_slug}/${location_slug}/${page}`;
 
                 // with middleware
-                let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.BASE_URL
+                let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.LOCAL_BASE_URL
                 let final_url_category = `${FINAL_URL}/resources/categories/single/${category_slug}`;
                 let final_url_location = `${FINAL_URL}/resources/locations/single/${location_slug}`;
                 let final_url = `${FINAL_URL}/resources/companies/location/category/get/${category_slug}/${location_slug}/${page}`;
