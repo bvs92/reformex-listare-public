@@ -1,6 +1,6 @@
 <template>
 <div>
-  <Banner keep-alive />
+  <Banner />
   <PopularCategories keep-alive />
   <TopHomeListings />
   <FeedbackZone keep-alive />
