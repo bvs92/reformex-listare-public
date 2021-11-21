@@ -236,7 +236,7 @@ export default {
                 rejectUnauthorized: false,
             });
 
-            let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_BASE_URL : process.env.BASE_URL
+            let FINAL_URL =  process.env.NODE_ENV == 'production' ? process.env.PROD_URL : process.env.BASE_URL
             let the_url = `${FINAL_URL}/api/banners/send/direct/message`;
             await axios.post(the_url, formData, {
                 headers: {'Access-Control-Allow-Origin': "*"},
