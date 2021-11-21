@@ -56,6 +56,7 @@ export default {
     '@/assets/css/style.css',
     '@/assets/css/responsive.css',
     '@/assets/css/fancybox.css',
+    // 'vue-slick-carousel/dist/vue-slick-carousel.css'
     // '@/assets/css/owl-carousel.css',
   ],
 
