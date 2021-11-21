@@ -27,7 +27,7 @@
 
     <img :src="require('@/assets/images/banner-sidebar.png')" class="pointer fit-image" v-if="banners && banners.length < 1" />
 
-    <p class="promote"><a href=""><i class="fa fa-bullhorn" aria-hidden="true"></i> Promovează-te și tu. Detalii aici.</a></p>
+    <p class="promote"><a href="https://www.reformex.ro/bannerzon/"><i class="fa fa-bullhorn" aria-hidden="true"></i> Promovează-te și tu. Detalii aici.</a></p>
 
     
   </div>

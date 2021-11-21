@@ -46,10 +46,10 @@
     </div>
 
     <div class="row mt-4 mb-2">
-        <div class="col-lg-6 d-flex justify-content-center" v-if="item.website">
+        <div class="col-lg-6 d-flex justify-content-center my-2" v-if="item.website">
             <button class="btn btn-info" @click.prevent="openWebsite(item.website)"><i class="fa fa-external-link" aria-hidden="true"></i> Accesează site</button>
         </div>
-        <div class="col-lg-6 d-flex justify-content-center" v-if="item.has_form">
+        <div class="col-lg-6 d-flex justify-content-center my-2" v-if="item.has_form">
             <button class="btn btn-secondary" @click.prevent="showForm"><i class="fa fa-envelope" aria-hidden="true"></i> Trimite mesaj</button>
         </div>
     </div>
