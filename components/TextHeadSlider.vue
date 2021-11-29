@@ -1,9 +1,8 @@
 <template>
 <div class="my-4">
   <h1 class="banner-two-heading font35" >
-        <span class='typewrite'>
-        Firme și profesioniști în
-        </span> 
+        <span class='typewrite mr-0'>
+        Firme și profesioniști în</span> 
         <vuejsTypist class="changing-text" :words="['arhitectură','amenajări','construcții','design interior','electricitate','instalații','renovări','zidărie','orice domeniu']" :human="true" :pause-interval="1000" />
     </h1>
 </div>

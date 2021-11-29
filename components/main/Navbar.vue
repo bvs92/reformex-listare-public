@@ -46,8 +46,8 @@
                   </li>
 
                   <li class='nav-item'>
-                    <a href='https://reformexapp.eu' class='nav-link'>
-                      Platformă șantiere
+                    <a href='https://beta.reformex.ro' class='nav-link'>
+                      Platformă proiecte
                     </a>
                   </li>
 
