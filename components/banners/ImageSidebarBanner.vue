@@ -1,7 +1,7 @@
 <template>
 <div>
 
-  <img v-if="item.photo_exists" :src="BASE_URL + '/storage/banners/' + item.image" @click.prevent="openModal" class="pointer fit-image" />
+  <img v-if="item.photo_exists" :src="'https://ams3.digitaloceanspaces.com/reformex.ro/uploads/banners/' + item.image" @click.prevent="openModal" class="pointer fit-image" />
   <img v-else :src="require('@/assets/images/default-banner.jpg')" class="pointer fit-image" />
 
 
