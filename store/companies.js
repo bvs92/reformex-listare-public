@@ -25,7 +25,7 @@ export const actions = {
           axios.get(`${FINAL_URL}/resources/companies/get/top`,{
         // axios.get(`${BASE_URL}/api/companies/get/top`,{
             headers: {'Access-Control-Allow-Origin': "*"},
-             mode: 'cors',
+             mode: 'no-cors',
           }).then(response => {
           if(response.data){
               commit('set_companies', response.data.users);

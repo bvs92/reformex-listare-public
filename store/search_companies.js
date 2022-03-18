@@ -60,17 +60,24 @@ export const actions = {
             // console.log('suntem aici', response.data);
 
             if(response.data.companies){
-                if(Array.isArray(response.data.companies)){
-                    await commit('set_search_companies', response.data.companies)
-                    // await commit('set_initial_search_companies', response.data.companies)
-                    await commit('set_total_pages', parseInt(response.data.total_pages));
-                    await commit('set_total_results', parseInt(response.data.total_results));
-                }else {
-                    // await commit('set_initial_search_companies', [response.data.companies[Object.keys(response.data.companies)[0]]])
-                    await commit('set_search_companies', [response.data.companies[Object.keys(response.data.companies)[0]]])
-                    await commit('set_total_pages', parseInt(response.data.total_pages));
-                    await commit('set_total_results', parseInt(response.data.total_results));
-                }
+                console.log('companiile sunt', response.data.companies);
+                console.log('verifica array', Array.isArray(response.data.companies));
+
+                await commit('set_search_companies', response.data.companies)
+                await commit('set_total_pages', parseInt(response.data.total_pages));
+                await commit('set_total_results', parseInt(response.data.total_results));
+
+
+                // if(Array.isArray(response.data.companies)){
+                //     await commit('set_search_companies', response.data.companies)
+                //     await commit('set_total_pages', parseInt(response.data.total_pages));
+                //     await commit('set_total_results', parseInt(response.data.total_results));
+                // }else {
+                //     // await commit('set_initial_search_companies', [response.data.companies[Object.keys(response.data.companies)[0]]])
+                //     await commit('set_search_companies', [response.data.companies[Object.keys(response.data.companies)[0]]])
+                //     await commit('set_total_pages', parseInt(response.data.total_pages));
+                //     await commit('set_total_results', parseInt(response.data.total_results));
+                // }
                
 
                 
@@ -115,17 +122,20 @@ export const actions = {
             // console.log('suntem aici', response.data);
 
             if(response.data.companies){
-                if(Array.isArray(response.data.companies)){
-                    await commit('set_search_companies', response.data.companies)
-                    // await commit('set_initial_search_companies', response.data.companies)
-                    await commit('set_total_pages', parseInt(response.data.total_pages));
-                    await commit('set_total_results', parseInt(response.data.total_results));
-                }else {
-                    // await commit('set_initial_search_companies', [response.data.companies[Object.keys(response.data.companies)[0]]])
-                    await commit('set_search_companies', [response.data.companies[Object.keys(response.data.companies)[0]]])
-                    await commit('set_total_pages', parseInt(response.data.total_pages));
-                    await commit('set_total_results', parseInt(response.data.total_results));
-                }
+
+                await commit('set_search_companies', response.data.companies)
+                await commit('set_total_pages', parseInt(response.data.total_pages));
+                await commit('set_total_results', parseInt(response.data.total_results));
+
+                // if(Array.isArray(response.data.companies)){
+                //     await commit('set_search_companies', response.data.companies)
+                //     await commit('set_total_pages', parseInt(response.data.total_pages));
+                //     await commit('set_total_results', parseInt(response.data.total_results));
+                // }else {
+                //     await commit('set_search_companies', [response.data.companies[Object.keys(response.data.companies)[0]]])
+                //     await commit('set_total_pages', parseInt(response.data.total_pages));
+                //     await commit('set_total_results', parseInt(response.data.total_results));
+                // }
                
 
                 
