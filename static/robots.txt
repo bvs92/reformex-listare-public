@@ -1,5 +1,2 @@
 User-agent: * 
 Disallow: /detalii-firma/*
-
-UserAgent: Googlebot
-Disallow: /detalii-firma/*
