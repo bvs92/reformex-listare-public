@@ -5,7 +5,7 @@
         <client-only>
         <div class='listings-image'>
             <figure class="figure-stil" v-if="project.first_photo"
-            :style="{ backgroundImage: `url(${project.first_photo})`}"
+            :style="{ backgroundImage: `url(${projectPhoto})`}"
             >
             
             </figure>
@@ -54,7 +54,8 @@ export default {
     data(){
         return {
             categories: [],
-            modalShow: false
+            modalShow: false,
+            projectPhoto: null
         }
     },
     props: {
@@ -81,6 +82,8 @@ export default {
         } else {
              this.categories = this.project.categories;
         }
+
+        this.projectPhoto = "https://ams3.digitaloceanspaces.com/reformex.ro/uploads/" + this.project.first_photo;
     }
 }
 </script>

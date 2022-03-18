@@ -94,7 +94,7 @@ export default {
         if(this.photos && this.photos.length > 0){
             this.items = [];
             await this.photos.forEach(item => {
-                let final_image = this.BASE + '/storage/work_projects/' + item.name;
+                let final_image = 'https://ams3.digitaloceanspaces.com/reformex.ro/uploads/work_projects/' + item.name;
 
                 this.items.push(final_image);
             });

@@ -5,7 +5,7 @@
             <div class='listings-image' v-if="company.company">
                 
                     <template v-if="company.company.card">
-                        <img :src="BASE +'/storage/cards/' + company.company.card.image" :alt='company.company.name'  class="fit-image" v-if="statusImage == 1" />
+                        <img :src="'https://ams3.digitaloceanspaces.com/reformex.ro/uploads/cards/' + company.company.card.image" :alt='company.company.name'  class="fit-image" v-if="statusImage == 1" />
                         <img src="~assets/images/listings/reformex-cover-small-grey.jpg" :alt='company.company.name'  class="fit-image" v-else />
                     </template>
                     <template v-else>
@@ -16,7 +16,7 @@
             <div class='listings-content'>
                 <div class='author'>
                 <div class='d-flex align-items-center'>
-                    <img :src="BASE + '/' + company.profile_photo" :alt='company.company.name' v-if="company.has_profile_photo" />
+                    <img :src="'https://ams3.digitaloceanspaces.com/reformex.ro/uploads/cards/' + company.profile_photo" :alt='company.company.name' v-if="company.has_profile_photo" />
                     <img src='~assets/images/user3.png' :alt='company.company.name' v-else />
                     <span>{{ slice_owner_name(company.first_name + ' ' +  company.last_name)}}</span>
                 </div>

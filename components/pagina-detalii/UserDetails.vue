@@ -3,7 +3,7 @@
     <!-- <h3></h3> -->
     <div class='author'>
         <div class='d-flex align-items-center'>
-            <img :src="BASE + '/' + company.profile_photo" :alt='company.company.name' v-if="company.has_profile_photo" />
+            <img :src="company.profile_photo" :alt='company.company.name' v-if="company.has_profile_photo" />
             <img src='~assets/images/user3.png' :alt='company.company.name' v-else />
             <div class='title'>
             <h4>
