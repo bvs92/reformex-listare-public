@@ -37,7 +37,7 @@ export default {
         formatWebsite: function(website){
 
             if(website.includes('facebook.com') || website.includes('instagram.com') || website.includes('youtube.com') || website.includes('twitter.com')){
-                this.format_social_link(website);
+                return this.format_social_link(website);
             } else {
                 if(website.includes('https:://') || website.includes('http:://')){
                     return website;
