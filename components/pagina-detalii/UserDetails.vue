@@ -96,25 +96,29 @@ export default {
         format_social_link: function(network, profile){
             if(network == 'facebook'){
                 if(profile.includes('facebook.com')){
-                    return profile;
+                    let $splitted = profile.split('facebook.com/');
+                    return 'https://www.facebook.com/' + $splittted[1];
                 } else {
                     return 'https://www.facebook.com/' + profile;
                 }
             } else if(network == 'instagram'){
                 if(profile.includes('instagram.com')){
-                    return profile;
+                    let $splitted = profile.split('instagram.com/');
+                    return 'https://www.instagram.com/' + $splittted[1];
                 } else {
                     return 'https://www.instagram.com/' + profile;
                 }
             } else if(network == 'twitter'){
                 if(profile.includes('twitter.com')){
-                    return profile;
+                    let $splitted = profile.split('twitter.com/');
+                    return 'https://www.twitter.com/' + $splittted[1];
                 } else {
                     return 'https://www.twitter.com/' + profile;
                 }
             } else if(network == 'youtube'){
                 if(profile.includes('youtube.com')){
-                    return profile;
+                    let $splitted = profile.split('youtube.com/');
+                    return 'https://www.youtube.com/' + $splittted[1];
                 } else {
                     return 'https://www.youtube.com/' + profile;
                 }
