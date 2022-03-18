@@ -6,11 +6,11 @@
         <!-- :class="{'promoted' : slug == 'beton-expert'}" -->
     <div class='row m-0' :class="{'disabled' : loading_page_change}">
         <div class='col-lg-4 col-md-4 p-0'>
-        <div class='listings-image ' v-if="company.company">
+        <div class='listings-image ' v-if="company.user">
             <!-- <img src='~assets/images/listings/reformex-cover-small-grey.jpg' :alt='company.company.name' /> -->
 
-            <template v-if="company.company.card">
-                <img :src="'https://ams3.digitaloceanspaces.com/reformex.ro/uploads/cards/' + company.company.card.image" :alt='company.company.name'  class="fit-image" v-if="company.card_photo_exists == true" />
+            <template v-if="company.user.company.card">
+                <img :src="'https://ams3.digitaloceanspaces.com/reformex.ro/uploads/cards/' + company.user.company.card.image" :alt='company.company.name'  class="fit-image" v-if="company.card_photo_exists == true" />
                 <img src="~assets/images/listings/reformex-cover-small-grey.jpg" :alt='company.company.name'  class="fit-image" v-else />
             </template>
             <template v-else>
