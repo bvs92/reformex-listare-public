@@ -71,7 +71,7 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    '@nuxtjs/google-analytics'
+    // '@nuxtjs/google-analytics'
   ],
 
   serverMiddleware: [
@@ -109,9 +109,9 @@ export default {
     // vendor: ['vue-burger-menu'],
   },
 
-  googleAnalytics: {
-    id: 'UA-162186529-1'
-  }
+  // googleAnalytics: {
+  //   id: 'UA-162186529-1'
+  // }
 
 
 
