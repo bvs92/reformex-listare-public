@@ -165,9 +165,9 @@ export default {
         this.BASE = process.env.NODE_ENV == 'production' ? process.env.PROD_URL : process.env.BASE_URL;
         this.slug = this.company.user_name_profile ? this.company.user_name_profile.username : this.company.username;
         
-        if(this.company.company.card){
-            this.checkImage();
-        }
+        // if(this.company.company.card){
+        //     this.checkImage();
+        // }
 
 
 
