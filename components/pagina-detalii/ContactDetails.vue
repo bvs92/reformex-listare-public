@@ -47,6 +47,12 @@ export default {
                 } else if(website.includes('http//')) {
                     let final_url = website.split('http//');
                     return 'https://' + final_url[1];
+                } else if (website.includes('https://')){
+                    let final_url = website.split('https://');
+                    return 'https://' + final_url[1];
+                } else if(website.includes('http://')) {
+                    let final_url = website.split('http://');
+                    return 'https://' + final_url[1];
                 } else {
                     return 'https://' + website;
                 }
