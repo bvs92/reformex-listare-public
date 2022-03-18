@@ -39,7 +39,7 @@ export default {
             if(website.includes('facebook.com') || website.includes('instagram.com') || website.includes('youtube.com') || website.includes('twitter.com')){
                 return this.format_social_link(website);
             } else {
-                if(website.includes('https:://') || website.includes('http:://')){
+                if(website.includes('https://') || website.includes('http://')){
                     return website;
                 } else if (website.includes('https//')){
                     let final_url = website.split('https//');
@@ -47,11 +47,11 @@ export default {
                 } else if(website.includes('http//')) {
                     let final_url = website.split('http//');
                     return 'https://' + final_url[1];
-                } else if (website.includes('https://')){
-                    let final_url = website.split('https://');
+                } else if (website.includes('https:://')){
+                    let final_url = website.split('https:://');
                     return 'https://' + final_url[1];
-                } else if(website.includes('http://')) {
-                    let final_url = website.split('http://');
+                } else if(website.includes('http:://')) {
+                    let final_url = website.split('http:://');
                     return 'https://' + final_url[1];
                 } else {
                     return 'https://' + website;
