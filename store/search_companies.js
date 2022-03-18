@@ -57,7 +57,7 @@ export const actions = {
              mode: 'cors',
           }).then(async response => {
 
-            console.log('suntem aici', response.data);
+            // console.log('suntem aici', response.data);
 
             if(response.data.companies){
                 await commit('set_search_companies', response.data.companies)
