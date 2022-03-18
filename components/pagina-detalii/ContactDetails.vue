@@ -12,7 +12,7 @@
             </li>
             <li v-if="company.public_profile && company.public_profile.website">
                     <i class="fa fa-external-link" aria-hidden="true"></i>
-                    <a :href="'https://' + company.public_profile.website" rel="nofollow" target="_blank"> {{ company.public_profile.website }}
+                    <a :href="company.public_profile.website" rel="nofollow" target="_blank"> {{ company.public_profile.website }}
                 </a>
             </li>
         </ul>

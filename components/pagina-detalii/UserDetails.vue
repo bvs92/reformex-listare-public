@@ -36,16 +36,16 @@
                 <ul class='social d-flex justify-content-between'>
                     <li v-for="profile in company.social_profiles" :key="profile.id" >
                         <template v-if="profile.username != null">
-                            <a target="_blank" rel="nofollow" :href="'https://www.facebook.com/' + profile.username" v-if="profile.type == 'facebook_profile'">
+                            <a target="_blank" rel="nofollow" :href="format_social_link('facebook',profile.username)" v-if="profile.type == 'facebook_profile'">
                                 <i class="fa fa-facebook-square" aria-hidden="true"></i>
                             </a>
-                            <a target="_blank" rel="nofollow" :href="'https://www.instagram.com/' + profile.username" v-else-if="profile.type == 'instagram_profile'">
+                            <a target="_blank" rel="nofollow" :href="format_social_link('instagram',profile.username)" v-else-if="profile.type == 'instagram_profile'">
                                 <i class="fa fa-instagram" aria-hidden="true"></i>
                             </a>
-                            <a target="_blank" rel="nofollow" :href="'https://www.youtube.com/' + profile.username" v-else-if="profile.type == 'youtube_profile'">
+                            <a target="_blank" rel="nofollow" :href="format_social_link('youtube',profile.username)" v-else-if="profile.type == 'youtube_profile'">
                                 <i class="fa fa-youtube-play" aria-hidden="true"></i>
                             </a>
-                            <a target="_blank" rel="nofollow" :href="'https://www.twitter.com/' + profile.username" v-else-if="profile.type == 'twitter_profile'">
+                            <a target="_blank" rel="nofollow" :href="format_social_link('twitter',profile.username)" v-else-if="profile.type == 'twitter_profile'">
                                 <i class="fa fa-twitter-square" aria-hidden="true"></i>
                         </a>
                         </template>
@@ -91,6 +91,34 @@ export default {
             })
 
             return found[0].text;
+        },
+
+        format_social_link: function(network, profile){
+            if(network == 'facebook'){
+                if(profile.includes('facebook.com')){
+                    return profile;
+                } else {
+                    return 'https://www.facebook.com/' + profile;
+                }
+            } else if(network == 'instagram'){
+                if(profile.includes('instagram.com')){
+                    return profile;
+                } else {
+                    return 'https://www.instagram.com/' + profile;
+                }
+            } else if(network == 'twitter'){
+                if(profile.includes('twitter.com')){
+                    return profile;
+                } else {
+                    return 'https://www.twitter.com/' + profile;
+                }
+            } else if(network == 'youtube'){
+                if(profile.includes('youtube.com')){
+                    return profile;
+                } else {
+                    return 'https://www.youtube.com/' + profile;
+                }
+            }
         }
     },
 
