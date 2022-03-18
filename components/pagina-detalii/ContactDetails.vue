@@ -12,7 +12,7 @@
             </li>
             <li v-if="company.public_profile && company.public_profile.website">
                     <i class="fa fa-external-link" aria-hidden="true"></i>
-                    <a :href="company.public_profile.website" rel="nofollow" target="_blank"> {{ company.public_profile.website }}
+                    <a :href="company.public_profile.website" rel="nofollow" target="_blank"> {{ formatWebsite(company.public_profile.website) }}
                 </a>
             </li>
         </ul>
@@ -32,6 +32,14 @@ export default {
     methods: {
         showPhone: function(){
             this.isHidden = !this.isHidden;
+        },
+
+        formatWebsite: function(website){
+            if(website.includes('https:://') || website.includes('http://')){
+                return website;
+            } else {
+                return 'https://' + website;
+            }
         }
     },
 }
