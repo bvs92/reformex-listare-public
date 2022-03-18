@@ -16,7 +16,6 @@
     "bootstrap": "^4.6.0",
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.15.1",
-    "dotenv": "^16.0.0",
     "express": "^4.17.1",
     "https": "^1.0.0",
     "needle": "^3.0.0",
@@ -28,7 +27,6 @@
     "vuejs-typist": "^0.1.1"
   },
   "devDependencies": {
-    "@nuxtjs/google-analytics": "^2.4.0",
     "url-loader": "^4.1.1"
   }
 }
