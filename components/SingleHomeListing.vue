@@ -5,7 +5,7 @@
             <div class='listings-image' v-if="company.company">
                 
                     <template v-if="company.company.card">
-                        <img :src="'https://ams3.digitaloceanspaces.com/reformex.ro/uploads/cards/' + company.company.card.image" :alt='company.company.name'  class="fit-image" v-if="statusImage == 1" />
+                        <img :src="'https://ams3.digitaloceanspaces.com/reformex.ro/uploads/cards/' + company.company.card.image" :alt='company.company.name'  class="fit-image" v-if="company.card_photo_exists == true" />
                         <img src="~assets/images/listings/reformex-cover-small-grey.jpg" :alt='company.company.name'  class="fit-image" v-else />
                     </template>
                     <template v-else>
