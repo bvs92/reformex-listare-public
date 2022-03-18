@@ -8,7 +8,7 @@
         </p>
         <div class='client-info'>
         <div class='d-flex align-items-center'>
-            <img :src="BASE + '/' + review.user.profile_photo" :alt='review.user.first_name' v-if="review.user.has_profile_photo" />
+            <img :src="review.user.profile_photo" :alt='review.user.first_name' v-if="review.user.has_profile_photo" />
             <img src='~assets/images/user3.png' :alt='review.company_name' v-else />
             <div class='title'>
             <h3>{{ review.user.last_name.charAt(0) }}. {{ review.user.first_name }}</h3>

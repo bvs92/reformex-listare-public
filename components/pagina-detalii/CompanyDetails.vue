@@ -1,7 +1,7 @@
 <template>
     <div v-if="company.public_profile.description" class="pb-4">
         <h2 class="h">Detalii companie</h2>
-       <div v-html="company.public_profile.description" class="mb-5">
+       <div v-html="company.public_profile.description" class="mb-5 wrap-text">
 
        </div>
     </div>
@@ -18,5 +18,9 @@ export default {
 <style scoped>
 .h {
     font-size: 26px!important;
+}
+
+.wrap-text {
+    overflow-wrap: break-word;
 }
 </style>
