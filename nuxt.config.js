@@ -70,7 +70,9 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [],
+  buildModules: [
+    '@nuxtjs/google-analytics'
+  ],
 
   serverMiddleware: [
     { path: "/resources", handler: "~/server-middleware/rest.js" },
@@ -106,6 +108,10 @@ export default {
 
     // vendor: ['vue-burger-menu'],
   },
+
+  googleAnalytics: {
+    id: 'UA-162186529-1'
+  }
 
 
 
