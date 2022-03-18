@@ -60,9 +60,6 @@ export const actions = {
             // console.log('suntem aici', response.data);
 
             if(response.data.companies){
-                console.log('companiile sunt', response.data.companies);
-                console.log('verifica array', Array.isArray(response.data.companies));
-
                 await commit('set_search_companies', response.data.companies)
                 await commit('set_total_pages', parseInt(response.data.total_pages));
                 await commit('set_total_results', parseInt(response.data.total_results));
@@ -88,7 +85,7 @@ export const actions = {
                 // commit('set_initial_search_companies', []);
             }
       }).catch(error => {
-          console.log('eroare server');
+        //   console.log('eroare server');
       })
       .finally(() => {
             commit('set_search_made', true);

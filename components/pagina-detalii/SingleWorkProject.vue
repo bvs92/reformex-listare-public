@@ -83,7 +83,7 @@ export default {
              this.categories = this.project.categories;
         }
 
-        this.projectPhoto = "https://ams3.digitaloceanspaces.com/reformex.ro/uploads/" + this.project.first_photo;
+        this.projectPhoto = "https://ams3.digitaloceanspaces.com/reformex.ro/uploads/work_projects/" + this.project.first_photo;
     }
 }
 </script>
