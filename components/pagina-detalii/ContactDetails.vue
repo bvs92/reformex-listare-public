@@ -57,16 +57,16 @@ export default {
 
             if(profile.includes('facebook.com')){
                 let $splitted = profile.split('facebook.com/');
-                return 'https://www.facebook.com/' + $splittted[1];
+                return 'https://www.facebook.com/' + $splitted[1];
             } else if(profile.includes('instagram.com')){
                 let $splitted = profile.split('instagram.com/');
-                return 'https://www.instagram.com/' + $splittted[1];
+                return 'https://www.instagram.com/' + $splitted[1];
             } else if(profile.includes('twitter.com')){
                 let $splitted = profile.split('twitter.com/');
-                return 'https://www.twitter.com/' + $splittted[1];
+                return 'https://www.twitter.com/' + $splitted[1];
             } else if(profile.includes('youtube.com')){
                 let $splitted = profile.split('youtube.com/');
-                return 'https://www.youtube.com/' + $splittted[1];
+                return 'https://www.youtube.com/' + $splitted[1];
             } 
         }
     },
